@@ -15,6 +15,8 @@
 		7E47D85D1F3B4FF000DDA78B /* gif1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7E47D85C1F3B4FF000DDA78B /* gif1.gif */; };
 		7E47D8611F3B51A100DDA78B /* WebViewContent.html in Resources */ = {isa = PBXBuildFile; fileRef = 7E47D8601F3B51A100DDA78B /* WebViewContent.html */; };
 		7E47D8631F3B76C400DDA78B /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E47D8621F3B76C400DDA78B /* MainScreenViewController.swift */; };
+		7E47D8651F3B817700DDA78B /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E47D8641F3B817700DDA78B /* CustomTableViewCell.swift */; };
+		7E47D8671F3B84D000DDA78B /* defaultrestlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E47D8661F3B84D000DDA78B /* defaultrestlogo.png */; };
 		97F3CEBB22FF66BBABFC4B6E /* Pods_SeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEE5917A4910DC008EEABAE /* Pods_SeeFood.framework */; };
 		D1C0EB5F1F3A2C6200DCF4C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */; };
 		D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB651F3A2C6200DCF4C9 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 		7E47D85C1F3B4FF000DDA78B /* gif1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gif1.gif; sourceTree = "<group>"; };
 		7E47D8601F3B51A100DDA78B /* WebViewContent.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = WebViewContent.html; sourceTree = "<group>"; };
 		7E47D8621F3B76C400DDA78B /* MainScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		7E47D8641F3B817700DDA78B /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		7E47D8661F3B84D000DDA78B /* defaultrestlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultrestlogo.png; sourceTree = "<group>"; };
 		BCEE5917A4910DC008EEABAE /* Pods_SeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C0EB5B1F3A2C6200DCF4C9 /* SeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,10 +132,12 @@
 				7E0E1BCD1F3A44B800367508 /* userIcon.png */,
 				7E0E1BCE1F3A44B800367508 /* lockIcon.png */,
 				7E47D85C1F3B4FF000DDA78B /* gif1.gif */,
+				7E47D8661F3B84D000DDA78B /* defaultrestlogo.png */,
 				7E47D8601F3B51A100DDA78B /* WebViewContent.html */,
 				7E0E1BD11F3A455500367508 /* LoginViewController.swift */,
 				7E47D85A1F3B4F0D00DDA78B /* SignUpViewController.swift */,
 				7E47D8621F3B76C400DDA78B /* MainScreenViewController.swift */,
+				7E47D8641F3B817700DDA78B /* CustomTableViewCell.swift */,
 			);
 			path = Thiago;
 			sourceTree = "<group>";
@@ -205,6 +211,7 @@
 				7E47D8611F3B51A100DDA78B /* WebViewContent.html in Resources */,
 				7E47D85D1F3B4FF000DDA78B /* gif1.gif in Resources */,
 				7E0E1BD01F3A44B800367508 /* lockIcon.png in Resources */,
+				7E47D8671F3B84D000DDA78B /* defaultrestlogo.png in Resources */,
 				7E0E1BCF1F3A44B800367508 /* userIcon.png in Resources */,
 				D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */,
 				D1C0EB751F3A2C8E00DCF4C9 /* Errol.storyboard in Resources */,
@@ -267,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E47D85B1F3B4F0D00DDA78B /* SignUpViewController.swift in Sources */,
+				7E47D8651F3B817700DDA78B /* CustomTableViewCell.swift in Sources */,
 				7E47D8631F3B76C400DDA78B /* MainScreenViewController.swift in Sources */,
 				7E0E1BD21F3A455500367508 /* LoginViewController.swift in Sources */,
 				D1C0EB5F1F3A2C6200DCF4C9 /* AppDelegate.swift in Sources */,

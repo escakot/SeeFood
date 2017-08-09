@@ -6,6 +6,9 @@ target 'SeeFood' do
   use_frameworks!
 
   # Pods for SeeFood
-  pod 'Parse', '~> 1.15'
+  pod 'Parse'
+
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 
 end
