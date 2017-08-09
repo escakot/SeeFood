@@ -1,25 +1,24 @@
 //
-//  LoginViewController.swift
+//  SignUpViewController.swift
 //  SeeFood
 //
-//  Created by Thiago Hissa on 2017-08-08.
+//  Created by Thiago Hissa on 2017-08-09.
 //  Copyright © 2017 Errol Thiago. All rights reserved.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController{
+class SignUpViewController: UIViewController {
     
     //MARK: Properties
+
+    @IBOutlet weak var myWebView: UIWebView!
     
     @IBOutlet weak var usernameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
-
-    @IBOutlet weak var loginButton: UIButton!
     
-    @IBOutlet weak var myWebView: UIWebView!
-    
+    @IBOutlet weak var signupButton: UIButton!
     
     
     
@@ -36,9 +35,8 @@ class LoginViewController: UIViewController{
         self.myWebView.load(html!, mimeType: "text/html", textEncodingName: "UTF-8", baseURL: htmlURL.deletingLastPathComponent())
         self.myWebView.isHidden = true
         
-        
         //MARK: Styles
-        loginButton.layer.cornerRadius = 20
+        signupButton.layer.cornerRadius = 20
         
         let border1 = CALayer()
         let border2 = CALayer()
@@ -57,22 +55,24 @@ class LoginViewController: UIViewController{
         
         
         usernameTextField.attributedPlaceholder = NSAttributedString(string:"Username",
-        attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
+                                                                     attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
         passwordTextField.attributedPlaceholder = NSAttributedString(string:"Password",
-        attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
+                                                                     attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
         
     }
     
     
     
     
-    @IBAction func loginButton(_ sender: UIButton) {
+    
+    @IBAction func signupButton(_ sender: UIButton) {
         self.myWebView.isHidden = false
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
             self.performSegue(withIdentifier: "SegueToMain", sender: nil)
         })
     }
-
     
+
+  
 
 }
