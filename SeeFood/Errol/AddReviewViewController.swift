@@ -35,6 +35,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
     ParseManager.shared.userLogin(username: "usernameErrol", password: "errol12345") { (success: Bool) in
       if !success
       {
+        print("Login Successful")
         return
       }
     }
