@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -18,11 +19,15 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var mainTable: UITableView!
     
+    @IBOutlet weak var customNav: UIView!
     
     
+    
+    var mapView: GMSMapView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupMap()
     }
 
 
@@ -30,18 +35,31 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     @IBAction func switchMapListButton(_ sender: UIButton) {
-        UIView.animate(withDuration: 3,
+        
+        if self.mainTable.alpha == 0 {
+            self.mainTable.alpha = 1
+            self.mapView?.removeFromSuperview()
+            sender.setTitle("Map", for: .normal)
+        }
+        else{
+            self.mainTable.alpha = 0
+            self.view.addSubview(self.mapView!)
+            sender.setTitle("List", for: .normal)
+        }
+        
+        UIView.animate(withDuration: 1,
                        delay: 0,
-                       usingSpringWithDamping: 0.7,
+                       usingSpringWithDamping: 1,
                        initialSpringVelocity: 3,
                        options: UIViewAnimationOptions.curveEaseIn,
                        animations: {
-//                        sender.transform = sender.transform.rotated(by: CGFloat(Double.pi/4))
-                        if self.mainTable.isHidden {
-                            self.mainTable.isHidden = false
+                        if self.mainTable.alpha == 0 {
+                            self.mapView?.frame.origin.x = self.view.frame.origin.x
+                            self.mainTable.frame.origin.x = -500
                         }
                         else{
-                            self.mainTable.alpha = 0
+                            self.mapView?.frame.origin.x = 500
+                            self.mainTable.frame.origin.x = self.view.frame.origin.x
                         }
                         self.view.layoutIfNeeded()
         }, completion: nil)
@@ -50,6 +68,40 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
+    
+    
+    //MARK: Map Setup
+    
+    func setupMap(){
+    
+    let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
+    let f = self.view.frame
+        
+    let mapFrame = CGRect(x: 500, y: 102, width: f.size.width, height: f.size.height)
+        
+    self.mapView = GMSMapView.map(withFrame: mapFrame, camera: camera)
+    
+    // Creates a marker in the center of the map.
+    let marker = GMSMarker()
+    marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
+    marker.title = "Sydney"
+    marker.snippet = "Australia"
+    
+    do {
+    // Set the map style by passing the URL of the local file.
+    if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+    mapView?.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+    } else {
+    NSLog("Unable to find style.json")
+    }
+    } catch {
+    NSLog("One or more of the map styles failed to load. \(error)")
+    }
+    
+        marker.map = mapView
+        
+        
+    }
     
     
     

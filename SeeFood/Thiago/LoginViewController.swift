@@ -18,6 +18,8 @@ class LoginViewController: UIViewController{
 
     @IBOutlet weak var loginButton: UIButton!
     
+    @IBOutlet weak var loginAsGuestButton: UIButton!
+    
     @IBOutlet weak var myWebView: UIWebView!
     
     
@@ -38,7 +40,8 @@ class LoginViewController: UIViewController{
         
         
         //MARK: Styles
-        loginButton.layer.cornerRadius = 20
+        loginButton.layer.cornerRadius = 15
+        loginAsGuestButton.layer.cornerRadius = 15
         
         let border1 = CALayer()
         let border2 = CALayer()
@@ -73,6 +76,13 @@ class LoginViewController: UIViewController{
         })
     }
 
+   
+    @IBAction func loginAsGuestButton(_ sender: Any) {
+        self.myWebView.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+            self.performSegue(withIdentifier: "SegueToMain", sender: nil)
+        })
+    }
     
 
 }
