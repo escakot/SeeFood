@@ -12,15 +12,17 @@ import Parse
 class Restaurant: PFObject, PFSubclassing {
 
   // MARK: - Properties
+  @NSManaged var name: String
+  @NSManaged var coordinates: PFGeoPoint
   @NSManaged var owner: PFUser
   @NSManaged var menu: PFRelation<MenuItem>
   
   // MARK: - Initializers
-  init(owner: PFUser, menu: PFRelation<MenuItem>)
+  init(name:String, coordinates:PFGeoPoint)
   {
     super.init()
-    self.owner = owner
-    self.menu = menu
+    self.name = name
+    self.coordinates = coordinates
   }
   
   static func parseClassName() -> String

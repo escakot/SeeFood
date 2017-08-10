@@ -35,6 +35,7 @@
 		D1C0EB911F3BAB8E00DCF4C9 /* Star-Filled.png in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB8E1F3BAB8E00DCF4C9 /* Star-Filled.png */; };
 		D1C0EB921F3BAB8E00DCF4C9 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */; };
 		D1C0EB941F3BDDD500DCF4C9 /* chickenRice.JPG in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB931F3BDDD500DCF4C9 /* chickenRice.JPG */; };
+		D1E32D961F3BEF470008726F /* ParseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E32D951F3BEF470008726F /* ParseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		D1C0EB8E1F3BAB8E00DCF4C9 /* Star-Filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Star-Filled.png"; sourceTree = "<group>"; };
 		D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star.png; sourceTree = "<group>"; };
 		D1C0EB931F3BDDD500DCF4C9 /* chickenRice.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = chickenRice.JPG; path = ../../../../../../Downloads/chickenRice.JPG; sourceTree = "<group>"; };
+		D1E32D951F3BEF470008726F /* ParseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			children = (
 				D1C0EB741F3A2C8E00DCF4C9 /* Errol.storyboard */,
 				D1C0EB8B1F3BA61900DCF4C9 /* AddReviewViewController.swift */,
+				D1E32D951F3BEF470008726F /* ParseManager.swift */,
 				D1C0EB8D1F3BAB8E00DCF4C9 /* Star-Half.png */,
 				D1C0EB8E1F3BAB8E00DCF4C9 /* Star-Filled.png */,
 				D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */,
@@ -331,6 +334,7 @@
 				D1C0EB8C1F3BA61900DCF4C9 /* AddReviewViewController.swift in Sources */,
 				D1C0EB871F3B95C600DCF4C9 /* Restaurant.swift in Sources */,
 				7E7EDAAE1F3BD78C0024B2CD /* DetailViewController.swift in Sources */,
+				D1E32D961F3BEF470008726F /* ParseManager.swift in Sources */,
 				7E0E1BD21F3A455500367508 /* LoginViewController.swift in Sources */,
 				D1C0EB891F3B95F400DCF4C9 /* MenuItem.swift in Sources */,
 				D1C0EB5F1F3A2C6200DCF4C9 /* AppDelegate.swift in Sources */,
