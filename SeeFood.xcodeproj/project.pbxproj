@@ -26,6 +26,11 @@
 		D1C0EB851F3B93C600DCF4C9 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB841F3B93C600DCF4C9 /* Review.swift */; };
 		D1C0EB871F3B95C600DCF4C9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB861F3B95C600DCF4C9 /* Restaurant.swift */; };
 		D1C0EB891F3B95F400DCF4C9 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB881F3B95F400DCF4C9 /* MenuItem.swift */; };
+		D1C0EB8C1F3BA61900DCF4C9 /* AddReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB8B1F3BA61900DCF4C9 /* AddReviewViewController.swift */; };
+		D1C0EB901F3BAB8E00DCF4C9 /* Star-Half.png in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB8D1F3BAB8E00DCF4C9 /* Star-Half.png */; };
+		D1C0EB911F3BAB8E00DCF4C9 /* Star-Filled.png in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB8E1F3BAB8E00DCF4C9 /* Star-Filled.png */; };
+		D1C0EB921F3BAB8E00DCF4C9 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */; };
+		D1C0EB941F3BDDD500DCF4C9 /* chickenRice.JPG in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB931F3BDDD500DCF4C9 /* chickenRice.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +57,11 @@
 		D1C0EB841F3B93C600DCF4C9 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		D1C0EB861F3B95C600DCF4C9 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		D1C0EB881F3B95F400DCF4C9 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		D1C0EB8B1F3BA61900DCF4C9 /* AddReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReviewViewController.swift; sourceTree = "<group>"; };
+		D1C0EB8D1F3BAB8E00DCF4C9 /* Star-Half.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Star-Half.png"; sourceTree = "<group>"; };
+		D1C0EB8E1F3BAB8E00DCF4C9 /* Star-Filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Star-Filled.png"; sourceTree = "<group>"; };
+		D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star.png; sourceTree = "<group>"; };
+		D1C0EB931F3BDDD500DCF4C9 /* chickenRice.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = chickenRice.JPG; path = ../../../../../../Downloads/chickenRice.JPG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +136,11 @@
 			isa = PBXGroup;
 			children = (
 				D1C0EB741F3A2C8E00DCF4C9 /* Errol.storyboard */,
+				D1C0EB8B1F3BA61900DCF4C9 /* AddReviewViewController.swift */,
+				D1C0EB8D1F3BAB8E00DCF4C9 /* Star-Half.png */,
+				D1C0EB8E1F3BAB8E00DCF4C9 /* Star-Filled.png */,
+				D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */,
+				D1C0EB931F3BDDD500DCF4C9 /* chickenRice.JPG */,
 				D1C0EB8A1F3B995A00DCF4C9 /* Models */,
 			);
 			path = Errol;
@@ -222,12 +237,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C0EB941F3BDDD500DCF4C9 /* chickenRice.JPG in Resources */,
 				D1C0EB711F3A2C7600DCF4C9 /* Thiago.storyboard in Resources */,
+				D1C0EB921F3BAB8E00DCF4C9 /* Star.png in Resources */,
+				D1C0EB911F3BAB8E00DCF4C9 /* Star-Filled.png in Resources */,
 				7E0E1BCC1F3A435F00367508 /* test.jpg in Resources */,
 				D1C0EB7C1F3A2DAE00DCF4C9 /* LaunchScreen.storyboard in Resources */,
 				7E47D8611F3B51A100DDA78B /* WebViewContent.html in Resources */,
 				7E47D85D1F3B4FF000DDA78B /* gif1.gif in Resources */,
 				7E0E1BD01F3A44B800367508 /* lockIcon.png in Resources */,
+				D1C0EB901F3BAB8E00DCF4C9 /* Star-Half.png in Resources */,
 				7E47D8671F3B84D000DDA78B /* defaultrestlogo.png in Resources */,
 				7E0E1BCF1F3A44B800367508 /* userIcon.png in Resources */,
 				D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */,
@@ -293,6 +312,7 @@
 				7E47D85B1F3B4F0D00DDA78B /* SignUpViewController.swift in Sources */,
 				7E47D8651F3B817700DDA78B /* CustomTableViewCell.swift in Sources */,
 				7E47D8631F3B76C400DDA78B /* MainScreenViewController.swift in Sources */,
+				D1C0EB8C1F3BA61900DCF4C9 /* AddReviewViewController.swift in Sources */,
 				D1C0EB871F3B95C600DCF4C9 /* Restaurant.swift in Sources */,
 				7E0E1BD21F3A455500367508 /* LoginViewController.swift in Sources */,
 				D1C0EB891F3B95F400DCF4C9 /* MenuItem.swift in Sources */,

@@ -15,16 +15,19 @@ class Review: PFObject, PFSubclassing {
   @NSManaged var user: PFUser
   @NSManaged var image: PFFile
   @NSManaged var comment: String?
+  @NSManaged var rating: Int
+  @NSManaged var voting: Int
   @NSManaged var menuItem: MenuItem
   @NSManaged var restaurant: Restaurant
   
   // MARK: - Initializers
-  init(user: PFUser, image: PFFile, comment: String?, menuItem: MenuItem, restaurant: Restaurant)
+  init(user: PFUser, image: PFFile, comment: String?, rating: Int, menuItem: MenuItem, restaurant: Restaurant)
   {
     super.init()
     self.user = user
     self.image = image
     self.comment = comment
+    self.rating = rating
     self.menuItem = menuItem
     self.restaurant = restaurant
   }

@@ -17,6 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
+    
+    Restaurant.registerSubclass()
+    MenuItem.registerSubclass()
+    Review.registerSubclass()
+    
+    let configuration = ParseClientConfiguration {
+      $0.applicationId = "j1La8f63jdn38dG0a8Fj2maHj1LhSy4"
+      $0.server = "https://seefoods.herokuapp.com"
+    }
+    Parse.initialize(with: configuration)
+    
     return true
   }
 
