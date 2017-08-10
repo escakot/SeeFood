@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7E0E1BCC1F3A435F00367508 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E0E1BCB1F3A435F00367508 /* test.jpg */; };
 		7E0E1BCF1F3A44B800367508 /* userIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E0E1BCD1F3A44B800367508 /* userIcon.png */; };
 		7E0E1BD01F3A44B800367508 /* lockIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E0E1BCE1F3A44B800367508 /* lockIcon.png */; };
 		7E0E1BD21F3A455500367508 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0E1BD11F3A455500367508 /* LoginViewController.swift */; };
@@ -17,6 +16,11 @@
 		7E47D8631F3B76C400DDA78B /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E47D8621F3B76C400DDA78B /* MainScreenViewController.swift */; };
 		7E47D8651F3B817700DDA78B /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E47D8641F3B817700DDA78B /* CustomTableViewCell.swift */; };
 		7E47D8671F3B84D000DDA78B /* defaultrestlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E47D8661F3B84D000DDA78B /* defaultrestlogo.png */; };
+		7E7EDAAA1F3BA3C80024B2CD /* redbackground copy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E7EDAA91F3BA3C80024B2CD /* redbackground copy.jpg */; };
+		7E7EDAAC1F3BA76F0024B2CD /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E7EDAAB1F3BA76F0024B2CD /* style.json */; };
+		7E7EDAAE1F3BD78C0024B2CD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EDAAD1F3BD78C0024B2CD /* DetailViewController.swift */; };
+		7E7EDAB01F3BD83A0024B2CD /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EDAAF1F3BD8390024B2CD /* CustomCollectionViewCell.swift */; };
+		7E7EDAB21F3BD9880024B2CD /* labanane.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7EDAB11F3BD9880024B2CD /* labanane.png */; };
 		97F3CEBB22FF66BBABFC4B6E /* Pods_SeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEE5917A4910DC008EEABAE /* Pods_SeeFood.framework */; };
 		D1C0EB5F1F3A2C6200DCF4C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */; };
 		D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB651F3A2C6200DCF4C9 /* Assets.xcassets */; };
@@ -28,7 +32,6 @@
 /* Begin PBXFileReference section */
 		30AC8B5732DE6E2F16FD5336 /* Pods-SeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeeFood.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood.debug.xcconfig"; sourceTree = "<group>"; };
 		312A436504126538360B423B /* Pods-SeeFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeeFood.release.xcconfig"; path = "Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood.release.xcconfig"; sourceTree = "<group>"; };
-		7E0E1BCB1F3A435F00367508 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		7E0E1BCD1F3A44B800367508 /* userIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userIcon.png; sourceTree = "<group>"; };
 		7E0E1BCE1F3A44B800367508 /* lockIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lockIcon.png; sourceTree = "<group>"; };
 		7E0E1BD11F3A455500367508 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +41,11 @@
 		7E47D8621F3B76C400DDA78B /* MainScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		7E47D8641F3B817700DDA78B /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		7E47D8661F3B84D000DDA78B /* defaultrestlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultrestlogo.png; sourceTree = "<group>"; };
+		7E7EDAA91F3BA3C80024B2CD /* redbackground copy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "redbackground copy.jpg"; sourceTree = "<group>"; };
+		7E7EDAAB1F3BA76F0024B2CD /* style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
+		7E7EDAAD1F3BD78C0024B2CD /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		7E7EDAAF1F3BD8390024B2CD /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		7E7EDAB11F3BD9880024B2CD /* labanane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = labanane.png; sourceTree = "<group>"; };
 		BCEE5917A4910DC008EEABAE /* Pods_SeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C0EB5B1F3A2C6200DCF4C9 /* SeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,16 +136,20 @@
 			isa = PBXGroup;
 			children = (
 				D1C0EB701F3A2C7600DCF4C9 /* Thiago.storyboard */,
-				7E0E1BCB1F3A435F00367508 /* test.jpg */,
 				7E0E1BCD1F3A44B800367508 /* userIcon.png */,
 				7E0E1BCE1F3A44B800367508 /* lockIcon.png */,
 				7E47D85C1F3B4FF000DDA78B /* gif1.gif */,
 				7E47D8661F3B84D000DDA78B /* defaultrestlogo.png */,
+				7E7EDAA91F3BA3C80024B2CD /* redbackground copy.jpg */,
+				7E7EDAB11F3BD9880024B2CD /* labanane.png */,
+				7E7EDAAB1F3BA76F0024B2CD /* style.json */,
 				7E47D8601F3B51A100DDA78B /* WebViewContent.html */,
 				7E0E1BD11F3A455500367508 /* LoginViewController.swift */,
 				7E47D85A1F3B4F0D00DDA78B /* SignUpViewController.swift */,
 				7E47D8621F3B76C400DDA78B /* MainScreenViewController.swift */,
 				7E47D8641F3B817700DDA78B /* CustomTableViewCell.swift */,
+				7E7EDAAD1F3BD78C0024B2CD /* DetailViewController.swift */,
+				7E7EDAAF1F3BD8390024B2CD /* CustomCollectionViewCell.swift */,
 			);
 			path = Thiago;
 			sourceTree = "<group>";
@@ -205,12 +217,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E7EDAAC1F3BA76F0024B2CD /* style.json in Resources */,
 				D1C0EB711F3A2C7600DCF4C9 /* Thiago.storyboard in Resources */,
-				7E0E1BCC1F3A435F00367508 /* test.jpg in Resources */,
 				D1C0EB7C1F3A2DAE00DCF4C9 /* LaunchScreen.storyboard in Resources */,
 				7E47D8611F3B51A100DDA78B /* WebViewContent.html in Resources */,
 				7E47D85D1F3B4FF000DDA78B /* gif1.gif in Resources */,
+				7E7EDAB21F3BD9880024B2CD /* labanane.png in Resources */,
 				7E0E1BD01F3A44B800367508 /* lockIcon.png in Resources */,
+				7E7EDAAA1F3BA3C80024B2CD /* redbackground copy.jpg in Resources */,
 				7E47D8671F3B84D000DDA78B /* defaultrestlogo.png in Resources */,
 				7E0E1BCF1F3A44B800367508 /* userIcon.png in Resources */,
 				D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */,
@@ -274,8 +288,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E47D85B1F3B4F0D00DDA78B /* SignUpViewController.swift in Sources */,
+				7E7EDAB01F3BD83A0024B2CD /* CustomCollectionViewCell.swift in Sources */,
 				7E47D8651F3B817700DDA78B /* CustomTableViewCell.swift in Sources */,
 				7E47D8631F3B76C400DDA78B /* MainScreenViewController.swift in Sources */,
+				7E7EDAAE1F3BD78C0024B2CD /* DetailViewController.swift in Sources */,
 				7E0E1BD21F3A455500367508 /* LoginViewController.swift in Sources */,
 				D1C0EB5F1F3A2C6200DCF4C9 /* AppDelegate.swift in Sources */,
 			);
