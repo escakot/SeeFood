@@ -25,6 +25,7 @@ class ParseManager: NSObject {
         print(error!.localizedDescription)
         isLoginSuccessful(false)
       } else {
+        self.currentUser = PFUser.current()
         isLoginSuccessful(true)
       }
       
@@ -37,12 +38,15 @@ class ParseManager: NSObject {
     let newUser = PFUser()
     newUser.username = username
     newUser.password = password
+//    newUser.email = "email@example.com"
+    
     
     newUser.signUpInBackground { (bool, error) in
       if let error = error {
         print(error.localizedDescription)
         completionHandler(error.localizedDescription)
       } else {
+//        self.currentUser = PFUser.current()
         completionHandler(nil)
       }
     }
@@ -73,7 +77,37 @@ class ParseManager: NSObject {
         completionHandler(nil)
       }
     })
-    
+  }
+  
+  func createMenuItemFor(_ restaurant:Restaurant, title:String, price:Float, coordinates:CLLocationCoordinate2D, completionHandler: @escaping (MenuItem) -> Void)
+  {
+    let menuItem = MenuItem(restaurant: restaurant, title: title, price: price)
+    menuItem.saveInBackground { (success: Bool, error: Error?) in
+      if success
+      {
+        completionHandler(menuItem)
+      } else {
+        print(error!.localizedDescription)
+      }
+    }
+  }
+  
+  func addReviewFor(_ menuItem:MenuItem, at restaurant:Restaurant, image:UIImage, comment:String?, rating:Int, completionHandler: @escaping () -> Void)
+  {
+    guard let user = PFUser.current(),
+      let imageData = UIImagePNGRepresentation(image) else {
+      return
+    }
+    let imageFile = PFFile(name: "image.png", data: imageData)
+    let review = Review(user: user, image: imageFile!, comment:comment, rating: rating, menuItem: menuItem, restaurant: restaurant)
+    review.saveInBackground { (success: Bool, error: Error?) in
+      if success
+      {
+        completionHandler()
+      } else {
+        print(error!.localizedDescription)
+      }
+    }
   }
 
 }

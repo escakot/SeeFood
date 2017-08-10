@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let configuration = ParseClientConfiguration {
       $0.applicationId = "j1La8f63jdn38dG0a8Fj2maHj1LhSy4"
-      $0.server = "https://seefoods.herokuapp.com"
+      $0.server = "https://seefoods.herokuapp.com/parse"
     }
     Parse.initialize(with: configuration)
     

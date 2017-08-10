@@ -14,17 +14,15 @@ class MenuItem: PFObject, PFSubclassing {
   // MARK: - Properties
   @NSManaged var restaurant: Restaurant
   @NSManaged var title: String
-  @NSManaged var comment: String?
   @NSManaged var price: Float
   @NSManaged var reviews: PFRelation<Review>
   
   // MARK: - Initializers
-  init(restaurant:Restaurant, title:String, comment:String, price:Float)
+  init(restaurant:Restaurant, title:String, price:Float)
   {
     super.init()
     self.restaurant = restaurant
     self.title = title
-    self.comment = comment
     self.price = price
   }
   

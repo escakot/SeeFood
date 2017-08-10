@@ -30,6 +30,9 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    
+    //Temporary Setup
+    
     // Do any additional setup after loading the view.
     ratingStack.isUserInteractionEnabled =  true
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleRatingTap(sender:)))
@@ -46,43 +49,28 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
     priceTextField.delegate = self
   }
   
+  
+  // MARK: - Button Methods
   @IBAction func postButton(_ sender: UIBarButtonItem)
   {
-    guard let currentUser = PFUser.current() else {
+    guard PFUser.current() == nil else {
       dismiss(animated: true)
       return
     }
-    if menuItem == nil
+    let image = foodImageView.image!
+    let comment = commentTextView.text
+    if let menuItem = menuItem
     {
-      guard var priceString = priceTextField.text else {
-        return
-      }
-      priceString.remove(at: priceString.startIndex)
-      guard let value = Float(priceString) else {
-        return
-      }
-      menuItem = MenuItem(restaurant: restaurant, title: menuItemTextField.text!, comment: commentTextView.text, price: value)
-      menuItem!.saveInBackground(block: { (bool, error) in
-        if error != nil {
-          print(error!.localizedDescription)
-          return
-        }
-        let imageData = UIImagePNGRepresentation(self.foodImageView.image!)
-        guard let pfImage = PFFile(name: "image.png", data: imageData!) else
-        {
-          return
-        }
-        let review = Review(user: currentUser, image: pfImage, comment: self.commentTextView.text, rating: self.rating, menuItem: self.menuItem!, restaurant: self.restaurant)
-        review.saveInBackground()
+      ParseManager.shared.addReviewFor(menuItem, at: restaurant, image: image, comment:comment, rating: rating, completionHandler: { 
       })
     } else {
-        let imageData = UIImagePNGRepresentation(self.foodImageView.image!)
-        guard let pfImage = PFFile(name: "image.png", data: imageData!) else
-        {
-          return
-        }
-        let review = Review(user: currentUser, image: pfImage, comment: self.commentTextView.text, rating: self.rating, menuItem: self.menuItem!, restaurant: self.restaurant)
-        review.saveInBackground()
+      let title = menuItemTextField.text!
+      let price = getPriceFloat()
+      let coordinates = CLLocationCoordinate2D.init(latitude: 0.0, longitude: 0.0)
+      ParseManager.shared.createMenuItemFor(restaurant, title: title, price: price, coordinates: coordinates, completionHandler: { (savedMenuItem) in
+        ParseManager.shared.addReviewFor(savedMenuItem, at: self.restaurant, image: image, comment:comment, rating: self.rating, completionHandler: {
+        })
+      })
     }
     print("saved")
 //    dismiss(animated: true)
@@ -93,6 +81,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
   }
   
   
+  // MARK: - Gesture Recognizer Methods
   func handleRatingTap(sender:UITapGestureRecognizer)
   {
     let location = sender.location(in: ratingStack)
@@ -146,5 +135,16 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
     let formatter = NumberFormatter()
     formatter.numberStyle = .currency
     textField.text = formatter.string(from: NSNumber(value: value))
+  }
+  
+  func getPriceFloat() -> Float
+  {
+    var priceString = priceTextField.text!
+    guard priceString != "", priceString[priceString.startIndex] == "$" else
+    {
+      return 0.0
+    }
+    priceString.remove(at: priceString.startIndex)
+    return Float(priceString)!
   }
 }
