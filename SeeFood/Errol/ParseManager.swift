@@ -85,6 +85,7 @@ class ParseManager: NSObject {
     menuItem.saveInBackground { (success: Bool, error: Error?) in
       if success
       {
+        restaurant.menu.add(menuItem)
         completionHandler(menuItem)
       } else {
         print(error!.localizedDescription)
@@ -103,6 +104,7 @@ class ParseManager: NSObject {
     review.saveInBackground { (success: Bool, error: Error?) in
       if success
       {
+        menuItem.reviews.add(review)
         completionHandler()
       } else {
         print(error!.localizedDescription)

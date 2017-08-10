@@ -7,6 +7,7 @@ target 'SeeFood' do
 
   # Pods for SeeFood
   pod 'Parse'
+  pod 'IQKeyboardManager'
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'

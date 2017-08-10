@@ -32,6 +32,12 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
     
     
     //Temporary Setup
+    ParseManager.shared.userLogin(username: "usernameErrol", password: "errol12345") { (success: Bool) in
+      if !success
+      {
+        return
+      }
+    }
     
     // Do any additional setup after loading the view.
     ratingStack.isUserInteractionEnabled =  true
