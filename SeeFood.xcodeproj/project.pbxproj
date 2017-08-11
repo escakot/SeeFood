@@ -16,6 +16,7 @@
 		7E47D8631F3B76C400DDA78B /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E47D8621F3B76C400DDA78B /* MainScreenViewController.swift */; };
 		7E47D8651F3B817700DDA78B /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E47D8641F3B817700DDA78B /* CustomTableViewCell.swift */; };
 		7E47D8671F3B84D000DDA78B /* defaultrestlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E47D8661F3B84D000DDA78B /* defaultrestlogo.png */; };
+		7E6DFBCE1F3E03F80021A8A8 /* CellDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6DFBCD1F3E03F80021A8A8 /* CellDetailViewController.swift */; };
 		7E7EDAAA1F3BA3C80024B2CD /* redbackground copy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E7EDAA91F3BA3C80024B2CD /* redbackground copy.jpg */; };
 		7E7EDAAC1F3BA76F0024B2CD /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E7EDAAB1F3BA76F0024B2CD /* style.json */; };
 		7E7EDAAE1F3BD78C0024B2CD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EDAAD1F3BD78C0024B2CD /* DetailViewController.swift */; };
@@ -51,6 +52,7 @@
 		7E47D8621F3B76C400DDA78B /* MainScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		7E47D8641F3B817700DDA78B /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		7E47D8661F3B84D000DDA78B /* defaultrestlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultrestlogo.png; sourceTree = "<group>"; };
+		7E6DFBCD1F3E03F80021A8A8 /* CellDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellDetailViewController.swift; sourceTree = "<group>"; };
 		7E7EDAA91F3BA3C80024B2CD /* redbackground copy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "redbackground copy.jpg"; sourceTree = "<group>"; };
 		7E7EDAAB1F3BA76F0024B2CD /* style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
 		7E7EDAAD1F3BD78C0024B2CD /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -175,8 +177,9 @@
 				7E0E1BD11F3A455500367508 /* LoginViewController.swift */,
 				7E47D85A1F3B4F0D00DDA78B /* SignUpViewController.swift */,
 				7E47D8621F3B76C400DDA78B /* MainScreenViewController.swift */,
-				7E47D8641F3B817700DDA78B /* CustomTableViewCell.swift */,
 				7E7EDAAD1F3BD78C0024B2CD /* DetailViewController.swift */,
+				7E6DFBCD1F3E03F80021A8A8 /* CellDetailViewController.swift */,
+				7E47D8641F3B817700DDA78B /* CustomTableViewCell.swift */,
 				7E7EDAAF1F3BD8390024B2CD /* CustomCollectionViewCell.swift */,
 			);
 			path = Thiago;
@@ -320,7 +323,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -334,6 +337,7 @@
 				D17FE7761F3D70A300206951 /* GoogleManager.swift in Sources */,
 				7E7EDAB01F3BD83A0024B2CD /* CustomCollectionViewCell.swift in Sources */,
 				7E47D8651F3B817700DDA78B /* CustomTableViewCell.swift in Sources */,
+				7E6DFBCE1F3E03F80021A8A8 /* CellDetailViewController.swift in Sources */,
 				7E47D8631F3B76C400DDA78B /* MainScreenViewController.swift in Sources */,
 				D1C0EB8C1F3BA61900DCF4C9 /* AddReviewViewController.swift in Sources */,
 				D1C0EB871F3B95C600DCF4C9 /* Restaurant.swift in Sources */,
