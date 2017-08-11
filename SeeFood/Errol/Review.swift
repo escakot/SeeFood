@@ -21,9 +21,9 @@ class Review: PFObject, PFSubclassing {
   @NSManaged var restaurant: Restaurant
   
   // MARK: - Initializers
-  init(user: PFUser, image: PFFile, comment: String?, rating: Int, menuItem: MenuItem, restaurant: Restaurant)
+  convenience init(user: PFUser, image: PFFile, comment: String?, rating: Int, menuItem: MenuItem, restaurant: Restaurant)
   {
-    super.init()
+    self.init()
     self.user = user
     self.image = image
     self.comment = comment

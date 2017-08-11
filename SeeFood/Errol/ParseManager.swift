@@ -11,7 +11,7 @@ import Parse
 
 class ParseManager: NSObject {
   
-  private override init() { }
+  private override init() {}
   
   static let shared = ParseManager()
   
@@ -52,13 +52,10 @@ class ParseManager: NSObject {
     }
   }
   
-  func queryRestaurantMenuItems(restaurantName:String, coordinates:CLLocationCoordinate2D, completionHandler: @escaping (Array<MenuItem>?) -> Void)
+  func queryMenuItemsFor(_ restaurant:Restaurant, completionHandler: @escaping (Array<MenuItem>?) -> Void)
   {
-    let innerQuery = Restaurant.query()
-    innerQuery!.whereKey("name", contains: restaurantName)
-    
     let query = MenuItem.query()
-    query!.whereKey("restaurant", matchesQuery: innerQuery!)
+    query!.whereKey("restaurant", equalTo: restaurant)
     
     query!.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
       if error == nil
@@ -79,14 +76,43 @@ class ParseManager: NSObject {
     })
   }
   
+  func queryRestaurantWith(name:String, coordinates:PFGeoPoint, completionHandler: @escaping (Restaurant?) -> Void)
+  {
+    let query = Restaurant.query()
+    query!.whereKey("name", contains: name)
+    query!.whereKey("coordinates", nearGeoPoint: coordinates)
+    
+    query?.getFirstObjectInBackground(block: { (object, error) in
+      if error == nil
+      {
+        completionHandler(object as? Restaurant)
+      } else {
+        print(error!.localizedDescription)
+        completionHandler(nil)
+      }
+    })
+  }
+  
+  func createRestaurantProfileWith(id:String, name:String, coordinates:PFGeoPoint, completionHandler: @escaping (Bool) -> Void)
+  {
+    let restaurant  = Restaurant(id:id, name:name, coordinates:coordinates)
+    restaurant.saveInBackground { (success, error) in
+      if (!success)
+      {
+        print(error!.localizedDescription)
+      }
+      completionHandler(success)
+    }
+  }
+  
   func createMenuItemFor(_ restaurant:Restaurant, title:String, price:Float, coordinates:CLLocationCoordinate2D, completionHandler: @escaping (MenuItem) -> Void)
   {
     let menuItem = MenuItem(restaurant: restaurant, title: title, price: price)
     menuItem.saveInBackground { (success: Bool, error: Error?) in
       if success
       {
-        restaurant.menu.add(menuItem)
-        completionHandler(menuItem)
+        restaurant.menu().add(menuItem)
+        restaurant.saveInBackground()
       } else {
         print(error!.localizedDescription)
       }
@@ -104,7 +130,8 @@ class ParseManager: NSObject {
     review.saveInBackground { (success: Bool, error: Error?) in
       if success
       {
-        menuItem.reviews.add(review)
+        menuItem.reviews().add(review)
+        menuItem.saveInBackground()
         completionHandler()
       } else {
         print(error!.localizedDescription)

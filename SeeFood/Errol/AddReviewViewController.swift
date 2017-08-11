@@ -32,13 +32,30 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
     
     
     //Temporary Setup
-    ParseManager.shared.userLogin(username: "usernameErrol", password: "errol12345") { (success: Bool) in
-      if !success
-      {
-        print("Login Successful")
-        return
+//    ParseManager.shared.userSignUp(username: "errol", password: "errol") { (string) in
+      ParseManager.shared.userLogin(username: "errol", password: "errol") { (success: Bool) in
+        if !success
+        {
+          print("Login Successful")
+          return
+        }
       }
-    }
+//    }
+    
+//    ParseManager.shared.createRestaurantProfileWith(name: "Anoush", coordinates: PFGeoPoint(latitude: 0.0, longitude: 0.0)) { (success) in
+//      if success
+//      {
+        ParseManager.shared.queryRestaurantWith(name: "Anoush", coordinates: PFGeoPoint(latitude: 0.0, longitude: 0.0)) { (restaurant) in
+          guard restaurant != nil else {
+            print("Error query restaurant")
+            return
+          }
+          self.restaurant = restaurant
+          print("Restaurant: \(restaurant!.name)")
+        }
+        
+//      }
+//    }
     
     // Do any additional setup after loading the view.
     ratingStack.isUserInteractionEnabled =  true
@@ -51,7 +68,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
       menuItemTextField.isEnabled = false
     }
     
-//    foodImageView.image = foodImage
+    //    foodImageView.image = foodImage
     foodImageView.image = UIImage(named: "chickenRice.JPG")
     priceTextField.delegate = self
   }
@@ -60,7 +77,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
   // MARK: - Button Methods
   @IBAction func postButton(_ sender: UIBarButtonItem)
   {
-    guard PFUser.current() == nil else {
+    guard PFUser.current() != nil else {
       dismiss(animated: true)
       return
     }
@@ -68,7 +85,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
     let comment = commentTextView.text
     if let menuItem = menuItem
     {
-      ParseManager.shared.addReviewFor(menuItem, at: restaurant, image: image, comment:comment, rating: rating, completionHandler: { 
+      ParseManager.shared.addReviewFor(menuItem, at: restaurant, image: image, comment:comment, rating: rating, completionHandler: {
       })
     } else {
       let title = menuItemTextField.text!
@@ -80,11 +97,11 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
       })
     }
     print("saved")
-//    dismiss(animated: true)
+    //    dismiss(animated: true)
   }
   @IBAction func cancelButton(_ sender: UIBarButtonItem)
   {
-//    dismiss(animated: true)
+    //    dismiss(animated: true)
   }
   
   
