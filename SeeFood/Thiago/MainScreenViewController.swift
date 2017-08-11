@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 import GoogleMaps
 
 class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -21,14 +22,21 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var customNav: UIView!
     
-    
+    var arrayOfRestaurants: [Restaurant] = []
     
     var mapView: GMSMapView?
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.getRestaurantObjects()
         self.setupMap()
     }
+    
+    
+    
 
 
     
@@ -63,32 +71,31 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                         }
                         self.view.layoutIfNeeded()
         }, completion: nil)
-
-        
     }
     
     
     
     
+    
+    
     //MARK: Map Setup
-    
+
     func setupMap(){
-    
-    let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
+        
+        let userLocation = PFGeoPoint(latitude: 43.642566, longitude: -79.387057)
+        let camera = GMSCameraPosition.camera(withLatitude: userLocation.latitude, longitude: userLocation.longitude, zoom: 14.0)
+        
+  
     let f = self.view.frame
         
-    let mapFrame = CGRect(x: 500, y: 102, width: f.size.width, height: f.size.height)
+    let mapFrame = CGRect(x: 500, y: 125, width: f.size.width, height: f.size.height)
         
     self.mapView = GMSMapView.map(withFrame: mapFrame, camera: camera)
     
-    // Creates a marker in the center of the map.
-    let marker = GMSMarker()
-    marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-    marker.title = "Sydney"
-    marker.snippet = "Australia"
-    
-    do {
+        
+       
     // Set the map style by passing the URL of the local file.
+    do {
     if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
     mapView?.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
     } else {
@@ -97,11 +104,36 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     } catch {
     NSLog("One or more of the map styles failed to load. \(error)")
     }
-    
-        marker.map = mapView
         
+        for restaurant in arrayOfRestaurants {
+            let marker = GMSMarker()
+            marker.position = CLLocationCoordinate2D(latitude: restaurant.coordinates.latitude, longitude: restaurant.coordinates.longitude)
+            marker.title = restaurant.name
+            marker.snippet = "Lorem"
+            marker.map = mapView
+        }
+    
         
     }
+    
+    
+    
+    
+    
+    
+    //MARK: Google API Call
+    func getRestaurantObjects(){
+        let myGeoPoint1 = PFGeoPoint(latitude: 43.642566, longitude: -79.387057)
+        let restaurant1 = Restaurant.init(name: "CN Tower", coordinates: myGeoPoint1)
+        let myGeoPoint2 = PFGeoPoint(latitude: 43.641438, longitude: -79.389353)
+        let restaurant2 = Restaurant.init(name: "Rogers Center", coordinates: myGeoPoint2)
+        arrayOfRestaurants.append(restaurant1)
+        arrayOfRestaurants.append(restaurant2)
+    }
+    
+    
+    
+    
     
     
     
@@ -116,22 +148,35 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return self.arrayOfRestaurants.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: CustomTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CustomTableViewCell
-        cell.cellLogoImage.image = UIImage(named: "defaultrestlogo.png")
-        cell.cellRestaurantTitle.text = "La Banane"
-        cell.cellRatingsImage.image = UIImage(named: "")
-        cell.cellPhotoCountLabel.text = "0 Photos"
+        
+          let restaurant = arrayOfRestaurants[indexPath.row]
+        
+          cell.cellLogoImage.image = UIImage(named: "defaultrestlogo.png")
+          cell.cellRestaurantTitle.text = restaurant.name
+          cell.cellRatingsImage.image = UIImage(named: "Star.png")
+          cell.cellPhotoCountLabel.text = "0 Photos"
         
         return cell
     }
 
     
     
+    
+    //MARK: Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueToDetail"{
+            let index = self.mainTable.indexPathForSelectedRow
+            let vc = segue.destination as! DetailViewController
+            vc.restaurant = arrayOfRestaurants[(index?.row)!]
+        }
+    }
     
     
     

@@ -13,10 +13,11 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     //MARK: Properties
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
-    
+    var restaurant: Restaurant!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(restaurant.name)
     }
     
     
@@ -41,7 +42,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 75
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -57,7 +58,15 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     
     
-
+    //MARK: Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueToCellDetail"{
+            //let index = self.mainCollectionView.indexPathsForSelectedItems
+            // vc.restaurant = self.restaurant.menu[index...]
+         //   let vc = segue.destination as! CellDetailViewController
+        }
+    }
     
     
     
