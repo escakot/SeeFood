@@ -13,7 +13,7 @@ import GooglePlaces
 import ObservableArray_RxSwift
 import RxSwift
 
-class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CLLocationManagerDelegate, GMSMapViewDelegate {
+class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     //MARK: Properties
 
@@ -145,31 +145,29 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    
+    //MARK: GoogleMaps Delegate
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         print("infoWindowTapped")
-        self.performSegue(withIdentifier: "SegueToDetail", sender: nil)
+        print(marker.description)
+        self.performSegue(withIdentifier: "SegueToDetailFromMap", sender: nil)
     }
     
-//    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-//        self.performSegue(withIdentifier: "SegueToDetail", sender: nil)
-//    }
-//    
-//    func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
-//        self.performSegue(withIdentifier: "SegueToDetail", sender: nil)
-//    }
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        //MARK FOR TEST:
+        let marker = GMSMarker()
+        marker.title = "It Works!"
+        //MARK FOR TEST END
+        self.performSegue(withIdentifier: "SegueToDetailFromMap", sender: marker)
+    }
+
     
     
     
   
     
     
-    
-    //MARK: TextField Delegate
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        print("Should return")
-//        return true
-//    }
-    
+
     
     
     
@@ -213,10 +211,22 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueToDetail"{
+            print(sender.debugDescription)
             let index = self.mainTable.indexPathForSelectedRow
             let vc = segue.destination as! DetailViewController
             vc.restaurant = arrayOfRestaurants[(index?.row)!]
         }
+        
+        else if segue.identifier == "SegueToDetailFromMap"{
+            let vc = segue.destination as! DetailViewController
+            let marker = sender as! GMSMarker
+            for rest in arrayOfRestaurants{
+                if rest.name == marker.title {
+                    vc.restaurant = rest
+                }
+            }
+        }
+
     }
     
     
