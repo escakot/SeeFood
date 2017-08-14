@@ -23,11 +23,13 @@
 		7E7EDAB01F3BD83A0024B2CD /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EDAAF1F3BD8390024B2CD /* CustomCollectionViewCell.swift */; };
 		7E7EDAB21F3BD9880024B2CD /* labanane.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7EDAB11F3BD9880024B2CD /* labanane.png */; };
 		97F3CEBB22FF66BBABFC4B6E /* Pods_SeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEE5917A4910DC008EEABAE /* Pods_SeeFood.framework */; };
-		D17FE7741F3CE52B00206951 /* chickenRice.JPG in Resources */ = {isa = PBXBuildFile; fileRef = D17FE7731F3CE52B00206951 /* chickenRice.JPG */; };
+		D13427F41F3E5EF800F07E9C /* Thiago.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB701F3A2C7600DCF4C9 /* Thiago.storyboard */; };
+		D17FE7741F3CE52B00206951 /* chickenRice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D17FE7731F3CE52B00206951 /* chickenRice.jpg */; };
 		D17FE7761F3D70A300206951 /* GoogleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17FE7751F3D70A300206951 /* GoogleManager.swift */; };
+		D17FE7781F3E326400206951 /* assets.xib in Resources */ = {isa = PBXBuildFile; fileRef = D17FE7771F3E326400206951 /* assets.xib */; };
+		D17FE77A1F3E3D0300206951 /* beef-stirfry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D17FE7791F3E3D0300206951 /* beef-stirfry.jpg */; };
 		D1C0EB5F1F3A2C6200DCF4C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */; };
 		D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB651F3A2C6200DCF4C9 /* Assets.xcassets */; };
-		D1C0EB711F3A2C7600DCF4C9 /* Thiago.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB701F3A2C7600DCF4C9 /* Thiago.storyboard */; };
 		D1C0EB751F3A2C8E00DCF4C9 /* Errol.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB741F3A2C8E00DCF4C9 /* Errol.storyboard */; };
 		D1C0EB7C1F3A2DAE00DCF4C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB7B1F3A2DAE00DCF4C9 /* LaunchScreen.storyboard */; };
 		D1C0EB851F3B93C600DCF4C9 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB841F3B93C600DCF4C9 /* Review.swift */; };
@@ -59,8 +61,10 @@
 		7E7EDAAF1F3BD8390024B2CD /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		7E7EDAB11F3BD9880024B2CD /* labanane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = labanane.png; sourceTree = "<group>"; };
 		BCEE5917A4910DC008EEABAE /* Pods_SeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D17FE7731F3CE52B00206951 /* chickenRice.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chickenRice.JPG; sourceTree = "<group>"; };
+		D17FE7731F3CE52B00206951 /* chickenRice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chickenRice.jpg; sourceTree = "<group>"; };
 		D17FE7751F3D70A300206951 /* GoogleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleManager.swift; sourceTree = "<group>"; };
+		D17FE7771F3E326400206951 /* assets.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = assets.xib; sourceTree = "<group>"; };
+		D17FE7791F3E3D0300206951 /* beef-stirfry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "beef-stirfry.jpg"; sourceTree = "<group>"; };
 		D1C0EB5B1F3A2C6200DCF4C9 /* SeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1C0EB651F3A2C6200DCF4C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -156,7 +160,9 @@
 				D1C0EB8D1F3BAB8E00DCF4C9 /* Star-Half.png */,
 				D1C0EB8E1F3BAB8E00DCF4C9 /* Star-Filled.png */,
 				D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */,
-				D17FE7731F3CE52B00206951 /* chickenRice.JPG */,
+				D17FE7731F3CE52B00206951 /* chickenRice.jpg */,
+				D17FE7791F3E3D0300206951 /* beef-stirfry.jpg */,
+				D17FE7771F3E326400206951 /* assets.xib */,
 				D1C0EB8A1F3B995A00DCF4C9 /* Models */,
 			);
 			path = Errol;
@@ -258,22 +264,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D17FE7741F3CE52B00206951 /* chickenRice.JPG in Resources */,
-				D1C0EB711F3A2C7600DCF4C9 /* Thiago.storyboard in Resources */,
+				D17FE7741F3CE52B00206951 /* chickenRice.jpg in Resources */,
+				D13427F41F3E5EF800F07E9C /* Thiago.storyboard in Resources */,
 				D1C0EB921F3BAB8E00DCF4C9 /* Star.png in Resources */,
 				D1C0EB911F3BAB8E00DCF4C9 /* Star-Filled.png in Resources */,
 				7E7EDAAC1F3BA76F0024B2CD /* style.json in Resources */,
-				D1C0EB711F3A2C7600DCF4C9 /* Thiago.storyboard in Resources */,
 				D1C0EB7C1F3A2DAE00DCF4C9 /* LaunchScreen.storyboard in Resources */,
 				7E47D8611F3B51A100DDA78B /* WebViewContent.html in Resources */,
 				7E47D85D1F3B4FF000DDA78B /* gif1.gif in Resources */,
 				7E7EDAB21F3BD9880024B2CD /* labanane.png in Resources */,
+				D17FE77A1F3E3D0300206951 /* beef-stirfry.jpg in Resources */,
 				7E0E1BD01F3A44B800367508 /* lockIcon.png in Resources */,
 				D1C0EB901F3BAB8E00DCF4C9 /* Star-Half.png in Resources */,
 				7E7EDAAA1F3BA3C80024B2CD /* redbackground copy.jpg in Resources */,
 				7E47D8671F3B84D000DDA78B /* defaultrestlogo.png in Resources */,
 				7E0E1BCF1F3A44B800367508 /* userIcon.png in Resources */,
 				D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */,
+				D17FE7781F3E326400206951 /* assets.xib in Resources */,
 				D1C0EB751F3A2C8E00DCF4C9 /* Errol.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,7 +330,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

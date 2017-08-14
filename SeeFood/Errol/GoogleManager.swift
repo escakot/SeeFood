@@ -19,52 +19,31 @@ class GoogleManager: NSObject, CLLocationManagerDelegate {
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
     locationManager.requestWhenInUseAuthorization()
     locationManager.distanceFilter = 50
-    locationManager.startUpdatingLocation()
     locationManager.delegate = self
   }
   
   static let shared = GoogleManager()
   
+  let googlePlacesAPI = "AIzaSyCoWsUggZmQ3s9qHVrhhhSfierog67FDdU"
   var camera: GMSCameraPosition!
   var locationManager: CLLocationManager!
   var currentLocation: CLLocation?
-  var placesClient = GMSPlacesClient.shared()
   var zoomLevel: Float = 15.0
+  var searchRadius: Int = 20
   
-  var nearbyPlaces: [GMSPlace] = []
-  var selectedPlace: GMSPlace?
+  var placesClient = GMSPlacesClient.shared()
+  var places: [GMSPlace] = []
   
   
-  func getNearbyPlaces()
-  {
-    nearbyPlaces.removeAll()
-    
-    placesClient.currentPlace { (placeLikelihood: GMSPlaceLikelihoodList?,error: Error?) in
-      if let error = error
-      {
-        print(error.localizedDescription)
-        return
-      }
-      
-      if let likelihoodList = placeLikelihood
-      {
-        for likelihood in likelihoodList.likelihoods
-        {
-          let place = likelihood.place
-          self.nearbyPlaces.append(place)
-        }
-      }
-    }
-  }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
   {
-    let location = locations.last!
-    print("Location: \(location)")
+    currentLocation = locations.last!
+    print("Location: \(currentLocation!)")
     
-    camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: zoomLevel)
-    
-    getNearbyPlaces()
+    getPlacesNear(location: currentLocation!.coordinate, radius: searchRadius) { (places) in
+      self.places = places
+    }
   }
   
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
@@ -79,7 +58,7 @@ class GoogleManager: NSObject, CLLocationManagerDelegate {
     case .notDetermined:
       print("Location status not determined.")
       break
-    case .authorizedWhenInUse:
+    case .authorizedAlways:
       print("Location Status is Always")
       break
     case .authorizedWhenInUse:
@@ -92,5 +71,70 @@ class GoogleManager: NSObject, CLLocationManagerDelegate {
   {
     locationManager.stopUpdatingLocation()
   }
+  
+  
+  // MARK: - Google Places Methods
+  func getPlacesNear(location:CLLocationCoordinate2D, radius:Int, completionHandler: @escaping (Array<GMSPlace>) -> Void)
+  {
+    performNearbySearch(coordinates: location, radius: radius) { (placesID) in
+      var nearbyPlaces: [GMSPlace] = []
+      for placeID in placesID
+      {
+        self.placesClient.lookUpPlaceID(placeID, callback: { (place:GMSPlace?, error:Error?) in
+          if (error == nil)
+          {
+            nearbyPlaces.append(place!)
+          } else {
+            print(error!.localizedDescription)
+          }
+        })
+      }
+      completionHandler(nearbyPlaces)
+    }
+  }
+  
+  
+  
+  // MARK: - Query Search Methods
+  func performNearbySearch(coordinates: CLLocationCoordinate2D, radius:Int, completionHandler: @escaping (Array<String>) -> Void)
+  {
+    var components = URLComponents(string: "https://maps.googleapis.com")!
+    components.path = "/maps/api/place/nearbysearch/json"
+    let typeQuery = URLQueryItem(name: "type", value: "restaurant")
+    let locationQuery = URLQueryItem(name: "location", value: String(format: "%.7f,%.7f", coordinates.latitude, coordinates.longitude))
+    let radiusQuery = URLQueryItem(name: "radius", value: String(format:"%li", radius))
+    let keyQuery = URLQueryItem(name: "key", value: googlePlacesAPI)
+    components.queryItems = [typeQuery, locationQuery, radiusQuery, keyQuery]
+    
+    let urlRequest = URLRequest(url: components.url!)
+    
+    let configurations = URLSessionConfiguration.default
+    let session = URLSession(configuration: configurations)
+    let dataTask = session.dataTask(with: urlRequest, completionHandler: { (data: Data?, response: URLResponse?,error: Error?) in
+      if error == nil
+      {
+        var placesID: [String] = []
+        do {
+          let jsonData = try JSONSerialization.jsonObject(with: data!, options:[]) as! [String:AnyObject]
+          let placesArray = jsonData["results"] as! [[String:AnyObject]]
+          
+          for placesDict in placesArray
+          {
+            placesID.append(placesDict["place_id"] as! String)
+          }
+        } catch {
+          print(error.localizedDescription)
+        }
+        
+        completionHandler(placesID)
+        
+      } else {
+        print(error!.localizedDescription)
+      }
+    })
+    dataTask.resume()
+  }
+  
+  
   
 }

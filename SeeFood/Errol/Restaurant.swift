@@ -18,12 +18,11 @@ class Restaurant: PFObject, PFSubclassing {
   @NSManaged var owner: PFUser
   
   // MARK: - Initializers
-  convenience init(id:String, name:String, coordinates:PFGeoPoint)
+  convenience init(id:String, name:String)
   {
     self.init()
     self.id = id
     self.name = name
-    self.coordinates = coordinates
   }
   
   func menu() -> PFRelation<MenuItem>

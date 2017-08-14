@@ -11,6 +11,7 @@ target 'SeeFood' do
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-  pod 'GooglePlacePicker'
+  pod 'RxSwift'
+  pod 'ObservableArray-RxSwift'
 
 end

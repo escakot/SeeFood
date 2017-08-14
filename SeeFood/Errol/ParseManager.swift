@@ -95,7 +95,7 @@ class ParseManager: NSObject {
   
   func createRestaurantProfileWith(id:String, name:String, coordinates:PFGeoPoint, completionHandler: @escaping (Bool) -> Void)
   {
-    let restaurant  = Restaurant(id:id, name:name, coordinates:coordinates)
+    let restaurant  = Restaurant(id:id, name:name)
     restaurant.saveInBackground { (success, error) in
       if (!success)
       {
@@ -105,28 +105,29 @@ class ParseManager: NSObject {
     }
   }
   
-  func createMenuItemFor(_ restaurant:Restaurant, title:String, price:Float, coordinates:CLLocationCoordinate2D, completionHandler: @escaping (MenuItem) -> Void)
+  func createMenuItemFor(_ restaurant:Restaurant, title:String, completionHandler: @escaping (MenuItem) -> Void)
   {
-    let menuItem = MenuItem(restaurant: restaurant, title: title, price: price)
+    let menuItem = MenuItem(restaurant: restaurant, title: title)
     menuItem.saveInBackground { (success: Bool, error: Error?) in
       if success
       {
         restaurant.menu().add(menuItem)
         restaurant.saveInBackground()
+        completionHandler(menuItem)
       } else {
         print(error!.localizedDescription)
       }
     }
   }
   
-  func addReviewFor(_ menuItem:MenuItem, at restaurant:Restaurant, image:UIImage, comment:String?, rating:Int, completionHandler: @escaping () -> Void)
+  func addReviewFor(_ menuItem:MenuItem, at restaurant:Restaurant, image:UIImage, completionHandler: @escaping () -> Void)
   {
     guard let user = PFUser.current(),
       let imageData = UIImagePNGRepresentation(image) else {
       return
     }
     let imageFile = PFFile(name: "image.png", data: imageData)
-    let review = Review(user: user, image: imageFile!, comment:comment, rating: rating, menuItem: menuItem, restaurant: restaurant)
+    let review = Review(user: user, image: imageFile!, menuItem: menuItem, restaurant: restaurant)
     review.saveInBackground { (success: Bool, error: Error?) in
       if success
       {
