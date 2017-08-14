@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import GoogleMaps
 import GooglePlaces
+import ObservableArray_RxSwift
 import RxSwift
 
 class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -28,9 +29,11 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var mapView: GMSMapView?
   
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRxSwiftForPlaces()
         getRestaurantObjects()
         self.setupMap()
     }
@@ -134,6 +137,8 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
       sharedManager.locationManager.requestLocation()
       
       
+      
+      
     
     }
   
@@ -141,7 +146,15 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
   
     func setupRxSwiftForPlaces()
     {
-      
+      GoogleManager.shared.places.rx_elements().subscribe(onNext: { (places:[GMSPlace]) in
+        
+        
+        //Thiago make your changes to the map here!
+        //GoogleManager.shared.searchRadius = 50? //Change the value based on map
+        //Call GoogleManager.shared.locationManager.requestLocation to update the map
+        print(places)
+        
+      }).addDisposableTo(disposeBag)
     }
   
   

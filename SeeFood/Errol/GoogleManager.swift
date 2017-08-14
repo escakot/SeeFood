@@ -9,6 +9,8 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import RxSwift
+import ObservableArray_RxSwift
 
 class GoogleManager: NSObject, CLLocationManagerDelegate {
   
@@ -29,10 +31,11 @@ class GoogleManager: NSObject, CLLocationManagerDelegate {
   var locationManager: CLLocationManager!
   var currentLocation: CLLocation?
   var zoomLevel: Float = 15.0
-  var searchRadius: Int = 20
+  var searchRadius: Int = 50
   
   var placesClient = GMSPlacesClient.shared()
-  var places: [GMSPlace] = []
+  var places: ObservableArray<GMSPlace> = []
+  var placesID: [String] = []
   
   
   
@@ -42,7 +45,7 @@ class GoogleManager: NSObject, CLLocationManagerDelegate {
     print("Location: \(currentLocation!)")
     
     getPlacesNear(location: currentLocation!.coordinate, radius: searchRadius) { (places) in
-      self.places = places
+//      self.places = places
     }
   }
   
@@ -74,16 +77,18 @@ class GoogleManager: NSObject, CLLocationManagerDelegate {
   
   
   // MARK: - Google Places Methods
-  func getPlacesNear(location:CLLocationCoordinate2D, radius:Int, completionHandler: @escaping (Array<GMSPlace>) -> Void)
+  func getPlacesNear(location:CLLocationCoordinate2D, radius:Int, completionHandler: @escaping (ObservableArray<GMSPlace>) -> Void)
   {
+    places.removeAll()
     performNearbySearch(coordinates: location, radius: radius) { (placesID) in
-      var nearbyPlaces: [GMSPlace] = []
+      var nearbyPlaces: ObservableArray<GMSPlace> = []
       for placeID in placesID
       {
         self.placesClient.lookUpPlaceID(placeID, callback: { (place:GMSPlace?, error:Error?) in
           if (error == nil)
           {
-            nearbyPlaces.append(place!)
+//            nearbyPlaces.append(place!)
+            self.places.append(place!)
           } else {
             print(error!.localizedDescription)
           }
@@ -98,6 +103,7 @@ class GoogleManager: NSObject, CLLocationManagerDelegate {
   // MARK: - Query Search Methods
   func performNearbySearch(coordinates: CLLocationCoordinate2D, radius:Int, completionHandler: @escaping (Array<String>) -> Void)
   {
+    placesID = []
     var components = URLComponents(string: "https://maps.googleapis.com")!
     components.path = "/maps/api/place/nearbysearch/json"
     let typeQuery = URLQueryItem(name: "type", value: "restaurant")
@@ -113,20 +119,20 @@ class GoogleManager: NSObject, CLLocationManagerDelegate {
     let dataTask = session.dataTask(with: urlRequest, completionHandler: { (data: Data?, response: URLResponse?,error: Error?) in
       if error == nil
       {
-        var placesID: [String] = []
         do {
           let jsonData = try JSONSerialization.jsonObject(with: data!, options:[]) as! [String:AnyObject]
           let placesArray = jsonData["results"] as! [[String:AnyObject]]
           
           for placesDict in placesArray
           {
-            placesID.append(placesDict["place_id"] as! String)
+            self.placesID.append(placesDict["place_id"] as! String)
           }
+          completionHandler(self.placesID)
         } catch {
           print(error.localizedDescription)
+          completionHandler(self.placesID)
         }
         
-        completionHandler(placesID)
         
       } else {
         print(error!.localizedDescription)
