@@ -28,8 +28,11 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        locationManager.requestLocation()
         getRestaurants(coordinates: (locationManager.location?.coordinate)!)
-        GoogleManager.shared.locationManager.requestLocation()
     }
     
     
@@ -92,8 +95,8 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
 //            for rest in restaurants
 //            {
 //                let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
-//                restaurant.coordinates = 
-//                self.arrayOfRestaurants += restaurant
+//                restaurant.coordinates =
+//                self.arrayOfRestaurants.append(restaurant)
 //            }
 //        }
     }
