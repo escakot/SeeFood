@@ -23,13 +23,12 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var customNav: UIView!
     var arrayOfRestaurants: [Restaurant] = []
     var mapView: GMSMapView?
-    var disposeBag = DisposeBag()
     var locationManager = CLLocationManager()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupRxSwiftForPlaces()
+        getRestaurants(coordinates: (locationManager.location?.coordinate)!)
         GoogleManager.shared.locationManager.requestLocation()
     }
     
@@ -79,26 +78,24 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     //MARK: Google API Call
-    func setupRxSwiftForPlaces()
-    {
-        GoogleManager.shared.searchRadius = 200
-        GoogleManager.shared.places.rx_elements().subscribe(onNext: { (places:[GMSPlace]) in
-            
-            
-            //Thiago make your changes to the map here!
-            //GoogleManager.shared.searchRadius = 50? //Change the value based on map
-            //Call GoogleManager.shared.locationManager.requestLocation to update the map
-            
-            for rest in places {
-                let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
-                restaurant.coordinates = PFGeoPoint(latitude: rest.coordinate.latitude, longitude: rest.coordinate.longitude)
-                self.arrayOfRestaurants.append(restaurant)
-                self.mainTable.reloadData()
-            }
-            
-            print(places)
-            
-        }).addDisposableTo(disposeBag)
+    
+//    for rest in places {
+//    let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
+//    restaurant.coordinates = PFGeoPoint(latitude: rest.coordinate.latitude, longitude: rest.coordinate.longitude)
+//    self.arrayOfRestaurants.append(restaurant)
+//    self.mainTable.reloadData()
+//    }
+//    
+    
+    func getRestaurants(coordinates: CLLocationCoordinate2D) {
+//        GoogleManager.shared.performNearbySearch(coordinates: coordinates, radius: GoogleManager.shared.searchRadius) { (restaurants:[RestaurantData]) in
+//            for rest in restaurants
+//            {
+//                let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
+//                restaurant.coordinates = 
+//                self.arrayOfRestaurants += restaurant
+//            }
+//        }
     }
     
     
@@ -241,17 +238,13 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
-    
-    
-    
-    
-    
-    
     //MARK: Location MAnager Delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-       //Call google API to do Quety
+       //Call google API to do Query
     }
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
     {
