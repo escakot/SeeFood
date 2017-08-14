@@ -14,16 +14,18 @@ class MenuItem: PFObject, PFSubclassing {
   // MARK: - Properties
   @NSManaged var restaurant: Restaurant
   @NSManaged var title: String
-  @NSManaged var price: Float
-  @NSManaged var reviews: PFRelation<Review>
   
   // MARK: - Initializers
-  init(restaurant:Restaurant, title:String, price:Float)
+  convenience init(restaurant:Restaurant, title:String)
   {
-    super.init()
+    self.init()
     self.restaurant = restaurant
     self.title = title
-    self.price = price
+  }
+  
+  func reviews() -> PFRelation<Review>
+  {
+    return self.relation(forKey: "reviews") as! PFRelation<Review>
   }
   
   static func parseClassName() -> String

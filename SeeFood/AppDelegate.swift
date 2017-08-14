@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Parse.initialize(with: configuration)
     
     GMSServices.provideAPIKey("AIzaSyDnaWnMHeK5LNQ4rXlHUGZ5RR-nA79oUq8")
-    GMSPlacesClient.provideAPIKey("AIzaSyDnaWnMHeK5LNQ4rXlHUGZ5RR-nA79oUq8")
+    GMSPlacesClient.provideAPIKey("AIzaSyCoWsUggZmQ3s9qHVrhhhSfierog67FDdU")
 
     return true
   }

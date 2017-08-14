@@ -19,6 +19,7 @@
 		7E47D8671F3B84D000DDA78B /* defaultrestlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E47D8661F3B84D000DDA78B /* defaultrestlogo.png */; };
 		7E6DFBCE1F3E03F80021A8A8 /* CellDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6DFBCD1F3E03F80021A8A8 /* CellDetailViewController.swift */; };
 		7E7C08B41F421E3B001C9F3E /* turkey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C08B31F421E3B001C9F3E /* turkey.jpg */; };
+		7E7C08B61F422B15001C9F3E /* searchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C08B51F422B15001C9F3E /* searchIcon.png */; };
 		7E7EDAAA1F3BA3C80024B2CD /* redbackground copy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E7EDAA91F3BA3C80024B2CD /* redbackground copy.jpg */; };
 		7E7EDAAC1F3BA76F0024B2CD /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E7EDAAB1F3BA76F0024B2CD /* style.json */; };
 		7E7EDAAE1F3BD78C0024B2CD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EDAAD1F3BD78C0024B2CD /* DetailViewController.swift */; };
@@ -27,7 +28,10 @@
 		7EA53CFC1F3E3AF200A5B29C /* meal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EA53CFB1F3E3AF200A5B29C /* meal.jpg */; };
 		7EE7BD531F3E44EC00399BE3 /* transparentdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE7BD521F3E44EC00399BE3 /* transparentdown.png */; };
 		97F3CEBB22FF66BBABFC4B6E /* Pods_SeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEE5917A4910DC008EEABAE /* Pods_SeeFood.framework */; };
-		D17FE7741F3CE52B00206951 /* chickenRice.JPG in Resources */ = {isa = PBXBuildFile; fileRef = D17FE7731F3CE52B00206951 /* chickenRice.JPG */; };
+		D17FE7741F3CE52B00206951 /* chickenRice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D17FE7731F3CE52B00206951 /* chickenRice.jpg */; };
+		D17FE7761F3D70A300206951 /* GoogleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17FE7751F3D70A300206951 /* GoogleManager.swift */; };
+		D17FE7781F3E326400206951 /* assets.xib in Resources */ = {isa = PBXBuildFile; fileRef = D17FE7771F3E326400206951 /* assets.xib */; };
+		D17FE77A1F3E3D0300206951 /* beef-stirfry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D17FE7791F3E3D0300206951 /* beef-stirfry.jpg */; };
 		D1C0EB5F1F3A2C6200DCF4C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */; };
 		D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB651F3A2C6200DCF4C9 /* Assets.xcassets */; };
 		D1C0EB751F3A2C8E00DCF4C9 /* Errol.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB741F3A2C8E00DCF4C9 /* Errol.storyboard */; };
@@ -56,6 +60,7 @@
 		7E47D8661F3B84D000DDA78B /* defaultrestlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultrestlogo.png; sourceTree = "<group>"; };
 		7E6DFBCD1F3E03F80021A8A8 /* CellDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellDetailViewController.swift; sourceTree = "<group>"; };
 		7E7C08B31F421E3B001C9F3E /* turkey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = turkey.jpg; sourceTree = "<group>"; };
+		7E7C08B51F422B15001C9F3E /* searchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchIcon.png; sourceTree = "<group>"; };
 		7E7EDAA91F3BA3C80024B2CD /* redbackground copy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "redbackground copy.jpg"; sourceTree = "<group>"; };
 		7E7EDAAB1F3BA76F0024B2CD /* style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
 		7E7EDAAD1F3BD78C0024B2CD /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -64,7 +69,10 @@
 		7EA53CFB1F3E3AF200A5B29C /* meal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meal.jpg; sourceTree = "<group>"; };
 		7EE7BD521F3E44EC00399BE3 /* transparentdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparentdown.png; sourceTree = "<group>"; };
 		BCEE5917A4910DC008EEABAE /* Pods_SeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D17FE7731F3CE52B00206951 /* chickenRice.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chickenRice.JPG; sourceTree = "<group>"; };
+		D17FE7731F3CE52B00206951 /* chickenRice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chickenRice.jpg; sourceTree = "<group>"; };
+		D17FE7751F3D70A300206951 /* GoogleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleManager.swift; sourceTree = "<group>"; };
+		D17FE7771F3E326400206951 /* assets.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = assets.xib; sourceTree = "<group>"; };
+		D17FE7791F3E3D0300206951 /* beef-stirfry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "beef-stirfry.jpg"; sourceTree = "<group>"; };
 		D1C0EB5B1F3A2C6200DCF4C9 /* SeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1C0EB651F3A2C6200DCF4C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -156,10 +164,13 @@
 				D1C0EB741F3A2C8E00DCF4C9 /* Errol.storyboard */,
 				D1C0EB8B1F3BA61900DCF4C9 /* AddReviewViewController.swift */,
 				D1E32D951F3BEF470008726F /* ParseManager.swift */,
+				D17FE7751F3D70A300206951 /* GoogleManager.swift */,
 				D1C0EB8D1F3BAB8E00DCF4C9 /* Star-Half.png */,
 				D1C0EB8E1F3BAB8E00DCF4C9 /* Star-Filled.png */,
 				D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */,
-				D17FE7731F3CE52B00206951 /* chickenRice.JPG */,
+				D17FE7731F3CE52B00206951 /* chickenRice.jpg */,
+				D17FE7791F3E3D0300206951 /* beef-stirfry.jpg */,
+				D17FE7771F3E326400206951 /* assets.xib */,
 				D1C0EB8A1F3B995A00DCF4C9 /* Models */,
 			);
 			path = Errol;
@@ -178,6 +189,7 @@
 				7EE7BD521F3E44EC00399BE3 /* transparentdown.png */,
 				7EA53CFB1F3E3AF200A5B29C /* meal.jpg */,
 				7E7C08B31F421E3B001C9F3E /* turkey.jpg */,
+				7E7C08B51F422B15001C9F3E /* searchIcon.png */,
 				7E7EDAAB1F3BA76F0024B2CD /* style.json */,
 				7E47D8601F3B51A100DDA78B /* WebViewContent.html */,
 				7E0E1BD11F3A455500367508 /* LoginViewController.swift */,
@@ -264,7 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E288EC81F3E49AA0040BBB9 /* Thiago.storyboard in Resources */,
-				D17FE7741F3CE52B00206951 /* chickenRice.JPG in Resources */,
+				D17FE7741F3CE52B00206951 /* chickenRice.jpg in Resources */,
 				D1C0EB921F3BAB8E00DCF4C9 /* Star.png in Resources */,
 				D1C0EB911F3BAB8E00DCF4C9 /* Star-Filled.png in Resources */,
 				7E7EDAAC1F3BA76F0024B2CD /* style.json in Resources */,
@@ -272,8 +284,10 @@
 				7EA53CFC1F3E3AF200A5B29C /* meal.jpg in Resources */,
 				7E47D8611F3B51A100DDA78B /* WebViewContent.html in Resources */,
 				7E47D85D1F3B4FF000DDA78B /* gif1.gif in Resources */,
+				D17FE77A1F3E3D0300206951 /* beef-stirfry.jpg in Resources */,
 				7E0E1BD01F3A44B800367508 /* lockIcon.png in Resources */,
 				7EE7BD531F3E44EC00399BE3 /* transparentdown.png in Resources */,
+				7E7C08B61F422B15001C9F3E /* searchIcon.png in Resources */,
 				D1C0EB901F3BAB8E00DCF4C9 /* Star-Half.png in Resources */,
 				7E7C08B41F421E3B001C9F3E /* turkey.jpg in Resources */,
 				7EA53CFA1F3E39EB00A5B29C /* transparent.png in Resources */,
@@ -281,6 +295,7 @@
 				7E47D8671F3B84D000DDA78B /* defaultrestlogo.png in Resources */,
 				7E0E1BCF1F3A44B800367508 /* userIcon.png in Resources */,
 				D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */,
+				D17FE7781F3E326400206951 /* assets.xib in Resources */,
 				D1C0EB751F3A2C8E00DCF4C9 /* Errol.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E47D85B1F3B4F0D00DDA78B /* SignUpViewController.swift in Sources */,
+				D17FE7761F3D70A300206951 /* GoogleManager.swift in Sources */,
 				7E7EDAB01F3BD83A0024B2CD /* CustomCollectionViewCell.swift in Sources */,
 				7E47D8651F3B817700DDA78B /* CustomTableViewCell.swift in Sources */,
 				7E6DFBCE1F3E03F80021A8A8 /* CellDetailViewController.swift in Sources */,

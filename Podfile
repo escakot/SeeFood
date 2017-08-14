@@ -12,5 +12,7 @@ target 'SeeFood' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'UPCarouselFlowLayout', '~> 1.1'
+  pod 'RxSwift'
+  pod 'ObservableArray-RxSwift'
 
 end

@@ -9,8 +9,11 @@
 import UIKit
 import Parse
 import GoogleMaps
+import GooglePlaces
+import ObservableArray_RxSwift
+import RxSwift
 
-class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     //MARK: Properties
 
@@ -25,14 +28,16 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     var arrayOfRestaurants: [Restaurant] = []
     
     var mapView: GMSMapView?
-    
-    
-    
+  
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getRestaurantObjects()
+//        let sharedManager = GoogleManager.shared
+//        sharedManager.locationManager.requestLocation()
+        setupRxSwiftForPlaces()
         self.setupMap()
+        GoogleManager.shared.locationManager.requestLocation()
     }
     
     
@@ -121,18 +126,44 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     
+    
+//    func getRestaurantObjects(){
+////        let myGeoPoint1 = PFGeoPoint(latitude: 43.642566, longitude: -79.387057)
+////        let restaurant1 = Restaurant.init(name: "CN Tower", coordinates: myGeoPoint1)
+////        let myGeoPoint2 = PFGeoPoint(latitude: 43.641438, longitude: -79.389353)
+////        let restaurant2 = Restaurant.init(name: "Rogers Center", coordinates: myGeoPoint2)
+////        arrayOfRestaurants.append(restaurant1)
+////        arrayOfRestaurants.append(restaurant2)
+//      
+//      let sharedManager = GoogleManager.shared
+//      sharedManager.locationManager.requestLocation()
+//    }
+  
+  
     //MARK: Google API Call
-    func getRestaurantObjects(){
-        let myGeoPoint1 = PFGeoPoint(latitude: 43.642566, longitude: -79.387057)
-        let restaurant1 = Restaurant.init(name: "CN Tower", coordinates: myGeoPoint1)
-        let myGeoPoint2 = PFGeoPoint(latitude: 43.641438, longitude: -79.389353)
-        let restaurant2 = Restaurant.init(name: "Rogers Center", coordinates: myGeoPoint2)
-        arrayOfRestaurants.append(restaurant1)
-        arrayOfRestaurants.append(restaurant2)
+    func setupRxSwiftForPlaces()
+    {
+      GoogleManager.shared.places.rx_elements().subscribe(onNext: { (places:[GMSPlace]) in
+        
+        
+        //Thiago make your changes to the map here!
+        //GoogleManager.shared.searchRadius = 50? //Change the value based on map
+        //Call GoogleManager.shared.locationManager.requestLocation to update the map
+        
+        print(places)
+        
+      }).addDisposableTo(disposeBag)
     }
+  
+  
     
     
     
+    //MARK: TextField Delegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("Should return")
+        return true
+    }
     
     
     

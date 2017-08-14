@@ -11,7 +11,7 @@ import Parse
 
 class ParseManager: NSObject {
   
-  private override init() { }
+  private override init() {}
   
   static let shared = ParseManager()
   
@@ -52,13 +52,10 @@ class ParseManager: NSObject {
     }
   }
   
-  func queryRestaurantMenuItems(restaurantName:String, coordinates:CLLocationCoordinate2D, completionHandler: @escaping (Array<MenuItem>?) -> Void)
+  func queryMenuItemsFor(_ restaurant:Restaurant, completionHandler: @escaping (Array<MenuItem>?) -> Void)
   {
-    let innerQuery = Restaurant.query()
-    innerQuery!.whereKey("name", contains: restaurantName)
-    
     let query = MenuItem.query()
-    query!.whereKey("restaurant", matchesQuery: innerQuery!)
+    query!.whereKey("restaurant", equalTo: restaurant)
     
     query!.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
       if error == nil
@@ -79,13 +76,43 @@ class ParseManager: NSObject {
     })
   }
   
-  func createMenuItemFor(_ restaurant:Restaurant, title:String, price:Float, coordinates:CLLocationCoordinate2D, completionHandler: @escaping (MenuItem) -> Void)
+  func queryRestaurantWith(name:String, coordinates:PFGeoPoint, completionHandler: @escaping (Restaurant?) -> Void)
   {
-    let menuItem = MenuItem(restaurant: restaurant, title: title, price: price)
+    let query = Restaurant.query()
+    query!.whereKey("name", contains: name)
+    query!.whereKey("coordinates", nearGeoPoint: coordinates)
+    
+    query?.getFirstObjectInBackground(block: { (object, error) in
+      if error == nil
+      {
+        completionHandler(object as? Restaurant)
+      } else {
+        print(error!.localizedDescription)
+        completionHandler(nil)
+      }
+    })
+  }
+  
+  func createRestaurantProfileWith(id:String, name:String, coordinates:PFGeoPoint, completionHandler: @escaping (Bool) -> Void)
+  {
+    let restaurant  = Restaurant(id:id, name:name)
+    restaurant.saveInBackground { (success, error) in
+      if (!success)
+      {
+        print(error!.localizedDescription)
+      }
+      completionHandler(success)
+    }
+  }
+  
+  func createMenuItemFor(_ restaurant:Restaurant, title:String, completionHandler: @escaping (MenuItem) -> Void)
+  {
+    let menuItem = MenuItem(restaurant: restaurant, title: title)
     menuItem.saveInBackground { (success: Bool, error: Error?) in
       if success
       {
-        restaurant.menu.add(menuItem)
+        restaurant.menu().add(menuItem)
+        restaurant.saveInBackground()
         completionHandler(menuItem)
       } else {
         print(error!.localizedDescription)
@@ -93,18 +120,19 @@ class ParseManager: NSObject {
     }
   }
   
-  func addReviewFor(_ menuItem:MenuItem, at restaurant:Restaurant, image:UIImage, comment:String?, rating:Int, completionHandler: @escaping () -> Void)
+  func addReviewFor(_ menuItem:MenuItem, at restaurant:Restaurant, image:UIImage, completionHandler: @escaping () -> Void)
   {
     guard let user = PFUser.current(),
       let imageData = UIImagePNGRepresentation(image) else {
       return
     }
     let imageFile = PFFile(name: "image.png", data: imageData)
-    let review = Review(user: user, image: imageFile!, comment:comment, rating: rating, menuItem: menuItem, restaurant: restaurant)
+    let review = Review(user: user, image: imageFile!, menuItem: menuItem, restaurant: restaurant)
     review.saveInBackground { (success: Bool, error: Error?) in
       if success
       {
-        menuItem.reviews.add(review)
+        menuItem.reviews().add(review)
+        menuItem.saveInBackground()
         completionHandler()
       } else {
         print(error!.localizedDescription)
