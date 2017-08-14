@@ -41,15 +41,7 @@ class RestaurantData: NSObject {
 
 class GoogleManager: NSObject {
   
-  private override init()
-  {
-    super.init()
-    locationManager = CLLocationManager()
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    locationManager.requestWhenInUseAuthorization()
-    locationManager.distanceFilter = 50
-    locationManager.delegate = self
-  }
+  private override init() { }
   
   static let shared = GoogleManager()
   

@@ -13,7 +13,7 @@ import GooglePlaces
 import ObservableArray_RxSwift
 import RxSwift
 
-class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CLLocationManagerDelegate, GMSMapViewDelegate {
+class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     //MARK: Properties
 
@@ -23,13 +23,12 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var customNav: UIView!
     var arrayOfRestaurants: [Restaurant] = []
     var mapView: GMSMapView?
-    var disposeBag = DisposeBag()
     var locationManager = CLLocationManager()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupRxSwiftForPlaces()
+        getRestaurants(coordinates: (locationManager.location?.coordinate)!)
         GoogleManager.shared.locationManager.requestLocation()
     }
     
@@ -79,26 +78,24 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     //MARK: Google API Call
-    func setupRxSwiftForPlaces()
-    {
-        GoogleManager.shared.searchRadius = 200
-        GoogleManager.shared.places.rx_elements().subscribe(onNext: { (places:[GMSPlace]) in
-            
-            
-            //Thiago make your changes to the map here!
-            //GoogleManager.shared.searchRadius = 50? //Change the value based on map
-            //Call GoogleManager.shared.locationManager.requestLocation to update the map
-            
-            for rest in places {
-                let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
-                restaurant.coordinates = PFGeoPoint(latitude: rest.coordinate.latitude, longitude: rest.coordinate.longitude)
-                self.arrayOfRestaurants.append(restaurant)
-                self.mainTable.reloadData()
-            }
-            
-            print(places)
-            
-        }).addDisposableTo(disposeBag)
+    
+//    for rest in places {
+//    let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
+//    restaurant.coordinates = PFGeoPoint(latitude: rest.coordinate.latitude, longitude: rest.coordinate.longitude)
+//    self.arrayOfRestaurants.append(restaurant)
+//    self.mainTable.reloadData()
+//    }
+//    
+    
+    func getRestaurants(coordinates: CLLocationCoordinate2D) {
+//        GoogleManager.shared.performNearbySearch(coordinates: coordinates, radius: GoogleManager.shared.searchRadius) { (restaurants:[RestaurantData]) in
+//            for rest in restaurants
+//            {
+//                let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
+//                restaurant.coordinates = 
+//                self.arrayOfRestaurants += restaurant
+//            }
+//        }
     }
     
     
@@ -145,31 +142,29 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    
+    //MARK: GoogleMaps Delegate
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         print("infoWindowTapped")
-        self.performSegue(withIdentifier: "SegueToDetail", sender: nil)
+        print(marker.description)
+        self.performSegue(withIdentifier: "SegueToDetailFromMap", sender: nil)
     }
     
-//    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-//        self.performSegue(withIdentifier: "SegueToDetail", sender: nil)
-//    }
-//    
-//    func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
-//        self.performSegue(withIdentifier: "SegueToDetail", sender: nil)
-//    }
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        //MARK FOR TEST:
+        let marker = GMSMarker()
+        marker.title = "It Works!"
+        //MARK FOR TEST END
+        self.performSegue(withIdentifier: "SegueToDetailFromMap", sender: marker)
+    }
+
     
     
     
   
     
     
-    
-    //MARK: TextField Delegate
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        print("Should return")
-//        return true
-//    }
-    
+
     
     
     
@@ -213,10 +208,22 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueToDetail"{
+            print(sender.debugDescription)
             let index = self.mainTable.indexPathForSelectedRow
             let vc = segue.destination as! DetailViewController
             vc.restaurant = arrayOfRestaurants[(index?.row)!]
         }
+        
+        else if segue.identifier == "SegueToDetailFromMap"{
+            let vc = segue.destination as! DetailViewController
+            let marker = sender as! GMSMarker
+            for rest in arrayOfRestaurants{
+                if rest.name == marker.title {
+                    vc.restaurant = rest
+                }
+            }
+        }
+
     }
     
     
@@ -231,17 +238,13 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
-    
-    
-    
-    
-    
-    
     //MARK: Location MAnager Delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-       //Call google API to do Quety
+       //Call google API to do Query
     }
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
     {
