@@ -13,12 +13,20 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     //MARK: Properties
     @IBOutlet weak var mainCollectionView: UICollectionView!
     @IBOutlet weak var restaurantNameLabel: UILabel!
+    @IBOutlet weak var defaultPhoto: UIImageView!
+    @IBOutlet weak var defaultLabel: UILabel!
+    
     
     var restaurant: Restaurant!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         restaurantNameLabel.text = restaurant.name
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        defaultPhoto.isHidden = false
+        defaultLabel.isHidden = false
     }
     
     
@@ -43,7 +51,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -55,6 +63,16 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         return cell
     }
+    
+    
+    
+    
+    @IBAction func swipeToDismissView(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .right {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     
     
     
