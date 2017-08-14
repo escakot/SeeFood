@@ -12,6 +12,33 @@ import GooglePlaces
 import RxSwift
 import ObservableArray_RxSwift
 
+class RestaurantData: NSObject {
+  var placeID: String!
+  var name: String!
+  var openingHours: Int
+  var rating: Float
+  var address: String!
+  var photoRef: String!
+  var icon: UIImage?
+  
+  init(withJSONdata data:[String:AnyObject]) {
+    placeID = data["place_id"] as! String
+    name = data["name"] as! String
+    openingHours = (data["opening_hours"] as! [String:AnyObject])["open_now"] as! Int
+    rating = data["rating"] as! Float
+    address = data["vicinity"] as! String
+    photoRef = data["photo_reference"] as! String
+    do {
+      let iconData = try Data(contentsOf: URL(string: data["icon"] as! String)!)
+      icon = UIImage(data: iconData)
+    } catch {
+      print(error.localizedDescription)
+    }
+    
+  }
+  
+}
+
 class GoogleManager: NSObject, CLLocationManagerDelegate {
   
   private override init()
@@ -30,80 +57,28 @@ class GoogleManager: NSObject, CLLocationManagerDelegate {
   var camera: GMSCameraPosition!
   var locationManager: CLLocationManager!
   var currentLocation: CLLocation?
+  var previousLocation: CLLocation?
   var zoomLevel: Float = 15.0
   var searchRadius: Int = 50
   
   var placesClient = GMSPlacesClient.shared()
-  var places: ObservableArray<GMSPlace> = []
-  var placesID: [String] = []
+  var placesID: Array<String> = []
+  
+  var isFirstSearch = true
   
   
-  
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+  func getNearbyRestaurantsAt(coordinates: CLLocationCoordinate2D, completionHandler: @escaping () -> Void)
   {
-    currentLocation = locations.last!
-    print("Location: \(currentLocation!)")
     
-    getPlacesNear(location: currentLocation!.coordinate, radius: searchRadius) { (places) in
-//      self.places = places
-    }
   }
   
-  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
-  {
-    switch (status) {
-    case .restricted:
-      print("Location access was restricted.")
-      break
-    case .denied:
-      print("User denied access.")
-      break
-    case .notDetermined:
-      print("Location status not determined.")
-      break
-    case .authorizedAlways:
-      print("Location Status is Always")
-      break
-    case .authorizedWhenInUse:
-      print("Location Status is OK.")
-      break
-    }
-  }
-  
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
-  {
-    locationManager.stopUpdatingLocation()
-  }
-  
-  
-  // MARK: - Google Places Methods
-  func getPlacesNear(location:CLLocationCoordinate2D, radius:Int, completionHandler: @escaping (ObservableArray<GMSPlace>) -> Void)
-  {
-    places.removeAll()
-    performNearbySearch(coordinates: location, radius: radius) { (placesID) in
-      var nearbyPlaces: ObservableArray<GMSPlace> = []
-      for placeID in placesID
-      {
-        self.placesClient.lookUpPlaceID(placeID, callback: { (place:GMSPlace?, error:Error?) in
-          if (error == nil)
-          {
-//            nearbyPlaces.append(place!)
-            self.places.append(place!)
-          } else {
-            print(error!.localizedDescription)
-          }
-        })
-      }
-      completionHandler(nearbyPlaces)
-    }
-  }
   
   
   
   // MARK: - Query Search Methods
-  func performNearbySearch(coordinates: CLLocationCoordinate2D, radius:Int, completionHandler: @escaping (Array<String>) -> Void)
+  func performNearbySearch(coordinates: CLLocationCoordinate2D, radius:Int, completionHandler: @escaping ([RestaurantData]) -> Void)
   {
-    placesID = []
+    var restaurants: [RestaurantData]  = []
     var components = URLComponents(string: "https://maps.googleapis.com")!
     components.path = "/maps/api/place/nearbysearch/json"
     let typeQuery = URLQueryItem(name: "type", value: "restaurant")
@@ -125,12 +100,17 @@ class GoogleManager: NSObject, CLLocationManagerDelegate {
           
           for placesDict in placesArray
           {
-            self.placesID.append(placesDict["place_id"] as! String)
+            guard placesDict["place_id"] != nil else {
+              print("Place ID Is Nil")
+              return
+            }
+            let restaurantInfo = RestaurantData(withJSONdata: placesDict)
+            restaurants.append(restaurantInfo)
           }
-          completionHandler(self.placesID)
+          completionHandler(restaurants)
         } catch {
           print(error.localizedDescription)
-          completionHandler(self.placesID)
+          completionHandler(restaurants)
         }
         
         
