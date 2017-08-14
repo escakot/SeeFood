@@ -39,7 +39,7 @@ class RestaurantData: NSObject {
   
 }
 
-class GoogleManager: NSObject, CLLocationManagerDelegate {
+class GoogleManager: NSObject {
   
   private override init()
   {
