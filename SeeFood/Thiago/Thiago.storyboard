@@ -140,7 +140,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SeeFood" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thG-zn-3gM">
                                         <rect key="frame" x="70" y="33" width="234" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="KohinoorDevanagari-Light" family="Kohinoor Devanagari" pointSize="28"/>
                                         <color key="textColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -161,7 +161,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.84442298689138573" green="0.11401183878999782" blue="0.16095030745802363" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.84313725490196079" green="0.11372549019607843" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="yrf-bt-GgN"/>
                                 </constraints>
@@ -188,12 +188,12 @@
                                                     <color key="textColor" red="0.24920634107001291" green="0.25103874063670417" blue="0.25103874063670417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jvf-f9-yYC">
-                                                    <rect key="frame" x="85" y="46" width="154" height="31"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="thumbsupIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="jvf-f9-yYC">
+                                                    <rect key="frame" x="85" y="49" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="41 Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGv-qf-QGt">
-                                                    <rect key="frame" x="258" y="51" width="91" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="41" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGv-qf-QGt">
+                                                    <rect key="frame" x="118" y="51" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.60023596189070239" green="0.60464946161048694" blue="0.60464946161048694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -256,26 +256,31 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIg-qR-Pbg">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SeeFood" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXG-Yb-jYE">
-                                        <rect key="frame" x="70" y="34" width="234" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="KohinoorDevanagari-Light" family="Kohinoor Devanagari" pointSize="30"/>
-                                        <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SeeFood" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXG-Yb-jYE">
+                                        <rect key="frame" x="150" y="35" width="74.5" height="28"/>
+                                        <color key="tintColor" red="0.29864524812734083" green="0.08128962908126916" blue="0.088544333860226615" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="KohinoorDevanagari-Light" family="Kohinoor Devanagari" pointSize="20"/>
+                                        <color key="textColor" red="0.11396886704119846" green="0.015520793895492225" blue="0.022677267608613889" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5m0-nm-wqb">
-                                        <rect key="frame" x="0.0" y="29" width="62" height="44"/>
+                                        <rect key="frame" x="8" y="27" width="37" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="38"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
+                                        <color key="tintColor" red="0.29864524812734083" green="0.08128962908126916" blue="0.088544333860226615" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.02864583333333337" green="0.0039011186710364346" blue="0.0056998831807016778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="backButton:" destination="P0e-Jd-2QZ" eventType="touchUpInside" id="VBo-AD-3cW"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.84476000070571899" green="0.11397387832403183" blue="0.16201174259185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.9432922578528663" green="0.95022823033707859" blue="0.95022823033707859" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="FXG-Yb-jYE" firstAttribute="centerX" secondItem="ZIg-qR-Pbg" secondAttribute="centerX" id="Dhu-ic-uOL"/>
+                                    <constraint firstItem="FXG-Yb-jYE" firstAttribute="top" secondItem="ZIg-qR-Pbg" secondAttribute="top" constant="35" id="J8U-bF-EXJ"/>
+                                </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ALa-J3-ebu">
                                 <rect key="frame" x="0.0" y="88" width="375" height="579"/>
@@ -294,12 +299,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="92" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vHW-43-z5a">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vHW-43-z5a">
                                                     <rect key="frame" x="0.0" y="0.0" width="92" height="92"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="vHW-43-z5a" secondAttribute="bottom" id="E7r-zo-w7i"/>
+                                            <constraint firstAttribute="trailing" secondItem="vHW-43-z5a" secondAttribute="trailing" id="QWP-RS-Kz5"/>
+                                            <constraint firstItem="vHW-43-z5a" firstAttribute="top" secondItem="iPs-rd-oOX" secondAttribute="top" id="ZRd-Lb-S0X"/>
+                                            <constraint firstItem="vHW-43-z5a" firstAttribute="leading" secondItem="iPs-rd-oOX" secondAttribute="leading" id="ezS-nh-DbE"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="cellImage" destination="vHW-43-z5a" id="EJN-3y-sf6"/>
                                             <segue destination="MFv-d7-21X" kind="show" identifier="SegueToCellDetail" id="6rV-nv-9XX"/>
@@ -311,34 +321,67 @@
                                     <outlet property="delegate" destination="P0e-Jd-2QZ" id="uH1-kj-AZp"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksn-Wp-0Cg">
-                                <rect key="frame" x="0.0" y="609" width="375" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksn-Wp-0Cg">
+                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                                 <color key="backgroundColor" red="0.84476000070571899" green="0.11397387832403183" blue="0.16201174259185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="gQG-QF-M8g"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="KohinoorDevanagari-Regular" family="Kohinoor Devanagari" pointSize="24"/>
                                 <state key="normal" title="Add">
                                     <color key="titleColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smileyIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="A00-hr-8HI">
+                                <rect key="frame" x="138" y="284" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="A00-hr-8HI" secondAttribute="height" multiplier="1:1" id="IVg-QX-AzX"/>
+                                    <constraint firstAttribute="height" constant="100" id="REr-qA-9xO"/>
+                                </constraints>
+                            </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Be the first to add a photo!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUG-YF-b7X">
+                                <rect key="frame" x="85" y="396" width="204" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="ZIg-qR-Pbg" firstAttribute="leading" secondItem="bMm-tY-OE0" secondAttribute="leading" id="1gY-dS-7vd"/>
+                            <constraint firstItem="oUG-YF-b7X" firstAttribute="centerX" secondItem="ksn-Wp-0Cg" secondAttribute="centerX" id="2GU-7l-m2H"/>
+                            <constraint firstItem="oUG-YF-b7X" firstAttribute="top" secondItem="A00-hr-8HI" secondAttribute="bottom" constant="12" id="7TP-wX-Hsp"/>
+                            <constraint firstItem="A00-hr-8HI" firstAttribute="centerY" secondItem="bMm-tY-OE0" secondAttribute="centerY" id="Av8-fO-lGP"/>
                             <constraint firstItem="ALa-J3-ebu" firstAttribute="top" secondItem="ZIg-qR-Pbg" secondAttribute="bottom" constant="2" id="EsA-IA-jAK"/>
                             <constraint firstAttribute="bottom" secondItem="ZIg-qR-Pbg" secondAttribute="bottom" constant="581" id="Mcd-d5-Ihr"/>
                             <constraint firstAttribute="trailing" secondItem="ALa-J3-ebu" secondAttribute="trailing" id="Oob-Ix-nZJ"/>
+                            <constraint firstItem="A00-hr-8HI" firstAttribute="centerX" secondItem="ksn-Wp-0Cg" secondAttribute="centerX" id="T7H-Hn-gol"/>
                             <constraint firstItem="ZIg-qR-Pbg" firstAttribute="top" secondItem="bMm-tY-OE0" secondAttribute="top" id="TYy-gM-CZt"/>
                             <constraint firstItem="c7t-JR-sGn" firstAttribute="top" secondItem="ALa-J3-ebu" secondAttribute="bottom" id="Zxq-eI-jh5"/>
                             <constraint firstAttribute="trailing" secondItem="ZIg-qR-Pbg" secondAttribute="trailing" id="aSl-Z2-7CX"/>
+                            <constraint firstItem="ksn-Wp-0Cg" firstAttribute="leading" secondItem="ALa-J3-ebu" secondAttribute="leading" id="e0w-bq-c72"/>
+                            <constraint firstItem="oUG-YF-b7X" firstAttribute="centerX" secondItem="bMm-tY-OE0" secondAttribute="centerX" id="kUC-XG-sXY"/>
+                            <constraint firstItem="ksn-Wp-0Cg" firstAttribute="bottom" secondItem="c7t-JR-sGn" secondAttribute="top" id="mlF-YD-el2"/>
                             <constraint firstItem="ALa-J3-ebu" firstAttribute="leading" secondItem="bMm-tY-OE0" secondAttribute="leading" id="ng9-4n-Jya"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="XrG-Sa-lYa" appends="YES" id="H60-ks-YWb"/>
+                        </connections>
                     </view>
                     <connections>
+                        <outlet property="defaultLabel" destination="oUG-YF-b7X" id="qaj-HC-Mlp"/>
+                        <outlet property="defaultPhoto" destination="A00-hr-8HI" id="01J-lF-YRl"/>
                         <outlet property="mainCollectionView" destination="ALa-J3-ebu" id="h9O-2g-HGU"/>
                         <outlet property="restaurantNameLabel" destination="FXG-Yb-jYE" id="whc-0d-8pf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UDc-9p-khp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="XrG-Sa-lYa">
+                    <connections>
+                        <action selector="swipeToDismissView:" destination="P0e-Jd-2QZ" id="ChC-VL-vxS"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="852" y="1010.6446776611695"/>
         </scene>
@@ -405,14 +448,14 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Salmon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7y-r5-PZb">
                                         <rect key="frame" x="70" y="34" width="234" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="25"/>
                                         <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5J6-xR-Phn">
                                         <rect key="frame" x="0.0" y="22" width="62" height="58"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="22"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
                                         <state key="normal" title="X">
                                             <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -556,6 +599,8 @@
         <image name="lockIcon.png" width="100" height="100"/>
         <image name="meal.jpg" width="960" height="641"/>
         <image name="redbackground copy.jpg" width="640" height="960"/>
+        <image name="smileyIcon.png" width="512" height="512"/>
+        <image name="thumbsupIcon.png" width="96" height="96"/>
         <image name="transparentdown.png" width="972" height="511"/>
         <image name="userIcon.png" width="96" height="96"/>
     </resources>

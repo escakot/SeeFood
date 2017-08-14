@@ -13,30 +13,23 @@ import GooglePlaces
 import ObservableArray_RxSwift
 import RxSwift
 
-class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     //MARK: Properties
 
     @IBOutlet weak var searchTextField: UITextField!
-    
     @IBOutlet weak var mapListButton: UIButton!
-    
     @IBOutlet weak var mainTable: UITableView!
-    
     @IBOutlet weak var customNav: UIView!
-    
     var arrayOfRestaurants: [Restaurant] = []
-    
     var mapView: GMSMapView?
-  
     var disposeBag = DisposeBag()
+    var locationManager = CLLocationManager()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let sharedManager = GoogleManager.shared
-//        sharedManager.locationManager.requestLocation()
         setupRxSwiftForPlaces()
-        self.setupMap()
         GoogleManager.shared.locationManager.requestLocation()
     }
     
@@ -49,13 +42,17 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func switchMapListButton(_ sender: UIButton) {
         
+        
         if self.mainTable.alpha == 0 {
             self.mainTable.alpha = 1
+            self.mainTable.isHidden = false
             self.mapView?.removeFromSuperview()
             sender.setTitle("Map", for: .normal)
         }
         else{
+            self.setupMap()
             self.mainTable.alpha = 0
+            self.mainTable.isHidden = true
             self.view.addSubview(self.mapView!)
             sender.setTitle("List", for: .normal)
         }
@@ -81,6 +78,32 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     
+    //MARK: Google API Call
+    func setupRxSwiftForPlaces()
+    {
+        GoogleManager.shared.searchRadius = 200
+        GoogleManager.shared.places.rx_elements().subscribe(onNext: { (places:[GMSPlace]) in
+            
+            
+            //Thiago make your changes to the map here!
+            //GoogleManager.shared.searchRadius = 50? //Change the value based on map
+            //Call GoogleManager.shared.locationManager.requestLocation to update the map
+            
+            for rest in places {
+                let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
+                restaurant.coordinates = PFGeoPoint(latitude: rest.coordinate.latitude, longitude: rest.coordinate.longitude)
+                self.arrayOfRestaurants.append(restaurant)
+                self.mainTable.reloadData()
+            }
+            
+            print(places)
+            
+        }).addDisposableTo(disposeBag)
+    }
+    
+    
+    
+    
     
     
     //MARK: Map Setup
@@ -91,27 +114,28 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         let camera = GMSCameraPosition.camera(withLatitude: userLocation.latitude, longitude: userLocation.longitude, zoom: 14.0)
         
   
-    let f = self.view.frame
+        let f = self.view.frame
         
-    let mapFrame = CGRect(x: 500, y: 125, width: f.size.width, height: f.size.height)
+        let mapFrame = CGRect(x: 500, y: 125, width: f.size.width, height: f.size.height)
         
-    self.mapView = GMSMapView.map(withFrame: mapFrame, camera: camera)
+        self.mapView = GMSMapView.map(withFrame: mapFrame, camera: camera)
     
-        
+        mapView?.delegate = self
        
-    // Set the map style by passing the URL of the local file.
-    do {
-    if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
-    mapView?.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-    } else {
-    NSLog("Unable to find style.json")
-    }
-    } catch {
-    NSLog("One or more of the map styles failed to load. \(error)")
-    }
+        // Set the map style by passing the URL of the local file.
+        do {
+        if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+        mapView?.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+        } else {
+        NSLog("Unable to find style.json")
+        }
+        } catch {
+        NSLog("One or more of the map styles failed to load. \(error)")
+        }
         
         for restaurant in arrayOfRestaurants {
             let marker = GMSMarker()
+            marker.icon = GMSMarker.markerImage(with: UIColorFromRGB(rgbValue: 0xB21823))
             marker.position = CLLocationCoordinate2D(latitude: restaurant.coordinates.latitude, longitude: restaurant.coordinates.longitude)
             marker.title = restaurant.name
             marker.snippet = "Lorem"
@@ -121,49 +145,30 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    
-    
-    
-    
-    
-    
-//    func getRestaurantObjects(){
-////        let myGeoPoint1 = PFGeoPoint(latitude: 43.642566, longitude: -79.387057)
-////        let restaurant1 = Restaurant.init(name: "CN Tower", coordinates: myGeoPoint1)
-////        let myGeoPoint2 = PFGeoPoint(latitude: 43.641438, longitude: -79.389353)
-////        let restaurant2 = Restaurant.init(name: "Rogers Center", coordinates: myGeoPoint2)
-////        arrayOfRestaurants.append(restaurant1)
-////        arrayOfRestaurants.append(restaurant2)
-//      
-//      let sharedManager = GoogleManager.shared
-//      sharedManager.locationManager.requestLocation()
-//    }
-  
-  
-    //MARK: Google API Call
-    func setupRxSwiftForPlaces()
-    {
-      GoogleManager.shared.places.rx_elements().subscribe(onNext: { (places:[GMSPlace]) in
-        
-        
-        //Thiago make your changes to the map here!
-        //GoogleManager.shared.searchRadius = 50? //Change the value based on map
-        //Call GoogleManager.shared.locationManager.requestLocation to update the map
-        
-        print(places)
-        
-      }).addDisposableTo(disposeBag)
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        print("infoWindowTapped")
+        self.performSegue(withIdentifier: "SegueToDetail", sender: nil)
     }
-  
+    
+//    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+//        self.performSegue(withIdentifier: "SegueToDetail", sender: nil)
+//    }
+//    
+//    func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
+//        self.performSegue(withIdentifier: "SegueToDetail", sender: nil)
+//    }
+    
+    
+    
   
     
     
     
     //MARK: TextField Delegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("Should return")
-        return true
-    }
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        print("Should return")
+//        return true
+//    }
     
     
     
@@ -190,11 +195,16 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
           cell.cellLogoImage.image = UIImage(named: "defaultrestlogo.png")
           cell.cellRestaurantTitle.text = restaurant.name
-          cell.cellRatingsImage.image = UIImage(named: "Star.png")
-          cell.cellPhotoCountLabel.text = "0 Photos"
+          cell.cellRatingsImage.image = UIImage(named: "thumbsupIcon.png")
+          cell.cellPhotoCountLabel.text = "0"
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        self.mainTable.deselectRow(at: indexPath, animated: true)
+    }
+    
 
     
     
@@ -208,6 +218,59 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             vc.restaurant = arrayOfRestaurants[(index?.row)!]
         }
     }
+    
+    
+    //MARK: ColorFunction
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    //MARK: Location MAnager Delegate
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+       //Call google API to do Quety
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
+    {
+        switch (status) {
+        case .restricted:
+            print("Location access was restricted.")
+            break
+        case .denied:
+            print("User denied access.")
+            break
+        case .notDetermined:
+            print("Location status not determined.")
+            break
+        case .authorizedAlways:
+            print("Location Status is Always")
+            break
+        case .authorizedWhenInUse:
+            print("Location Status is OK.")
+            break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        locationManager.stopUpdatingLocation()
+    }
+
+    
+    
     
     
     

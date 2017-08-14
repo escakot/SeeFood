@@ -20,10 +20,12 @@
 		7E6DFBCE1F3E03F80021A8A8 /* CellDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6DFBCD1F3E03F80021A8A8 /* CellDetailViewController.swift */; };
 		7E7C08B41F421E3B001C9F3E /* turkey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C08B31F421E3B001C9F3E /* turkey.jpg */; };
 		7E7C08B61F422B15001C9F3E /* searchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C08B51F422B15001C9F3E /* searchIcon.png */; };
+		7E7C08B81F4231B0001C9F3E /* thumbsupIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C08B71F4231B0001C9F3E /* thumbsupIcon.png */; };
 		7E7EDAAA1F3BA3C80024B2CD /* redbackground copy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E7EDAA91F3BA3C80024B2CD /* redbackground copy.jpg */; };
 		7E7EDAAC1F3BA76F0024B2CD /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E7EDAAB1F3BA76F0024B2CD /* style.json */; };
 		7E7EDAAE1F3BD78C0024B2CD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EDAAD1F3BD78C0024B2CD /* DetailViewController.swift */; };
 		7E7EDAB01F3BD83A0024B2CD /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EDAAF1F3BD8390024B2CD /* CustomCollectionViewCell.swift */; };
+		7E8CC7C51F4248B8003A16BD /* smileyIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E8CC7C41F4248B8003A16BD /* smileyIcon.png */; };
 		7EA53CFA1F3E39EB00A5B29C /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA53CF91F3E39EB00A5B29C /* transparent.png */; };
 		7EA53CFC1F3E3AF200A5B29C /* meal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EA53CFB1F3E3AF200A5B29C /* meal.jpg */; };
 		7EE7BD531F3E44EC00399BE3 /* transparentdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE7BD521F3E44EC00399BE3 /* transparentdown.png */; };
@@ -61,10 +63,12 @@
 		7E6DFBCD1F3E03F80021A8A8 /* CellDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellDetailViewController.swift; sourceTree = "<group>"; };
 		7E7C08B31F421E3B001C9F3E /* turkey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = turkey.jpg; sourceTree = "<group>"; };
 		7E7C08B51F422B15001C9F3E /* searchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchIcon.png; sourceTree = "<group>"; };
+		7E7C08B71F4231B0001C9F3E /* thumbsupIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbsupIcon.png; sourceTree = "<group>"; };
 		7E7EDAA91F3BA3C80024B2CD /* redbackground copy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "redbackground copy.jpg"; sourceTree = "<group>"; };
 		7E7EDAAB1F3BA76F0024B2CD /* style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
 		7E7EDAAD1F3BD78C0024B2CD /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7E7EDAAF1F3BD8390024B2CD /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		7E8CC7C41F4248B8003A16BD /* smileyIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smileyIcon.png; sourceTree = "<group>"; };
 		7EA53CF91F3E39EB00A5B29C /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
 		7EA53CFB1F3E3AF200A5B29C /* meal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meal.jpg; sourceTree = "<group>"; };
 		7EE7BD521F3E44EC00399BE3 /* transparentdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparentdown.png; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 				7EA53CFB1F3E3AF200A5B29C /* meal.jpg */,
 				7E7C08B31F421E3B001C9F3E /* turkey.jpg */,
 				7E7C08B51F422B15001C9F3E /* searchIcon.png */,
+				7E7C08B71F4231B0001C9F3E /* thumbsupIcon.png */,
+				7E8CC7C41F4248B8003A16BD /* smileyIcon.png */,
 				7E7EDAAB1F3BA76F0024B2CD /* style.json */,
 				7E47D8601F3B51A100DDA78B /* WebViewContent.html */,
 				7E0E1BD11F3A455500367508 /* LoginViewController.swift */,
@@ -280,6 +286,7 @@
 				D1C0EB921F3BAB8E00DCF4C9 /* Star.png in Resources */,
 				D1C0EB911F3BAB8E00DCF4C9 /* Star-Filled.png in Resources */,
 				7E7EDAAC1F3BA76F0024B2CD /* style.json in Resources */,
+				7E8CC7C51F4248B8003A16BD /* smileyIcon.png in Resources */,
 				D1C0EB7C1F3A2DAE00DCF4C9 /* LaunchScreen.storyboard in Resources */,
 				7EA53CFC1F3E3AF200A5B29C /* meal.jpg in Resources */,
 				7E47D8611F3B51A100DDA78B /* WebViewContent.html in Resources */,
@@ -293,6 +300,7 @@
 				7EA53CFA1F3E39EB00A5B29C /* transparent.png in Resources */,
 				7E7EDAAA1F3BA3C80024B2CD /* redbackground copy.jpg in Resources */,
 				7E47D8671F3B84D000DDA78B /* defaultrestlogo.png in Resources */,
+				7E7C08B81F4231B0001C9F3E /* thumbsupIcon.png in Resources */,
 				7E0E1BCF1F3A44B800367508 /* userIcon.png in Resources */,
 				D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */,
 				D17FE7781F3E326400206951 /* assets.xib in Resources */,
@@ -475,6 +483,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SeeFood/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.lighthouselabs.SeeFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -489,6 +498,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SeeFood/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.lighthouselabs.SeeFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
