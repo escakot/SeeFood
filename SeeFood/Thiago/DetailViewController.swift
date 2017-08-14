@@ -12,12 +12,13 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
 
     //MARK: Properties
     @IBOutlet weak var mainCollectionView: UICollectionView!
+    @IBOutlet weak var restaurantNameLabel: UILabel!
     
     var restaurant: Restaurant!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(restaurant.name)
+        restaurantNameLabel.text = restaurant.name
     }
     
     
@@ -49,7 +50,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         let cell: CustomCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCollectionViewCell
         
-        cell.cellImage.image = UIImage(named: "labanane.png")
+        cell.cellImage.image = UIImage(named: "meal.jpg")
         
         
         return cell
@@ -62,9 +63,11 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueToCellDetail"{
-            //let index = self.mainCollectionView.indexPathsForSelectedItems
-            // vc.restaurant = self.restaurant.menu[index...]
-         //   let vc = segue.destination as! CellDetailViewController
+           // let index = self.mainCollectionView.indexPathsForSelectedItems
+            let vc = segue.destination as! CellDetailViewController
+            
+            vc.browsingImage = UIImage(named: "meal.jpg")
+            vc.browsingName = restaurant.name
         }
     }
     

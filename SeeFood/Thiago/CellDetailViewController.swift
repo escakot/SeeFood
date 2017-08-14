@@ -7,25 +7,68 @@
 //
 
 import UIKit
+import UPCarouselFlowLayout
 
-class CellDetailViewController: UIViewController {
+class CellDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
     
     //MARK: Properties
     
-    @IBOutlet weak var mealImage: UIImageView!
     @IBOutlet weak var mealName: UILabel!
-    @IBOutlet weak var mealPrice: UILabel!
-    @IBOutlet weak var mealDescription: UITextView!
+    @IBOutlet weak var navBar: UIView!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var pageControl: UIPageControl!
     
-    var menutesting: Menutest?
     
+    
+    // TESTING PROP:
+    var browsingImage: UIImage!
+    var browsingName: String!
+    
+    var imageList:[String] = ["turkey.jpg", "meal.jpg", "turkey.jpg","meal.jpg"]
 
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        pageControl.numberOfPages = imageList.count
+        
+        //MARK: CollectionView Layout
+        let layout = UPCarouselFlowLayout()
+        layout.itemSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+        layout.sideItemAlpha = 0
+        layout.sideItemScale = 1
+        layout.scrollDirection = .horizontal
+        collectionView.collectionViewLayout = layout
+    }
+    
+    
+    
+    
+    //MARK: CollectionView Methods
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageList.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CellSwipe
+        cell.cellImage.image = UIImage(named: imageList[indexPath.row])
+        return cell
+    }
+    
+    
+    
+    @IBAction func backButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        pageControl.currentPage = Int(collectionView.contentOffset.x/self.collectionView.frame.size.width)
     }
 
-    
-    
 
  
 
@@ -33,17 +76,13 @@ class CellDetailViewController: UIViewController {
 
 
 
-class Menutest {
-    var name: String!
-    var description: String!
-    var image: UIImage?
-    
-    init(name: String, description: String, image: UIImage) {
-        self.name = name
-        self.description = description
-        self.image = image
-    }
+//MARK: Cell Class
+class CellSwipe: UICollectionViewCell {
+    @IBOutlet weak var cellImage: UIImageView!
 }
+
+
+
 
 
 
