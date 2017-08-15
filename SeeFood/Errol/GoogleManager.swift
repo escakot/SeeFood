@@ -15,19 +15,22 @@ import ObservableArray_RxSwift
 class RestaurantData: NSObject {
   var placeID: String!
   var name: String!
-  var openingHours: Int
+//  var isOpen: Bool?
   var rating: Float
   var address: String!
-  var photoRef: String!
+  var location: CLLocationCoordinate2D
+  var photoRef: [[String:AnyObject]]!
   var icon: UIImage?
   
   init(withJSONdata data:[String:AnyObject]) {
     placeID = data["place_id"] as! String
     name = data["name"] as! String
-    openingHours = (data["opening_hours"] as! [String:AnyObject])["open_now"] as! Int
+//    isOpen = (data["opening_hours"] as! [String:AnyObject])["open_now"] as! Bool
     rating = data["rating"] as! Float
     address = data["vicinity"] as! String
-    photoRef = data["photo_reference"] as! String
+    photoRef = data["photos"] as! [[String:AnyObject]]
+    location = CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: ((data["geometry"] as! [String:AnyObject])["location"] as! [String:AnyObject])["lat"] as! Float)!,
+                                      longitude: CLLocationDegrees(exactly: ((data["geometry"] as! [String:AnyObject])["location"] as! [String:AnyObject])["lng"] as! Float)!)
     do {
       let iconData = try Data(contentsOf: URL(string: data["icon"] as! String)!)
       icon = UIImage(data: iconData)
@@ -45,6 +48,7 @@ class GoogleManager: NSObject {
   
   static let shared = GoogleManager()
   
+  var components = URLComponents(string: "https://maps.googleapis.com")!
   let googlePlacesAPI = "AIzaSyCoWsUggZmQ3s9qHVrhhhSfierog67FDdU"
   var camera: GMSCameraPosition!
   var locationManager: CLLocationManager!
@@ -59,19 +63,42 @@ class GoogleManager: NSObject {
   var isFirstSearch = true
   
   
-  func getNearbyRestaurantsAt(coordinates: CLLocationCoordinate2D, completionHandler: @escaping () -> Void)
+  
+  // MARK: - Get Photo Methods
+  func getPhotosFor(reference:String, maxWidth:Int, completionHandler: @escaping (UIImage?) -> Void)
   {
+    components.path = "/maps/api/place/photo"
+    let sizeQuery = URLQueryItem(name: "maxwidth", value: String(format:"%li", maxWidth))
+    let referenceQuery = URLQueryItem(name: "photoreference", value: reference)
+    let keyQuery = URLQueryItem(name: "key", value: googlePlacesAPI)
+    components.queryItems = [sizeQuery, referenceQuery, keyQuery]
     
+    let urlRequest = URLRequest(url: components.url!)
+    
+    let configurations = URLSessionConfiguration.default
+    let session = URLSession(configuration: configurations)
+    let dataTask = session.dataTask(with: urlRequest, completionHandler: { (data: Data?, response: URLResponse?,error: Error?) in
+      if error == nil
+      {
+        
+        guard let image = UIImage(data: data!) else {
+          completionHandler(nil)
+          return
+        }
+        completionHandler(image)
+        
+      } else {
+        print(error!.localizedDescription)
+      }
+    })
+      
+    dataTask.resume()
   }
-  
-  
-  
-  
+    
   // MARK: - Query Search Methods
-  func performNearbySearch(coordinates: CLLocationCoordinate2D, radius:Int, completionHandler: @escaping ([RestaurantData]) -> Void)
+  func getRestaurantsNear(coordinates: CLLocationCoordinate2D, radius:Int, completionHandler: @escaping ([RestaurantData]) -> Void)
   {
     var restaurants: [RestaurantData]  = []
-    var components = URLComponents(string: "https://maps.googleapis.com")!
     components.path = "/maps/api/place/nearbysearch/json"
     let typeQuery = URLQueryItem(name: "type", value: "restaurant")
     let locationQuery = URLQueryItem(name: "location", value: String(format: "%.7f,%.7f", coordinates.latitude, coordinates.longitude))
@@ -112,7 +139,4 @@ class GoogleManager: NSObject {
     })
     dataTask.resume()
   }
-  
-  
-  
 }
