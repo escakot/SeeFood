@@ -67,10 +67,18 @@ class LoginViewController: UIViewController{
     
     
     @IBAction func loginButton(_ sender: UIButton) {
-        self.myWebView.isHidden = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-            self.dismiss(animated: true, completion: nil)
-        })
+        ParseManager.shared.userLogin(username: usernameTextField.text!, password: passwordTextField.text!) { (status:Bool) in
+            if status {
+                self.myWebView.isHidden = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+                    self.dismiss(animated: true, completion: nil)
+                })
+            }
+            else{
+                //Handle Failed Login
+            }
+        }
+        
     }
 
    

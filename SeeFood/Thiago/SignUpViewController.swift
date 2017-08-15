@@ -64,12 +64,28 @@ class SignUpViewController: UIViewController {
     
     
     
-    
+    //MARK: IBActions
     @IBAction func signupButton(_ sender: UIButton) {
-        self.myWebView.isHidden = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-            self.performSegue(withIdentifier: "SegueToMain", sender: nil)
-        })
+        
+        
+        if (usernameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
+            print("Error: Empty textfields")
+        }
+        else {
+        ParseManager.shared.userSignUp(username: usernameTextField.text!, password: passwordTextField.text!) { (result:String?) in
+            print(result!)
+            }
+        }
+        
+//        self.myWebView.isHidden = false
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+//            self.performSegue(withIdentifier: "SegueToMain", sender: nil)
+//        })
+    }
+    
+
+    @IBAction func loginButtonDismissView(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
 

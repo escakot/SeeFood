@@ -18,31 +18,51 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     
     var restaurant: RestaurantData!
+    var parseRestaurant: Restaurant!
+    var arrayOfMenuItems: [MenuItem] = []
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         restaurantNameLabel.text = restaurant.name
+        
+        //MARK: Query Restaurant
+        ParseManager.shared.queryRestaurantWith(id: restaurant.placeID) { (savedRestaurant:Restaurant?) in
+            if savedRestaurant == nil {
+                print("No Retaurants with id: \(self.restaurant.placeID)")
+                ParseManager.shared.createRestaurantProfileWith(id: self.restaurant.placeID, name: self.restaurant.name, completionHandler: { (created:Bool) in
+                    print("Restaurant Created Status: \(created)")
+                    self.defaultPhoto.isHidden = false
+                    self.defaultLabel.isHidden = false
+                })
+            }
+            else{
+                self.parseRestaurant = savedRestaurant
+                print("Restaurant found: \(self.parseRestaurant.name)")
+                
+                //MARK: Query Items
+                ParseManager.shared.queryMenuItemsFor(self.parseRestaurant) { (array: Array<MenuItem>?) in
+                    if (array?.isEmpty)!{
+                        self.defaultPhoto.isHidden = false
+                        self.defaultLabel.isHidden = false
+                        print("There are no Menu Items for \(self.parseRestaurant.name)")
+                    }
+                    else{
+                        self.arrayOfMenuItems = array!
+                        DispatchQueue.main.async {
+                            self.mainCollectionView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        defaultPhoto.isHidden = false
-        defaultLabel.isHidden = false
-    }
-    
-    
-    
-    @IBAction func backButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-    
-    
-    
-    
 
-
+   
+   
     
+   
     
     //MARK: CollectionView Method
     
@@ -51,7 +71,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return self.arrayOfMenuItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,13 +87,27 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     
     
+    //MARK: IBActions
+    
+    @IBAction func addButton(_ sender: UIButton) {
+        ParseManager.shared.createMenuItemFor(self.parseRestaurant, title: "Salmon") { (item:MenuItem) in
+            self.arrayOfMenuItems.append(item)
+            print("Menu item created: \(item.title)")
+            DispatchQueue.main.async {
+                self.mainCollectionView.reloadData()
+            }
+        }
+    }
+    
     @IBAction func swipeToDismissView(_ sender: UISwipeGestureRecognizer) {
         if sender.direction == .right {
             self.dismiss(animated: true, completion: nil)
         }
     }
     
-    
+    @IBAction func backButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     
     
     
@@ -81,11 +115,9 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueToCellDetail"{
-           // let index = self.mainCollectionView.indexPathsForSelectedItems
             let vc = segue.destination as! CellDetailViewController
-            
-            vc.browsingImage = UIImage(named: "meal.jpg")
-            vc.browsingName = restaurant.name
+//            let index = self.mainCollectionView.indexPathsForSelectedItems
+            vc.arrayOfMenuItems = self.arrayOfMenuItems
         }
     }
     

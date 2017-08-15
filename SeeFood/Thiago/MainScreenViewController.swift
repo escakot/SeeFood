@@ -167,15 +167,17 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell: CustomTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CustomTableViewCell
         
         let restaurant = arrayOfRestaurants[indexPath.row]
-       // cell.cellLogoImage.image = restaurant.photoRef[0]["photo_reference"]
+        
+        
         GoogleManager.shared.getPhotosFor(reference: restaurant.photoRef[0]["photo_reference"]as! String, maxWidth: 200) { (restaurantImage:UIImage?) in
             restaurant.icon = restaurantImage
         }
-      //  cell.cellLogoImage.image.cornerRadius = 7
         cell.cellLogoImage.image = restaurant.icon
         cell.cellRestaurantTitle.text = restaurant.name
         cell.cellRatingsImage.image = UIImage(named: "thumbsupIcon.png")
         cell.cellPhotoCountLabel.text = String(restaurant.rating)
+        cell.cellLogoImage.layer.masksToBounds = true
+        cell.cellLogoImage.layer.cornerRadius = 10
         return cell
     }
     

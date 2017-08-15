@@ -18,14 +18,14 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
-    
+    var arrayOfMenuItems: [MenuItem] = []
     
     
     // TESTING PROP:
     var browsingImage: UIImage!
     var browsingName: String!
     
-    var imageList:[String] = ["turkey.jpg", "meal.jpg", "turkey.jpg","meal.jpg"]
+    var imageList:[String] = ["turkey.jpg", "meal.jpg", "meal.jpg","meal.jpg","meal.jpg","meal.jpg","meal.jpg"]
 
     
     
@@ -33,9 +33,8 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        pageControl.numberOfPages = imageList.count
-        
+        pageControl.numberOfPages = arrayOfMenuItems.count
+        mealName.text = arrayOfMenuItems[0].title
         //MARK: CollectionView Layout
         let layout = UPCarouselFlowLayout()
         layout.itemSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
@@ -50,7 +49,7 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
     
     //MARK: CollectionView Methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageList.count
+        return arrayOfMenuItems.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CellSwipe
