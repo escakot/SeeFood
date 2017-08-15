@@ -49,7 +49,7 @@ class GoogleManager: NSObject {
   static let shared = GoogleManager()
   
   var components = URLComponents(string: "https://maps.googleapis.com")!
-  let googlePlacesAPI = "AIzaSyCoWsUggZmQ3s9qHVrhhhSfierog67FDdU"
+  let googlePlacesAPI = (UIApplication.shared.delegate as! AppDelegate).googlePlacesAPIkey
   var camera: GMSCameraPosition!
   var locationManager: CLLocationManager!
   var currentLocation: CLLocation?

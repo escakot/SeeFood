@@ -17,6 +17,8 @@ import IQKeyboardManager
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
+  
+  let googlePlacesAPIkey = "AIzaSyCoWsUggZmQ3s9qHVrhhhSfierog67FDdU"
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -34,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Parse.initialize(with: configuration)
     
     GMSServices.provideAPIKey("AIzaSyDnaWnMHeK5LNQ4rXlHUGZ5RR-nA79oUq8")
-    GMSPlacesClient.provideAPIKey("AIzaSyCoWsUggZmQ3s9qHVrhhhSfierog67FDdU")
+    GMSPlacesClient.provideAPIKey(googlePlacesAPIkey)
 
     return true
   }
