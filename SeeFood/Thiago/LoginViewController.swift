@@ -69,7 +69,7 @@ class LoginViewController: UIViewController{
     @IBAction func loginButton(_ sender: UIButton) {
         self.myWebView.isHidden = false
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-            self.performSegue(withIdentifier: "SegueToMain", sender: nil)
+            self.dismiss(animated: true, completion: nil)
         })
     }
 

@@ -21,7 +21,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var mapListButton: UIButton!
     @IBOutlet weak var mainTable: UITableView!
     @IBOutlet weak var customNav: UIView!
-    var arrayOfRestaurants: [Restaurant] = []
+    var arrayOfRestaurants: [RestaurantData] = []
     var mapView: GMSMapView?
     var locationManager = CLLocationManager()
     
@@ -84,18 +84,15 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func getRestaurants(coordinates: CLLocationCoordinate2D) {
         
         GoogleManager.shared.getRestaurantsNear(coordinates: coordinates, radius: 500) { (restaurants: [RestaurantData]) in
-            for rest in restaurants {
-                let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
-                restaurant.coordinates = PFGeoPoint(latitude: rest.location.latitude, longitude: rest.location.longitude)
-                self.arrayOfRestaurants.append(restaurant)
-            }
-            print(self.arrayOfRestaurants)
+            self.arrayOfRestaurants = restaurants
             DispatchQueue.main.async {
                 self.mainTable.reloadData()
             }
         }
+            print(self.arrayOfRestaurants)
+        }
 
-    }
+    
     
     
     
@@ -106,17 +103,19 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func setupMap(){
         
-        let userLocation = PFGeoPoint(latitude: 43.642566, longitude: -79.387057)
-        let camera = GMSCameraPosition.camera(withLatitude: userLocation.latitude, longitude: userLocation.longitude, zoom: 14.0)
+        let userLocation = PFGeoPoint(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
+        let camera = GMSCameraPosition.camera(withLatitude: userLocation.latitude, longitude: userLocation.longitude, zoom: 16.0)
         
   
         let f = self.view.frame
         
         let mapFrame = CGRect(x: 500, y: 125, width: f.size.width, height: f.size.height)
         
-        self.mapView = GMSMapView.map(withFrame: mapFrame, camera: camera)
+        mapView = GMSMapView.map(withFrame: mapFrame, camera: camera)
     
         mapView?.delegate = self
+        
+        mapView?.isMyLocationEnabled = true
        
         // Set the map style by passing the URL of the local file.
         do {
@@ -132,7 +131,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         for restaurant in arrayOfRestaurants {
             let marker = GMSMarker()
             marker.icon = GMSMarker.markerImage(with: UIColorFromRGB(rgbValue: 0xB21823))
-            marker.position = CLLocationCoordinate2D(latitude: restaurant.coordinates.latitude, longitude: restaurant.coordinates.longitude)
+            marker.position = CLLocationCoordinate2D(latitude: restaurant.location.latitude, longitude: restaurant.location.longitude)
             marker.title = restaurant.name
             marker.snippet = "Lorem"
             marker.map = mapView
@@ -148,15 +147,6 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         print(marker.description)
         self.performSegue(withIdentifier: "SegueToDetailFromMap", sender: marker)
     }
-    
-//    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-//        //MARK FOR TEST:
-//        let marker = GMSMarker()
-//        marker.title = "It Works!"
-//        //MARK FOR TEST END
-//        self.performSegue(withIdentifier: "SegueToDetailFromMap", sender: marker)
-//    }
-
     
     
     
@@ -176,18 +166,21 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let cell: CustomTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CustomTableViewCell
         
-          let restaurant = arrayOfRestaurants[indexPath.row]
-        
-          cell.cellLogoImage.image = UIImage(named: "defaultrestlogo.png")
-          cell.cellRestaurantTitle.text = restaurant.name
-          cell.cellRatingsImage.image = UIImage(named: "thumbsupIcon.png")
-          cell.cellPhotoCountLabel.text = "0"
-        
+        let restaurant = arrayOfRestaurants[indexPath.row]
+       // cell.cellLogoImage.image = restaurant.photoRef[0]["photo_reference"]
+        GoogleManager.shared.getPhotosFor(reference: restaurant.photoRef[0]["photo_reference"]as! String, maxWidth: 200) { (restaurantImage:UIImage?) in
+            restaurant.icon = restaurantImage
+        }
+      //  cell.cellLogoImage.image.cornerRadius = 7
+        cell.cellLogoImage.image = restaurant.icon
+        cell.cellRestaurantTitle.text = restaurant.name
+        cell.cellRatingsImage.image = UIImage(named: "thumbsupIcon.png")
+        cell.cellPhotoCountLabel.text = String(restaurant.rating)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        self.mainTable.deselectRow(at: indexPath, animated: true)
+        mainTable.deselectRow(at: indexPath, animated: true)
     }
     
 

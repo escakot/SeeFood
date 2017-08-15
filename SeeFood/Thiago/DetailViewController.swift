@@ -17,7 +17,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var defaultLabel: UILabel!
     
     
-    var restaurant: Restaurant!
+    var restaurant: RestaurantData!
     
     override func viewDidLoad() {
         super.viewDidLoad()
