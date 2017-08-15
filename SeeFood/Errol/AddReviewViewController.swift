@@ -22,32 +22,6 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //Temporary Setup
-    //    ParseManager.shared.userSignUp(username: "errol", password: "errol") { (string) in
-    ParseManager.shared.userLogin(username: "errol", password: "errol") { (success: Bool) in
-      if success
-      {
-        print("Login Successful")
-      } else {
-        print("Login Failed")
-      }
-    }
-    //    }
-    
-    //    ParseManager.shared.createRestaurantProfileWith(name: "Anoush", coordinates: PFGeoPoint(latitude: 0.0, longitude: 0.0)) { (success) in
-    //      if success
-    //      {
-    ParseManager.shared.queryRestaurantWith(name: "Anoush", coordinates: PFGeoPoint(latitude: 0.0, longitude: 0.0)) { (restaurant) in
-      guard restaurant != nil else {
-        print("Error query restaurant")
-        return
-      }
-      self.restaurant = restaurant
-      print("Restaurant: \(restaurant!.name)")
-    }
-    //      }
-    //    }
-    
     // Do any additional setup after loading the view.
     if menuItem != nil
     {
@@ -55,11 +29,12 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
       menuItemTextField.isEnabled = false
     }
     
-    //    foodImageView.image = foodImage
+    foodImageView.image = foodImage
+    setImageViewSize(image: foodImage)
     //    foodImageView.image = UIImage(named: "chickenRice.jpg")
     //    setImageViewSize(image: UIImage(named: "chickenRice.jpg")!)
-    setImageViewSize(image: UIImage(named: "beef-stirfry.jpg")!)
-    foodImageView.image = UIImage(named: "beef-stirfry.jpg")
+//    setImageViewSize(image: UIImage(named: "beef-stirfry.jpg")!)
+//    foodImageView.image = UIImage(named: "beef-stirfry.jpg")
   }
   
   

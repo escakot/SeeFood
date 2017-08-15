@@ -76,11 +76,11 @@ class ParseManager: NSObject {
     })
   }
   
-  func queryRestaurantWith(name:String, coordinates:PFGeoPoint, completionHandler: @escaping (Restaurant?) -> Void)
+  func queryRestaurantWith(id:String, completionHandler: @escaping (Restaurant?) -> Void)
   {
     let query = Restaurant.query()
-    query!.whereKey("name", contains: name)
-    query!.whereKey("coordinates", nearGeoPoint: coordinates)
+    query!.whereKey("id", contains: id)
+//    query!.whereKey("coordinates", nearGeoPoint: coordinates)
     
     query?.getFirstObjectInBackground(block: { (object, error) in
       if error == nil
@@ -93,7 +93,7 @@ class ParseManager: NSObject {
     })
   }
   
-  func createRestaurantProfileWith(id:String, name:String, coordinates:PFGeoPoint, completionHandler: @escaping (Bool) -> Void)
+  func createRestaurantProfileWith(id:String, name:String, completionHandler: @escaping (Bool) -> Void)
   {
     let restaurant  = Restaurant(id:id, name:name)
     restaurant.saveInBackground { (success, error) in

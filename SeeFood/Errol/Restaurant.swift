@@ -14,7 +14,6 @@ class Restaurant: PFObject, PFSubclassing {
   // MARK: - Properties
   @NSManaged var id: String
   @NSManaged var name: String
-  @NSManaged var coordinates: PFGeoPoint
   @NSManaged var owner: PFUser
   
   // MARK: - Initializers
