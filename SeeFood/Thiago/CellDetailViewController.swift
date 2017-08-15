@@ -25,7 +25,7 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
     var browsingImage: UIImage!
     var browsingName: String!
     
-    var imageList:[String] = ["turkey.jpg", "meal.jpg", "meal.jpg","meal.jpg","meal.jpg","meal.jpg","meal.jpg"]
+    var imageList:[String] = ["meal.jpg", "meal.jpg", "meal.jpg","meal.jpg","meal.jpg","meal.jpg","meal.jpg"]
 
     
     

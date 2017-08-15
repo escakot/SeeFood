@@ -84,27 +84,25 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //MARK: Google API Call
     func getRestaurants(coordinates: CLLocationCoordinate2D) {
+        var count = 0
         
         GoogleManager.shared.getRestaurantsNear(coordinates: coordinates, radius: 500) { (restaurants: [RestaurantData]) in
             self.arrayOfRestaurants = restaurants
             for rest in self.arrayOfRestaurants {
+                count += 1
                 GoogleManager.shared.getPhotosFor(reference: rest.photoRef[0]["photo_reference"]as! String, maxWidth: 200) { (restaurantImage:UIImage?) in
-                    self.arrayOfImages.append(restaurantImage!)
-                    if self.arrayOfImages.count == self.arrayOfRestaurants.count-1 {
+                    rest.icon = restaurantImage
+                    if count == self.arrayOfRestaurants.count{
                         DispatchQueue.main.async{
+                            self.arrayOfRestaurants.sort { $0.rating > $1.rating }
                             self.mainTable.reloadData()
                         }
-                    }else {
-                        print(self.arrayOfImages.count)
-                        print("Retaurant Count: \(self.arrayOfRestaurants.count)")
                     }
                 }
             }
         }
         
-        
-          //  arrayOfRestaurants.sort { $0.rating < $1.rating }
-        }
+    }
 
     
     
@@ -182,7 +180,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let restaurant = arrayOfRestaurants[indexPath.row]
         
-        cell.cellLogoImage.image = arrayOfImages[indexPath.row]
+        cell.cellLogoImage.image = restaurant.icon
         cell.cellRestaurantTitle.text = restaurant.name
         cell.cellRatingsImage.image = UIImage(named: "thumbsupIcon.png")
         cell.cellPhotoCountLabel.text = String(restaurant.rating)
