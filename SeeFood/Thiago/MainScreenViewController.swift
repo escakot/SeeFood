@@ -44,7 +44,6 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func switchMapListButton(_ sender: UIButton) {
         
-        
         if self.mainTable.alpha == 0 {
             self.mainTable.alpha = 1
             self.mainTable.isHidden = false
@@ -80,25 +79,22 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     
+    
     //MARK: Google API Call
-    
-//    for rest in places {
-//    let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
-//    restaurant.coordinates = PFGeoPoint(latitude: rest.coordinate.latitude, longitude: rest.coordinate.longitude)
-//    self.arrayOfRestaurants.append(restaurant)
-//    self.mainTable.reloadData()
-//    }
-//    
-    
     func getRestaurants(coordinates: CLLocationCoordinate2D) {
-//        GoogleManager.shared.performNearbySearch(coordinates: coordinates, radius: GoogleManager.shared.searchRadius) { (restaurants:[RestaurantData]) in
-//            for rest in restaurants
-//            {
-//                let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
-//                restaurant.coordinates =
-//                self.arrayOfRestaurants.append(restaurant)
-//            }
-//        }
+        
+        GoogleManager.shared.getRestaurantsNear(coordinates: coordinates, radius: 500) { (restaurants: [RestaurantData]) in
+            for rest in restaurants {
+                let restaurant = Restaurant.init(id: rest.placeID, name: rest.name)
+                restaurant.coordinates = PFGeoPoint(latitude: rest.location.latitude, longitude: rest.location.longitude)
+                self.arrayOfRestaurants.append(restaurant)
+            }
+            print(self.arrayOfRestaurants)
+            DispatchQueue.main.async {
+                self.mainTable.reloadData()
+            }
+        }
+
     }
     
     
@@ -150,30 +146,21 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         print("infoWindowTapped")
         print(marker.description)
-        self.performSegue(withIdentifier: "SegueToDetailFromMap", sender: nil)
-    }
-    
-    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-        //MARK FOR TEST:
-        let marker = GMSMarker()
-        marker.title = "It Works!"
-        //MARK FOR TEST END
         self.performSegue(withIdentifier: "SegueToDetailFromMap", sender: marker)
     }
+    
+//    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+//        //MARK FOR TEST:
+//        let marker = GMSMarker()
+//        marker.title = "It Works!"
+//        //MARK FOR TEST END
+//        self.performSegue(withIdentifier: "SegueToDetailFromMap", sender: marker)
+//    }
 
     
     
     
   
-    
-    
-
-    
-    
-    
-    
-    
-    
     
     //MARK: TableView Methods
     
@@ -207,27 +194,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     
-    //MARK: Segue
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SegueToDetail"{
-            print(sender.debugDescription)
-            let index = self.mainTable.indexPathForSelectedRow
-            let vc = segue.destination as! DetailViewController
-            vc.restaurant = arrayOfRestaurants[(index?.row)!]
-        }
-        
-        else if segue.identifier == "SegueToDetailFromMap"{
-            let vc = segue.destination as! DetailViewController
-            let marker = sender as! GMSMarker
-            for rest in arrayOfRestaurants{
-                if rest.name == marker.title {
-                    vc.restaurant = rest
-                }
-            }
-        }
 
-    }
     
     
     //MARK: ColorFunction
@@ -279,5 +246,29 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     
+    //MARK: Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueToDetail"{
+            print(sender.debugDescription)
+            let index = self.mainTable.indexPathForSelectedRow
+            let vc = segue.destination as! DetailViewController
+            vc.restaurant = arrayOfRestaurants[(index?.row)!]
+        }
+            
+        else if segue.identifier == "SegueToDetailFromMap"{
+            let vc = segue.destination as! DetailViewController
+            let marker = sender as! GMSMarker
+            for rest in arrayOfRestaurants{
+                if rest.name == marker.title {
+                    vc.restaurant = rest
+                }
+            }
+        }
+        
+    }
+    
+    
+
     
 }
