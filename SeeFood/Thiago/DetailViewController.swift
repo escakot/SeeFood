@@ -101,12 +101,12 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     @IBAction func swipeToDismissView(_ sender: UISwipeGestureRecognizer) {
         if sender.direction == .right {
-            self.dismiss(animated: true, completion: nil)
+            dismissViewLeftToRight()
         }
     }
     
     @IBAction func backButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        dismissViewLeftToRight()
     }
     
     
@@ -122,6 +122,14 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     
+    func dismissViewLeftToRight(){
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromLeft
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+        self.dismiss(animated: false, completion: nil)
+    }
     
 
 }

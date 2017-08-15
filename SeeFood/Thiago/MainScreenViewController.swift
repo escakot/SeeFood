@@ -22,8 +22,10 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var mainTable: UITableView!
     @IBOutlet weak var customNav: UIView!
     var arrayOfRestaurants: [RestaurantData] = []
+    var arrayOfImages: [UIImage] = []
     var mapView: GMSMapView?
     var locationManager = CLLocationManager()
+    
     
     
     override func viewDidLoad() {
@@ -85,11 +87,23 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         GoogleManager.shared.getRestaurantsNear(coordinates: coordinates, radius: 500) { (restaurants: [RestaurantData]) in
             self.arrayOfRestaurants = restaurants
-            DispatchQueue.main.async {
-                self.mainTable.reloadData()
+            for rest in self.arrayOfRestaurants {
+                GoogleManager.shared.getPhotosFor(reference: rest.photoRef[0]["photo_reference"]as! String, maxWidth: 200) { (restaurantImage:UIImage?) in
+                    self.arrayOfImages.append(restaurantImage!)
+                    if self.arrayOfImages.count == self.arrayOfRestaurants.count-1 {
+                        DispatchQueue.main.async{
+                            self.mainTable.reloadData()
+                        }
+                    }else {
+                        print(self.arrayOfImages.count)
+                        print("Retaurant Count: \(self.arrayOfRestaurants.count)")
+                    }
+                }
             }
         }
-            print(self.arrayOfRestaurants)
+        
+        
+          //  arrayOfRestaurants.sort { $0.rating < $1.rating }
         }
 
     
@@ -168,16 +182,12 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let restaurant = arrayOfRestaurants[indexPath.row]
         
-        
-        GoogleManager.shared.getPhotosFor(reference: restaurant.photoRef[0]["photo_reference"]as! String, maxWidth: 200) { (restaurantImage:UIImage?) in
-            restaurant.icon = restaurantImage
-        }
-        cell.cellLogoImage.image = restaurant.icon
+        cell.cellLogoImage.image = arrayOfImages[indexPath.row]
         cell.cellRestaurantTitle.text = restaurant.name
         cell.cellRatingsImage.image = UIImage(named: "thumbsupIcon.png")
         cell.cellPhotoCountLabel.text = String(restaurant.rating)
         cell.cellLogoImage.layer.masksToBounds = true
-        cell.cellLogoImage.layer.cornerRadius = 10
+        cell.cellLogoImage.layer.cornerRadius = 2
         return cell
     }
     
@@ -249,6 +259,12 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             let index = self.mainTable.indexPathForSelectedRow
             let vc = segue.destination as! DetailViewController
             vc.restaurant = arrayOfRestaurants[(index?.row)!]
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromRight
+            self.view.window!.layer.add(transition, forKey: kCATransition)
+            present(segue.destination, animated: false, completion: nil)
         }
             
         else if segue.identifier == "SegueToDetailFromMap"{
@@ -259,10 +275,15 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                     vc.restaurant = rest
                 }
             }
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromRight
+            self.view.window!.layer.add(transition, forKey: kCATransition)
+            present(segue.destination, animated: false, completion: nil)
         }
         
     }
-    
     
 
     
