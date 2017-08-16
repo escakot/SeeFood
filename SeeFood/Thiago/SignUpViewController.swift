@@ -20,7 +20,8 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var signupButton: UIButton!
     
-    
+  
+    let alertController = UIAlertController(title: "Sign Up Error", message: "", preferredStyle: UIAlertControllerStyle.alert)
     
     
     override func viewDidLoad() {
@@ -58,7 +59,9 @@ class SignUpViewController: UIViewController {
                                                                      attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
         passwordTextField.attributedPlaceholder = NSAttributedString(string:"Password",
                                                                      attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
-        
+      
+        //UIAlertController Button
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
     }
     
     
@@ -72,8 +75,18 @@ class SignUpViewController: UIViewController {
             print("Error: Empty textfields")
         }
         else {
-        ParseManager.shared.userSignUp(username: usernameTextField.text!, password: passwordTextField.text!) { (result:String?) in
-            print(result!)
+            ParseManager.shared.userSignUp(username: usernameTextField.text!, password: passwordTextField.text!) { (result:String?) in
+              guard let result = result else
+              {
+                OperationQueue.main.addOperation({
+                  self.navigationController?.popToRootViewController(animated: true)
+                })
+                return
+              }
+              self.alertController.message = result
+              OperationQueue.main.addOperation({
+                self.present(self.alertController, animated: true, completion: nil)
+              })
             }
         }
         
