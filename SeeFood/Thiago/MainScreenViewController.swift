@@ -284,7 +284,8 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         
     }
-    
+  
+    @IBAction func unwindSegue(segue:UIStoryboardSegue) { }
 
-    
+  
 }
