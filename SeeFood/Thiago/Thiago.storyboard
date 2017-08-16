@@ -612,10 +612,11 @@
                         <outlet property="passwordTextField" destination="anB-Q3-zQa" id="Ece-E5-d8q"/>
                         <outlet property="signupButton" destination="pHp-1k-uz6" id="wPM-1n-w6m"/>
                         <outlet property="usernameTextField" destination="0xw-A9-8V7" id="7RJ-Bd-wHe"/>
-                        <segue destination="iu1-dJ-09V" kind="show" identifier="SegueToMain" id="zFi-NF-7jt"/>
+                        <segue destination="uxT-RI-3n5" kind="unwind" identifier="unwindSegueToMain" unwindAction="unwindSegueWithSegue:" id="uim-Ef-XtW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="drk-8s-2Js" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="uxT-RI-3n5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="641" y="94"/>
         </scene>

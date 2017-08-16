@@ -79,7 +79,7 @@ class SignUpViewController: UIViewController {
               guard let result = result else
               {
                 OperationQueue.main.addOperation({
-                  self.navigationController?.popToRootViewController(animated: true)
+                  self.performSegue(withIdentifier: "unwindSegueToMain", sender: nil)
                 })
                 return
               }
