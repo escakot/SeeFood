@@ -20,7 +20,8 @@ class LoginViewController: UIViewController{
     
     @IBOutlet weak var myWebView: UIWebView!
     
-    
+    let alertController = UIAlertController(title: "Login Error", message: "", preferredStyle: UIAlertControllerStyle.alert)
+  
     
     
     
@@ -60,29 +61,27 @@ class LoginViewController: UIViewController{
         attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
         passwordTextField.attributedPlaceholder = NSAttributedString(string:"Password",
         attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
-        
+      
+        //Setup AlertController Action
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
     }
     
     
     
     
     @IBAction func loginButton(_ sender: UIButton) {
-        ParseManager.shared.userLogin(username: usernameTextField.text!, password: passwordTextField.text!) { (status:Bool) in
-            if status {
-                self.myWebView.isHidden = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-                    self.dismiss(animated: true, completion: nil)
-                })
-            }
-            else{
-                //Handle Failed Login
-            }
+      ParseManager.shared.userLogin(username: usernameTextField.text!, password: passwordTextField.text!) { (message:String?) in
+        guard let message = message else {
+          self.dismiss(animated: true, completion: nil)
+          return
         }
-        
+        self.alertController.message = message
+        self.present(self.alertController, animated: true, completion: nil)
+      }
     }
 
-   
+  
 
-    
+  
 
 }

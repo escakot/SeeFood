@@ -17,16 +17,15 @@ class ParseManager: NSObject {
   
   var currentUser: PFUser?
   
-  func userLogin(username:String, password:String, isLoginSuccessful: @escaping (Bool) -> Void )
+  func userLogin(username:String, password:String, isLoginSuccessful: @escaping (String?) -> Void )
   {
     PFUser.logInWithUsername(inBackground: username, password: password) { (user, error) in
-      if error != nil
+      if let error = error
       {
-        print(error!.localizedDescription)
-        isLoginSuccessful(false)
+        print(error.localizedDescription)
+        isLoginSuccessful(error.localizedDescription)
       } else {
-        self.currentUser = PFUser.current()
-        isLoginSuccessful(true)
+        isLoginSuccessful(nil)
       }
       
     }
@@ -46,7 +45,6 @@ class ParseManager: NSObject {
         print(error.localizedDescription)
         completionHandler(error.localizedDescription)
       } else {
-//        self.currentUser = PFUser.current()
         completionHandler(nil)
       }
     }
