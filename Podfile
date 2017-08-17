@@ -8,11 +8,10 @@ target 'SeeFood' do
   # Pods for SeeFood
   pod 'Parse'
   pod 'IQKeyboardManager'
+  pod 'Toucan'
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'UPCarouselFlowLayout', '~> 1.1'
-  pod 'RxSwift'
-  pod 'ObservableArray-RxSwift'
 
 end

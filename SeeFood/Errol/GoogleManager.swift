@@ -9,8 +9,6 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
-import RxSwift
-import ObservableArray_RxSwift
 
 class RestaurantData: NSObject {
   var placeID: String!
