@@ -14,19 +14,22 @@ class RestaurantData: NSObject {
   var placeID: String!
   var name: String!
 //  var isOpen: Bool?
-  var rating: Float
+  var rating: Float = 0.0
   var address: String!
   var location: CLLocationCoordinate2D
-  var photoRef: [[String:AnyObject]]!
+  var photoRef: [[String:AnyObject]]?
   var icon: UIImage?
   
   init(withJSONdata data:[String:AnyObject]) {
     placeID = data["place_id"] as! String
     name = data["name"] as! String
 //    isOpen = (data["opening_hours"] as! [String:AnyObject])["open_now"] as! Bool
-    rating = data["rating"] as! Float
+    if data["rating"] != nil
+    {
+      rating = data["rating"] as! Float
+    }
     address = data["vicinity"] as! String
-    photoRef = data["photos"] as! [[String:AnyObject]]
+    photoRef = data["photos"] as? [[String:AnyObject]]
     location = CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: ((data["geometry"] as! [String:AnyObject])["location"] as! [String:AnyObject])["lat"] as! Float)!,
                                       longitude: CLLocationDegrees(exactly: ((data["geometry"] as! [String:AnyObject])["location"] as! [String:AnyObject])["lng"] as! Float)!)
     do {
