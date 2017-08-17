@@ -260,7 +260,6 @@
 				TargetAttributes = {
 					D1C0EB5A1F3A2C6200DCF4C9 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 62G7WYJ46U;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -490,11 +489,11 @@
 			baseConfigurationReference = 30AC8B5732DE6E2F16FD5336 /* Pods-SeeFood.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 62G7WYJ46U;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SeeFood/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.errolcheong.SeeFood;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.lighthouselabs.SeeFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -505,11 +504,11 @@
 			baseConfigurationReference = 312A436504126538360B423B /* Pods-SeeFood.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 62G7WYJ46U;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SeeFood/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.errolcheong.SeeFood;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.lighthouselabs.SeeFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
