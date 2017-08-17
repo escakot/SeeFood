@@ -46,11 +46,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="mRC-Qh-Z9E">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="PQe-YW-y0A">
+                            <color key="tintColor" red="0.11372549019607843" green="0.015686274509803921" blue="0.023529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="cancelButton:" destination="bz0-hk-yfV" id="Jlb-Og-GCt"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Post" id="T5x-3b-I2a">
+                            <color key="tintColor" red="0.11372549019607843" green="0.015686274509803921" blue="0.023529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="postButton:" destination="bz0-hk-yfV" id="ZDJ-uG-y2u"/>
                             </connections>
