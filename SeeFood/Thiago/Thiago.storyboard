@@ -130,12 +130,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAr-X8-TFm">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p2J-qO-QN2">
-                                        <rect key="frame" x="17" y="78" width="341" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SeeFood" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thG-zn-3gM">
                                         <rect key="frame" x="136" y="33" width="104" height="34"/>
                                         <constraints>
@@ -145,7 +139,7 @@
                                         <color key="textColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piB-Lz-fS2">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piB-Lz-fS2">
                                         <rect key="frame" x="17" y="40" width="45" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="4RT-iD-KJZ"/>
@@ -159,7 +153,7 @@
                                             <action selector="switchMapListButton:" destination="iu1-dJ-09V" eventType="touchUpInside" id="imX-lV-7I2"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M1S-nc-mqf">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M1S-nc-mqf">
                                         <rect key="frame" x="328" y="40" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="6qx-gt-FAj"/>
@@ -170,19 +164,20 @@
                                             <segue destination="KCC-iw-CeY" kind="show" id="q9O-Uq-7Vw"/>
                                         </connections>
                                     </button>
+                                    <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i8f-dq-xXz">
+                                        <rect key="frame" x="17" y="70" width="341" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.84476000070571899" green="0.11397387832403183" blue="0.16201174259185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="barTintColor" red="0.84476000070571899" green="0.11397387832403183" blue="0.16201174259185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" red="0.84313725490196079" green="0.11372549019607843" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="piB-Lz-fS2" firstAttribute="leading" secondItem="fAr-X8-TFm" secondAttribute="leading" constant="17" id="24N-Fg-4YP"/>
-                                    <constraint firstItem="p2J-qO-QN2" firstAttribute="top" secondItem="piB-Lz-fS2" secondAttribute="bottom" constant="8" id="516-7x-CsE"/>
                                     <constraint firstItem="thG-zn-3gM" firstAttribute="centerX" secondItem="fAr-X8-TFm" secondAttribute="centerX" id="EAh-gM-o5G"/>
-                                    <constraint firstItem="p2J-qO-QN2" firstAttribute="top" secondItem="M1S-nc-mqf" secondAttribute="bottom" constant="8" id="Hbe-LZ-avj"/>
-                                    <constraint firstItem="thG-zn-3gM" firstAttribute="centerX" secondItem="p2J-qO-QN2" secondAttribute="centerX" id="Ict-zu-d6K"/>
-                                    <constraint firstAttribute="trailing" secondItem="p2J-qO-QN2" secondAttribute="trailing" constant="17" id="bm3-4r-ZiD"/>
                                     <constraint firstAttribute="trailing" secondItem="M1S-nc-mqf" secondAttribute="trailing" constant="17" id="jeC-6S-NX7"/>
-                                    <constraint firstItem="p2J-qO-QN2" firstAttribute="leading" secondItem="fAr-X8-TFm" secondAttribute="leading" constant="17" id="oYg-t4-St6"/>
                                     <constraint firstItem="thG-zn-3gM" firstAttribute="top" secondItem="fAr-X8-TFm" secondAttribute="top" constant="33" id="tCG-q1-Evs"/>
-                                    <constraint firstItem="p2J-qO-QN2" firstAttribute="top" secondItem="thG-zn-3gM" secondAttribute="bottom" constant="11" id="w9K-Mb-rXc"/>
                                     <constraint firstAttribute="height" constant="125" id="yrf-bt-GgN"/>
                                 </constraints>
                             </view>
@@ -279,7 +274,7 @@
                         <outlet property="customNav" destination="fAr-X8-TFm" id="rol-Df-v3T"/>
                         <outlet property="mainTable" destination="rvj-2K-Way" id="de1-ub-BOK"/>
                         <outlet property="mapListButton" destination="piB-Lz-fS2" id="u2R-fb-CxW"/>
-                        <outlet property="searchTextField" destination="p2J-qO-QN2" id="yEQ-JY-lqB"/>
+                        <outlet property="searchBar" destination="i8f-dq-xXz" id="con-xY-Gl4"/>
                         <segue destination="P0e-Jd-2QZ" kind="show" identifier="SegueToDetailFromMap" id="IWR-J8-JyM"/>
                     </connections>
                 </viewController>
@@ -338,14 +333,14 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="iPs-rd-oOX" customClass="CustomCollectionViewCell" customModule="SeeFood" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" contentMode="center" reuseIdentifier="cell" id="iPs-rd-oOX" customClass="CustomCollectionViewCell" customModule="SeeFood" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="92" height="92"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="92" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vHW-43-z5a">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vHW-43-z5a">
                                                     <rect key="frame" x="0.0" y="0.0" width="92" height="92"/>
                                                 </imageView>
                                             </subviews>
@@ -358,7 +353,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="cellImage" destination="vHW-43-z5a" id="EJN-3y-sf6"/>
-                                            <segue destination="MFv-d7-21X" kind="show" identifier="SegueToCellDetail" id="6rV-nv-9XX"/>
+                                            <segue destination="MFv-d7-21X" kind="showDetail" identifier="SegueToCellDetail" id="xoa-oW-NHB"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
