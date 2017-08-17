@@ -41,10 +41,6 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
   
   
   
-  
-  
-  
-  
   @IBAction func switchMapListButton(_ sender: UIButton) {
     
     if sender.title(for: .normal) == "Map" {
