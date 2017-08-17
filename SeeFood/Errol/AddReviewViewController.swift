@@ -32,6 +32,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
     
     setImageViewSize(image: foodImage)
     foodImageView.image = Toucan.Resize.resizeImage(foodImage, size: foodImageView.frame.size)
+//    foodImageView.image = foodImage
     //    foodImageView.image = UIImage(named: "chickenRice.jpg")
     //    setImageViewSize(image: UIImage(named: "chickenRice.jpg")!)
 //    setImageViewSize(image: UIImage(named: "beef-stirfry.jpg")!)

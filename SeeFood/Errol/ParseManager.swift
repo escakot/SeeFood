@@ -91,15 +91,17 @@ class ParseManager: NSObject {
     })
   }
   
-  func createRestaurantProfileWith(id:String, name:String, completionHandler: @escaping (Bool) -> Void)
+  func createRestaurantProfileWith(id:String, name:String, completionHandler: @escaping (Bool, Restaurant?) -> Void)
   {
     let restaurant  = Restaurant(id:id, name:name)
     restaurant.saveInBackground { (success, error) in
       if (!success)
       {
         print(error!.localizedDescription)
+        completionHandler(success, nil)
+      } else {
+        completionHandler(success, restaurant)
       }
-      completionHandler(success)
     }
   }
   

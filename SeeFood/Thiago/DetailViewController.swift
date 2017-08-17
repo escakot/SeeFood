@@ -44,10 +44,11 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     ParseManager.shared.queryRestaurantWith(id: restaurant.placeID) { (savedRestaurant:Restaurant?) in
       if savedRestaurant == nil {
         print("No Retaurants with id: \(self.restaurant.placeID)")
-        ParseManager.shared.createRestaurantProfileWith(id: self.restaurant.placeID, name: self.restaurant.name, completionHandler: { (created:Bool) in
+        ParseManager.shared.createRestaurantProfileWith(id: self.restaurant.placeID, name: self.restaurant.name, completionHandler: { (created:Bool, createdRestaurant:Restaurant?) in
           print("Restaurant Created Status: \(created)")
           self.defaultPhoto.isHidden = false
           self.defaultLabel.isHidden = false
+          self.parseRestaurant = created ? createdRestaurant! : nil
         })
       }
       else{
