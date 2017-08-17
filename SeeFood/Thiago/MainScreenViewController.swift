@@ -15,7 +15,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
    
    //MARK: Properties
    
-   @IBOutlet weak var searchTextField: UITextField!
+   @IBOutlet weak var searchBar: UISearchBar!
    @IBOutlet weak var mapListButton: UIButton!
    @IBOutlet weak var mainTable: UITableView!
    @IBOutlet weak var customNav: UIView!
