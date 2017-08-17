@@ -28,7 +28,12 @@ class RestaurantData: NSObject {
     {
       rating = data["rating"] as! Float
     }
-    address = data["vicinity"] as! String
+    if data["vicinity"] != nil
+    {
+      address = data["vicinity"] as! String
+    } else if data["formatted_address"] != nil {
+      address = data["formatted_address"] as! String
+    }
     photoRef = data["photos"] as? [[String:AnyObject]]
     location = CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: ((data["geometry"] as! [String:AnyObject])["location"] as! [String:AnyObject])["lat"] as! Float)!,
                                       longitude: CLLocationDegrees(exactly: ((data["geometry"] as! [String:AnyObject])["location"] as! [String:AnyObject])["lng"] as! Float)!)
@@ -139,5 +144,55 @@ class GoogleManager: NSObject {
       }
     })
     dataTask.resume()
+  }
+  
+  func searchRestaurantWith(searchText:String, coordinates:CLLocation?, completionHandler: @escaping ([RestaurantData]) -> Void)
+  {
+    var restaurants: [RestaurantData]  = []
+    components.path = "/maps/api/place/textsearch/json"
+    let inputQuery = URLQueryItem(name: "query", value: searchText)
+    let typeQuery = URLQueryItem(name: "type", value: "restaurant")
+    let keyQuery = URLQueryItem(name: "key", value: googlePlacesAPI)
+    if let coordinates = coordinates
+    {
+      let locationQuery = URLQueryItem(name: "location", value: String(format: "%.7f,%.7f", coordinates.coordinate.latitude, coordinates.coordinate.longitude))
+      components.queryItems = [inputQuery, typeQuery, locationQuery, keyQuery]
+    } else {
+      components.queryItems = [inputQuery, typeQuery, keyQuery]
+    }
+    
+    let urlRequest = URLRequest(url: components.url!)
+    
+    let configurations = URLSessionConfiguration.default
+    let session = URLSession(configuration: configurations)
+    let dataTask = session.dataTask(with: urlRequest, completionHandler: { (data: Data?, response: URLResponse?,error: Error?) in
+      if error == nil
+      {
+        do {
+          let jsonData = try JSONSerialization.jsonObject(with: data!, options:[]) as! [String:AnyObject]
+          let placesArray = jsonData["results"] as! [[String:AnyObject]]
+          
+          for placesDict in placesArray
+          {
+            guard placesDict["place_id"] != nil else {
+              print("Place ID Is Nil")
+              return
+            }
+            let restaurantInfo = RestaurantData(withJSONdata: placesDict)
+            restaurants.append(restaurantInfo)
+          }
+          completionHandler(restaurants)
+        } catch {
+          print(error.localizedDescription)
+          completionHandler(restaurants)
+        }
+        
+        
+      } else {
+        print(error!.localizedDescription)
+      }
+    })
+    dataTask.resume()
+    
   }
 }
