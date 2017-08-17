@@ -10,8 +10,6 @@ import UIKit
 import Parse
 import GoogleMaps
 import GooglePlaces
-import ObservableArray_RxSwift
-import RxSwift
 
 class MainScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, GMSMapViewDelegate {
   

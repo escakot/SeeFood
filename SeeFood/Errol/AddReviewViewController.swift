@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Toucan
 
 class AddReviewViewController: UIViewController, UITextFieldDelegate {
   
@@ -29,8 +30,8 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
       menuItemTextField.isEnabled = false
     }
     
-    foodImageView.image = foodImage
     setImageViewSize(image: foodImage)
+    foodImageView.image = Toucan.Resize.resizeImage(foodImage, size: foodImageView.frame.size)
     //    foodImageView.image = UIImage(named: "chickenRice.jpg")
     //    setImageViewSize(image: UIImage(named: "chickenRice.jpg")!)
 //    setImageViewSize(image: UIImage(named: "beef-stirfry.jpg")!)
@@ -54,15 +55,15 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
       let title = menuItemTextField.text!
       ParseManager.shared.createMenuItemFor(restaurant, title: title, completionHandler: { (savedMenuItem) in
         ParseManager.shared.addReviewFor(savedMenuItem, at: self.restaurant, image: image, completionHandler: {
+          self.dismiss(animated: true)
         })
       })
     }
     print("saved")
-    //    dismiss(animated: true)
   }
   @IBAction func cancelButton(_ sender: UIBarButtonItem)
   {
-    //    dismiss(animated: true)
+    dismiss(animated: true)
   }
   
   func setImageViewSize(image:UIImage)

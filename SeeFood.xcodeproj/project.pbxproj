@@ -34,6 +34,8 @@
 		D17FE7761F3D70A300206951 /* GoogleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17FE7751F3D70A300206951 /* GoogleManager.swift */; };
 		D17FE7781F3E326400206951 /* assets.xib in Resources */ = {isa = PBXBuildFile; fileRef = D17FE7771F3E326400206951 /* assets.xib */; };
 		D17FE77A1F3E3D0300206951 /* beef-stirfry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D17FE7791F3E3D0300206951 /* beef-stirfry.jpg */; };
+		D1A839A21F450A0700881330 /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A839A01F450A0700881330 /* camera-icon.png */; };
+		D1A839A31F450A0700881330 /* photo-library-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A839A11F450A0700881330 /* photo-library-icon.png */; };
 		D1C0EB5F1F3A2C6200DCF4C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */; };
 		D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB651F3A2C6200DCF4C9 /* Assets.xcassets */; };
 		D1C0EB751F3A2C8E00DCF4C9 /* Errol.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB741F3A2C8E00DCF4C9 /* Errol.storyboard */; };
@@ -77,6 +79,8 @@
 		D17FE7751F3D70A300206951 /* GoogleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleManager.swift; sourceTree = "<group>"; };
 		D17FE7771F3E326400206951 /* assets.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = assets.xib; sourceTree = "<group>"; };
 		D17FE7791F3E3D0300206951 /* beef-stirfry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "beef-stirfry.jpg"; sourceTree = "<group>"; };
+		D1A839A01F450A0700881330 /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon.png"; sourceTree = "<group>"; };
+		D1A839A11F450A0700881330 /* photo-library-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-library-icon.png"; sourceTree = "<group>"; };
 		D1C0EB5B1F3A2C6200DCF4C9 /* SeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1C0EB651F3A2C6200DCF4C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 				D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */,
 				D17FE7731F3CE52B00206951 /* chickenRice.jpg */,
 				D17FE7791F3E3D0300206951 /* beef-stirfry.jpg */,
+				D1A839A01F450A0700881330 /* camera-icon.png */,
+				D1A839A11F450A0700881330 /* photo-library-icon.png */,
 				D17FE7771F3E326400206951 /* assets.xib */,
 				D1C0EB8A1F3B995A00DCF4C9 /* Models */,
 			);
@@ -254,6 +260,7 @@
 				TargetAttributes = {
 					D1C0EB5A1F3A2C6200DCF4C9 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 62G7WYJ46U;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -303,6 +310,8 @@
 				7E7C08B81F4231B0001C9F3E /* thumbsupIcon.png in Resources */,
 				7E0E1BCF1F3A44B800367508 /* userIcon.png in Resources */,
 				D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */,
+				D1A839A21F450A0700881330 /* camera-icon.png in Resources */,
+				D1A839A31F450A0700881330 /* photo-library-icon.png in Resources */,
 				D17FE7781F3E326400206951 /* assets.xib in Resources */,
 				D1C0EB751F3A2C8E00DCF4C9 /* Errol.storyboard in Resources */,
 			);
@@ -353,7 +362,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -481,11 +490,11 @@
 			baseConfigurationReference = 30AC8B5732DE6E2F16FD5336 /* Pods-SeeFood.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 62G7WYJ46U;
 				INFOPLIST_FILE = SeeFood/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.lighthouselabs.SeeFood;
+				PRODUCT_BUNDLE_IDENTIFIER = com.errolcheong.SeeFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -496,11 +505,11 @@
 			baseConfigurationReference = 312A436504126538360B423B /* Pods-SeeFood.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 62G7WYJ46U;
 				INFOPLIST_FILE = SeeFood/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.lighthouselabs.SeeFood;
+				PRODUCT_BUNDLE_IDENTIFIER = com.errolcheong.SeeFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
