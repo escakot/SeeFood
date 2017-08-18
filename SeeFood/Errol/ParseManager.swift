@@ -32,12 +32,12 @@ class ParseManager: NSObject {
   }
   
   
-  func userSignUp(username:String, password:String, completionHandler: @escaping (String?) -> Void)
+  func userSignUp(username:String, password:String, email:String, completionHandler: @escaping (String?) -> Void)
   {
     let newUser = PFUser()
     newUser.username = username
     newUser.password = password
-//    newUser.email = "email@example.com"
+    newUser.email = email
     
     
     newUser.signUpInBackground { (bool, error) in

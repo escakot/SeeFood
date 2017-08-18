@@ -16,6 +16,8 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     
+    @IBOutlet weak var emailTextField: UITextField!
+  
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var signupButton: UIButton!
@@ -71,11 +73,11 @@ class SignUpViewController: UIViewController {
     @IBAction func signupButton(_ sender: UIButton) {
         
         
-        if (usernameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
+        if (usernameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! {
             print("Error: Empty textfields")
         }
         else {
-            ParseManager.shared.userSignUp(username: usernameTextField.text!, password: passwordTextField.text!) { (result:String?) in
+          ParseManager.shared.userSignUp(username: usernameTextField.text!, password: passwordTextField.text!, email: emailTextField.text!) { (result:String?) in
               guard let result = result else
               {
                 OperationQueue.main.addOperation({

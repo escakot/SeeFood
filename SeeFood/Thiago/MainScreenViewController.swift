@@ -339,7 +339,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
   {
     NSObject.cancelPreviousPerformRequests(withTarget: self)
-    perform(#selector(performRestaurantSearch), with: searchText, afterDelay: 0.5)
+    perform(#selector(performRestaurantSearch), with: searchText, afterDelay: 0.3)
   }
   
   func performRestaurantSearch(sender:Any?)
