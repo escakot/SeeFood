@@ -11,10 +11,12 @@ import Photos
 import AVFoundation
 
 class MainCollectionView: UICollectionView {
+  
+  var isCameraLibraryViewOn = false
    
    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
       let indexPath = self.indexPathForItem(at: point)
-      if indexPath != nil
+      if indexPath != nil && !isCameraLibraryViewOn
       {
          return true
       }
@@ -156,6 +158,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
       guard !view.subviews.contains(cameraLibraryView) else {
          return
       }
+      mainCollectionView.isCameraLibraryViewOn = true
       view.addSubview(cameraLibraryView)
       cameraLibraryView.alpha = 0
       UIView.animate(withDuration: 0.6) {
@@ -222,6 +225,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             self.cameraLibraryView.alpha = 0
          }, completion: { (success) in
             self.cameraLibraryView.removeFromSuperview()
+            self.mainCollectionView.isCameraLibraryViewOn = false
          })
       }
    }
