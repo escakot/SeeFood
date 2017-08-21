@@ -46,13 +46,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
    override func viewDidLoad() {
       super.viewDidLoad()
       
-//      if(traitCollection.forceTouchCapability == .available){
-         registerForPreviewing(with: self, sourceView: mainCollectionView)
-//      }
-//      else{
-//         print("No Force touch!!!")
-//      }
-//      
+      registerForPreviewing(with: self, sourceView: mainCollectionView)
       
       restaurantNameLabel.text = restaurant.name
       
@@ -114,6 +108,11 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
       cameraLibraryView.addSubview(cameraImageView)
       cameraLibraryView.addSubview(libraryImageView)
       
+   }
+   
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(true)
+      self.mainCollectionView.reloadData()
    }
    
    

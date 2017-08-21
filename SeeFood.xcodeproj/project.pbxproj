@@ -28,6 +28,7 @@
 		7E8CC7C51F4248B8003A16BD /* smileyIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E8CC7C41F4248B8003A16BD /* smileyIcon.png */; };
 		7EA53CFA1F3E39EB00A5B29C /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA53CF91F3E39EB00A5B29C /* transparent.png */; };
 		7EA53CFC1F3E3AF200A5B29C /* meal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EA53CFB1F3E3AF200A5B29C /* meal.jpg */; };
+		7ED672D21F4B412B000D3AD9 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7ED672D11F4B412B000D3AD9 /* loading.gif */; };
 		7EE7BD531F3E44EC00399BE3 /* transparentdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE7BD521F3E44EC00399BE3 /* transparentdown.png */; };
 		97F3CEBB22FF66BBABFC4B6E /* Pods_SeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEE5917A4910DC008EEABAE /* Pods_SeeFood.framework */; };
 		D17FE7741F3CE52B00206951 /* chickenRice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D17FE7731F3CE52B00206951 /* chickenRice.jpg */; };
@@ -75,6 +76,7 @@
 		7E8CC7C41F4248B8003A16BD /* smileyIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smileyIcon.png; sourceTree = "<group>"; };
 		7EA53CF91F3E39EB00A5B29C /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
 		7EA53CFB1F3E3AF200A5B29C /* meal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meal.jpg; sourceTree = "<group>"; };
+		7ED672D11F4B412B000D3AD9 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		7EE7BD521F3E44EC00399BE3 /* transparentdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparentdown.png; sourceTree = "<group>"; };
 		BCEE5917A4910DC008EEABAE /* Pods_SeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D17FE7731F3CE52B00206951 /* chickenRice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chickenRice.jpg; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				7E0E1BCD1F3A44B800367508 /* userIcon.png */,
 				7E0E1BCE1F3A44B800367508 /* lockIcon.png */,
 				7E47D85C1F3B4FF000DDA78B /* gif1.gif */,
+				7ED672D11F4B412B000D3AD9 /* loading.gif */,
 				7E47D8661F3B84D000DDA78B /* defaultrestlogo.png */,
 				7E7EDAA91F3BA3C80024B2CD /* redbackground copy.jpg */,
 				7EA53CF91F3E39EB00A5B29C /* transparent.png */,
@@ -310,6 +313,7 @@
 				7E7C08B61F422B15001C9F3E /* searchIcon.png in Resources */,
 				D1C0EB901F3BAB8E00DCF4C9 /* Star-Half.png in Resources */,
 				7E7C08B41F421E3B001C9F3E /* turkey.jpg in Resources */,
+				7ED672D21F4B412B000D3AD9 /* loading.gif in Resources */,
 				7EA53CFA1F3E39EB00A5B29C /* transparent.png in Resources */,
 				D1A839A51F4676E000881330 /* mailIcon.png in Resources */,
 				7E7EDAAA1F3BA3C80024B2CD /* redbackground copy.jpg in Resources */,
@@ -369,7 +373,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
