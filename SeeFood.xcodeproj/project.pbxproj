@@ -37,6 +37,7 @@
 		D1A839A21F450A0700881330 /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A839A01F450A0700881330 /* camera-icon.png */; };
 		D1A839A31F450A0700881330 /* photo-library-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A839A11F450A0700881330 /* photo-library-icon.png */; };
 		D1A839A51F4676E000881330 /* mailIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A839A41F4676E000881330 /* mailIcon.png */; };
+		D1B8A8F81F4A814400D7D470 /* close-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B8A8F71F4A814400D7D470 /* close-icon.png */; };
 		D1C0EB5F1F3A2C6200DCF4C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */; };
 		D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB651F3A2C6200DCF4C9 /* Assets.xcassets */; };
 		D1C0EB751F3A2C8E00DCF4C9 /* Errol.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB741F3A2C8E00DCF4C9 /* Errol.storyboard */; };
@@ -83,6 +84,7 @@
 		D1A839A01F450A0700881330 /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon.png"; sourceTree = "<group>"; };
 		D1A839A11F450A0700881330 /* photo-library-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-library-icon.png"; sourceTree = "<group>"; };
 		D1A839A41F4676E000881330 /* mailIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mailIcon.png; sourceTree = "<group>"; };
+		D1B8A8F71F4A814400D7D470 /* close-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close-icon.png"; sourceTree = "<group>"; };
 		D1C0EB5B1F3A2C6200DCF4C9 /* SeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1C0EB651F3A2C6200DCF4C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				D1A839A01F450A0700881330 /* camera-icon.png */,
 				D1A839A11F450A0700881330 /* photo-library-icon.png */,
 				D1A839A41F4676E000881330 /* mailIcon.png */,
+				D1B8A8F71F4A814400D7D470 /* close-icon.png */,
 				D17FE7771F3E326400206951 /* assets.xib */,
 				D1C0EB8A1F3B995A00DCF4C9 /* Models */,
 			);
@@ -303,6 +306,7 @@
 				D17FE77A1F3E3D0300206951 /* beef-stirfry.jpg in Resources */,
 				7E0E1BD01F3A44B800367508 /* lockIcon.png in Resources */,
 				7EE7BD531F3E44EC00399BE3 /* transparentdown.png in Resources */,
+				D1B8A8F81F4A814400D7D470 /* close-icon.png in Resources */,
 				7E7C08B61F422B15001C9F3E /* searchIcon.png in Resources */,
 				D1C0EB901F3BAB8E00DCF4C9 /* Star-Half.png in Resources */,
 				7E7C08B41F421E3B001C9F3E /* turkey.jpg in Resources */,
@@ -365,7 +369,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

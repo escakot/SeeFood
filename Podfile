@@ -9,6 +9,8 @@ target 'SeeFood' do
   pod 'Parse'
   pod 'IQKeyboardManager'
   pod 'Toucan'
+  pod 'SteviaLayout'
+  pod 'Clarifai'
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'

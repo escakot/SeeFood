@@ -50,6 +50,43 @@ class ParseManager: NSObject {
     }
   }
   
+  func userResetPassword(username:String, email:String, completionHandler: @escaping (String?) -> Void)
+  {
+    if !email.isEmpty
+    {
+      PFUser.requestPasswordResetForEmail(inBackground: email, block: { (success, error) in
+        if error == nil
+        {
+          completionHandler(nil)
+        } else {
+          print(error!.localizedDescription)
+          completionHandler(error!.localizedDescription)
+        }
+      })
+    }
+    else
+    {
+      let query = PFUser.query()
+      query?.whereKey("username", equalTo: username)
+      
+      query?.getFirstObjectInBackground(block: { (user, error) in
+        if error == nil
+        {
+          let userEmail = (user as! PFUser).email!
+          PFUser.requestPasswordResetForEmail(inBackground: userEmail, block: { (success, error) in
+            if error == nil
+            {
+              completionHandler(nil)
+            } else {
+              print(error!.localizedDescription)
+              completionHandler(error?.localizedDescription)
+            }
+          })
+        }
+      })
+    }
+  }
+  
   func queryMenuItemsFor(_ restaurant:Restaurant, completionHandler: @escaping (Array<MenuItem>?) -> Void)
   {
     let query = MenuItem.query()
@@ -78,7 +115,7 @@ class ParseManager: NSObject {
   {
     let query = Restaurant.query()
     query!.whereKey("id", contains: id)
-//    query!.whereKey("coordinates", nearGeoPoint: coordinates)
+    //    query!.whereKey("coordinates", nearGeoPoint: coordinates)
     
     query?.getFirstObjectInBackground(block: { (object, error) in
       if error == nil
@@ -124,7 +161,7 @@ class ParseManager: NSObject {
   {
     guard let user = PFUser.current(),
       let imageData = UIImagePNGRepresentation(image) else {
-      return
+        return
     }
     let imageFile = PFFile(name: "image.png", data: imageData)
     let review = Review(user: user, image: imageFile!, menuItem: menuItem, restaurant: restaurant)
@@ -139,5 +176,5 @@ class ParseManager: NSObject {
       }
     }
   }
-
+  
 }
