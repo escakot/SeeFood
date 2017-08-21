@@ -11,6 +11,7 @@ import Parse
 import Toucan
 import Clarifai
 import Stevia
+import TagListView
 
 class AddReviewViewController: UIViewController, UITextFieldDelegate {
   
@@ -18,11 +19,14 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
   @IBOutlet weak var menuItemTextField: UITextField!
   @IBOutlet weak var foodImageViewHeight: NSLayoutConstraint!
   
+  var foodImageView2: UIImageView!
+  var menuItemTextField2: UITextField!
+  
   var restaurant: Restaurant!
   var menuItem: MenuItem?
   var foodImage: UIImage!
   let clarifaiAPI = "c2b0351a3e40478ca234a70c36fa864f"
-  let tagStackView = UIStackView()
+  let tagsView = TagStackView()
   
   
   override func viewDidLoad() {
@@ -35,45 +39,43 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
       menuItemTextField.isEnabled = false
     }
     
-//    setImageViewSize(image: foodImage)
-//    foodImageView.image = Toucan.Resize.resizeImage(foodImage, size: foodImageView.frame.size)
+    foodImageView.isUserInteractionEnabled = false
+    setImageViewSize(image: foodImage)
+    foodImageView.image = Toucan.Resize.resizeImage(foodImage, size: foodImageView.frame.size)
 //    setImageViewSize(image: UIImage(named: "chickenRice.jpg")!)
 //    foodImageView.image = Toucan.Resize.resizeImage(UIImage(named:"chickenRice.jpg")!, size: foodImageView.frame.size)
     
     
-//    let clarifai = ClarifaiApp.init(apiKey: clarifaiAPI)
-//    let clarifaiImage = ClarifaiImage.init(image: foodImage)!
-//    clarifai?.getModelByID("bd367be194cf45149e75f01d59f77ba7", completion: { (model, error) in
-//      if error == nil
-//      {
-//        model!.predict(on: [clarifaiImage], completion: { (outputs:[ClarifaiOutput]?, outputError) in
-//          if outputError == nil
-//          {
-////            print(String(format: "Outputs: %@", outputs![0]))
-//            let responseData = (outputs![0].responseDict as! [String:AnyObject])["data"] as! [String:AnyObject]
-//            let possibleItems = responseData["concepts"] as! [[String:AnyObject]]
-//            for item in possibleItems
-//            {
-//              self.createTag(name: item["name"] as! String)
-//            }
-//          }
-//        })
-//      }
-//    })
-    view.sv([tagStackView])
+    let clarifai = ClarifaiApp.init(apiKey: clarifaiAPI)
+    let clarifaiImage = ClarifaiImage.init(image: foodImage)!
+    clarifai?.getModelByID("bd367be194cf45149e75f01d59f77ba7", completion: { (model, error) in
+      if error == nil
+      {
+        model!.predict(on: [clarifaiImage], completion: { (outputs:[ClarifaiOutput]?, outputError) in
+          if outputError == nil
+          {
+//            print(String(format: "Outputs: %@", outputs![0]))
+            let responseData = (outputs![0].responseDict as! [String:AnyObject])["data"] as! [String:AnyObject]
+            let possibleItems = responseData["concepts"] as! [[String:AnyObject]]
+            for item in possibleItems
+            {
+              OperationQueue.main.addOperation({ 
+                self.createTag(name: item["name"] as! String, predictedTag: true)
+              })
+            }
+          }
+        })
+      }
+    })
+    
+    
+    view.sv([tagsView])
     view.layout(
     foodImageView.frame.maxY + 40,
-    tagStackView.fillHorizontally(),
+    |-10-tagsView-10-|,
     10)
     
-    let tempArray = ["Chicken", "Rice", "Vegetables", "Beef"]
-    for food in tempArray
-    {
-      createTag(name: food)
-    }
-    
-    resizeTagStackView()
-    view.addSubview(tagStackView)
+    view.addSubview(tagsView)
   }
   
   
@@ -112,9 +114,8 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
     foodImageView.frame.size = CGSize(width: view.frame.width, height: newHeight)
   }
   
-  func createTag(name:String)
+  func createTag(name:String, predictedTag:Bool)
   {
-    
     let tagLabel = UILabel()
     let font = UIFont.systemFont(ofSize: 10)
     tagLabel.font = font
@@ -122,24 +123,31 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
     tagLabel.sizeToFit()
     
     let closeTagButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-    closeTagButton.setImage(image: UIImage(named: "close-icond.png"), inFrame: CGRect(x: 0, y: 0, width: 20, height: 20), forState: .normal)
+    let closeIcon = UIImage(named: "close-icon.png")!
+    closeTagButton.setImage(closeIcon, for: .normal)
+//    let horizontalEdge = closeIcon.size.width - 20
+//    let verticalEdge = closeIcon.size.height - 20
+//    closeTagButton.imageEdgeInsets = UIEdgeInsetsMake(verticalEdge, horizontalEdge, verticalEdge, horizontalEdge)
     closeTagButton.tap { closeTagButton.superview?.removeFromSuperview() }
     
     let stack = UIStackView.init(arrangedSubviews: [tagLabel, closeTagButton])
     stack.isUserInteractionEnabled = true
     stack.spacing = 5
-    stack.setNeedsUpdateConstraints()
-    stack.updateConstraintsIfNeeded()
-    stack.setNeedsLayout()
-    stack.layoutIfNeeded()
-    stack.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
     
     let tagPanGesture = UIPanGestureRecognizer.init(target: self, action: #selector(panMoveTag))
     stack.addGestureRecognizer(tagPanGesture)
-    stack.frame = CGRect(x: 0, y: 0, width: 200, height: 20)
-    stack.center = CGPoint(x: view.center.x, y: view.center.y + 200)
+    let stackFrame = CGRect(x: 0, y: 0, width: tagLabel.frame.width + closeTagButton.frame.width + stack.spacing, height: 20)
+    let stackView = UIView(frame: CGRect(x: 0, y: 0, width: tagLabel.frame.width + closeTagButton.frame.width + stack.spacing + 10, height: 25))
+    stack.insertSubview(stackView, at: 0)
+    stack.frame = stackFrame
+
+    stackView.backgroundColor = UIColor(white: 0.4, alpha: 0.5)
+    stackView.layer.borderWidth = 1
+    stackView.layer.borderColor = UIColor.black.cgColor
+    stackView.layer.cornerRadius = 5
+    stackView.center = stack.center
     
-    tagStackView.addArrangedSubview(stack)
+    tagsView.addArrangedSubview([stack])
   }
   
   func panMoveTag(sender:UIPanGestureRecognizer)
@@ -150,29 +158,32 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate {
     sender.setTranslation(CGPoint.zero, in: view)
   }
   
-  func resizeTagStackView()
-  {
-    tagStackView.setNeedsUpdateConstraints()
-    tagStackView.updateConstraintsIfNeeded()
-    tagStackView.setNeedsLayout()
-    tagStackView.layoutIfNeeded()
-    tagStackView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-  }
 }
 
-extension UIButton{
+class TagStackView: UIView
+{
+  let padding: CGFloat = 15
+  var xStack: CGFloat = 15
+  var yStack: CGFloat = 15
   
-  func setImage(image: UIImage?, inFrame frame: CGRect?, forState state: UIControlState){
-    self.setImage(image, for: state)
+  func addArrangedSubview(_ views:[UIView])
+  {
+    let width = self.superview!.frame.width
+//    let height = self.frame.height
     
-    if let frame = frame{
-      self.imageEdgeInsets = UIEdgeInsets(
-        top: frame.minY - self.frame.minY,
-        left: frame.minX - self.frame.minX,
-        bottom: self.frame.maxY - frame.maxY,
-        right: self.frame.maxX - frame.maxX
-      )
+    for view in views
+    {
+      if xStack + view.frame.width + padding > width
+      {
+        yStack = yStack + view.frame.height + padding
+        xStack = padding
+      }
+      let viewFrame = CGRect(x: xStack, y: yStack, width: view.frame.width, height: view.frame.height)
+      view.frame = viewFrame
+      self.addSubview(view)
+      
+      xStack = xStack + view.frame.width + padding
     }
+    
   }
-  
 }

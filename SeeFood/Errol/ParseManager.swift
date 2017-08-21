@@ -87,28 +87,32 @@ class ParseManager: NSObject {
     }
   }
   
-  func queryMenuItemsFor(_ restaurant:Restaurant, completionHandler: @escaping (Array<MenuItem>?) -> Void)
+  func queryReviewFor(_ menuItem:MenuItem, completionHandler: @escaping (Array<Review>?) -> Void)
   {
-    let query = MenuItem.query()
-    query!.whereKey("restaurant", equalTo: restaurant)
-    
-    query!.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+    let reviewsQuery = menuItem.reviews().query()
+    reviewsQuery.findObjectsInBackground { (reviews:[Review]?, error:Error?) in
       if error == nil
       {
-        var tempArray:[MenuItem] = []
-        if let objects = objects
-        {
-          for object in objects
-          {
-            tempArray.append(object as! MenuItem)
-          }
-          completionHandler(tempArray)
-        }
+        completionHandler(reviews!)
       } else {
         print(error!.localizedDescription)
         completionHandler(nil)
       }
-    })
+    }
+  }
+  
+  func queryMenuItemsFor(_ restaurant:Restaurant, completionHandler: @escaping (Array<MenuItem>?) -> Void)
+  {
+    let menuItemsQuery = restaurant.menu().query()
+    menuItemsQuery.findObjectsInBackground { (menu:[MenuItem]?, error:Error?) in
+      if error == nil
+      {
+        completionHandler(menu!)
+      } else {
+        print(error!.localizedDescription)
+        completionHandler(nil)
+      }
+    }
   }
   
   func queryRestaurantWith(id:String, completionHandler: @escaping (Restaurant?) -> Void)

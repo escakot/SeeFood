@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
   
-  let googlePlacesAPIkey = "AIzaSyAGvpL7SlLaZOm51oLI4T8tc28XHkEMcUE"
+  let googlePlacesAPIkey = "AIzaSyB8WnwQLN2IMPvdBgOWgy-yzSRsTKmhTkY"
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
