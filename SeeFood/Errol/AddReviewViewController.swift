@@ -11,7 +11,6 @@ import Parse
 import Toucan
 import Clarifai
 import Stevia
-import TagListView
 
 class AddReviewViewController: UIViewController, UITextFieldDelegate {
   

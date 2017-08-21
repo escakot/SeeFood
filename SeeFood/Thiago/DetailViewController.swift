@@ -35,7 +35,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
    
    var cameraLibraryView: UIView!
    var imagePicker: UIImagePickerController!
-   
+   var imageWasSelected: Bool!
    
    var restaurant: RestaurantData!
    var parseRestaurant: Restaurant!
@@ -108,11 +108,25 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
       cameraLibraryView.addSubview(cameraImageView)
       cameraLibraryView.addSubview(libraryImageView)
       
+     imageWasSelected = false
    }
    
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
-      self.mainCollectionView.reloadData()
+      if imageWasSelected {
+         ParseManager.shared.queryMenuItemsFor(self.parseRestaurant) { (array: Array<MenuItem>?) in
+            if (array?.isEmpty)!{
+               self.defaultPhoto.isHidden = false
+               self.defaultLabel.isHidden = false
+               print("There are no Menu Items for \(self.parseRestaurant.name)")
+            }else{
+               self.arrayOfMenuItems = array!
+               DispatchQueue.main.async {
+                  self.mainCollectionView.reloadData()
+               }
+            }
+         }
+      }
    }
    
    
@@ -134,8 +148,18 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
       
       let cell: CustomCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCollectionViewCell
       
-      cell.cellImage.image = UIImage(named: "meal.jpg")
-      
+      ParseManager.shared.queryReviewFor(self.arrayOfMenuItems[indexPath.row]) { (reviews: Array<Review>?) in
+         reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
+            if error == nil {
+               DispatchQueue.main.async {
+                  cell.cellImage.image = UIImage(data: data!)
+               }
+            }
+            else {
+               print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
+            }
+         })
+      }
       return cell
    }
    
@@ -201,6 +225,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
       if let pickedImage = info["UIImagePickerControllerOriginalImage"] as? UIImage
       {
+         imageWasSelected = true
          let navController = UIStoryboard(name: "Errol", bundle: nil).instantiateInitialViewController() as! UINavigationController
          let addReviewController = navController.viewControllers.first as! AddReviewViewController
          addReviewController.foodImage = pickedImage

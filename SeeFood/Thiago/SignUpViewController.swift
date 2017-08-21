@@ -81,8 +81,7 @@ class SignUpViewController: UIViewController {
    
    //MARK: IBActions
    @IBAction func signupButton(_ sender: UIButton) {
-      
-      
+      self.myWebView.isHidden = false
       if (usernameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! {
          print("Error: Empty textfields")
       }
@@ -96,6 +95,7 @@ class SignUpViewController: UIViewController {
                return
             }
             self.alertController.message = result
+            self.myWebView.isHidden = true
             OperationQueue.main.addOperation({
                self.present(self.alertController, animated: true, completion: nil)
             })

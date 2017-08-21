@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qnP-5G-OEK">
+                            <webView alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qnP-5G-OEK">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
@@ -540,11 +540,22 @@
                                                         <constraint firstAttribute="width" constant="354" id="ijV-UV-aKh"/>
                                                     </constraints>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparent.png" translatesAutoresizingMaskIntoConstraints="NO" id="Lgq-fV-2uN">
+                                                    <rect key="frame" x="0.0" y="542" width="354" height="126"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="354" id="AyM-e5-RhK"/>
+                                                        <constraint firstAttribute="height" constant="126" id="BdQ-th-TIr"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.81906893726591756" green="0.11702179718101678" blue="0.17418250537571975" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Lgq-fV-2uN" secondAttribute="trailing" id="6S5-NX-S6K"/>
                                             <constraint firstItem="EU7-tJ-7Rf" firstAttribute="leading" secondItem="W7U-6D-lw7" secondAttribute="leading" id="Grp-Me-xtc"/>
+                                            <constraint firstItem="Lgq-fV-2uN" firstAttribute="centerX" secondItem="W7U-6D-lw7" secondAttribute="centerX" id="M54-V3-Pmn"/>
+                                            <constraint firstAttribute="bottom" secondItem="Lgq-fV-2uN" secondAttribute="bottom" constant="2" id="MsJ-c9-YBm"/>
+                                            <constraint firstItem="Lgq-fV-2uN" firstAttribute="leading" secondItem="W7U-6D-lw7" secondAttribute="leading" id="ZVg-nQ-bDj"/>
                                             <constraint firstAttribute="trailing" secondItem="EU7-tJ-7Rf" secondAttribute="trailing" id="j9U-1o-vl1"/>
                                             <constraint firstItem="EU7-tJ-7Rf" firstAttribute="top" secondItem="W7U-6D-lw7" secondAttribute="top" id="tsi-yL-pJc"/>
                                         </constraints>
@@ -579,13 +590,21 @@
                                             <constraint firstAttribute="width" secondItem="5J6-xR-Phn" secondAttribute="height" multiplier="31:29" id="Rao-xN-ag1"/>
                                             <constraint firstAttribute="height" constant="58" id="vbB-3K-Ecm"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="25"/>
                                         <state key="normal" title="X">
                                             <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="backButton:" destination="MFv-d7-21X" eventType="touchUpInside" id="fwN-eU-su1"/>
                                         </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ox-t5-xWJ">
+                                        <rect key="frame" x="301" y="34" width="66" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                        <state key="normal" title="Tag">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -598,6 +617,7 @@
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="VYe-dH-OZd">
                                 <rect key="frame" x="0.0" y="628" width="375" height="39"/>
+                                <color key="backgroundColor" red="0.13077890917602997" green="0.13077890917602997" blue="0.13077890917602997" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="VYe-dH-OZd" secondAttribute="height" multiplier="354:37" id="cdB-et-oUR"/>
                                 </constraints>
@@ -656,7 +676,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8DQ-zk-YCr">
+                            <webView alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8DQ-zk-YCr">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
@@ -820,6 +840,7 @@
         <image name="redbackground copy.jpg" width="640" height="960"/>
         <image name="smileyIcon.png" width="512" height="512"/>
         <image name="thumbsupIcon.png" width="96" height="96"/>
+        <image name="transparent.png" width="972" height="511"/>
         <image name="transparentdown.png" width="972" height="511"/>
         <image name="userIcon.png" width="96" height="96"/>
     </resources>
