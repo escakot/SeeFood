@@ -39,39 +39,39 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
     menuItemTextField.placeholder = "Menu Item Title"
     menuItemTextField.textAlignment = .center
     foodImageView.isUserInteractionEnabled = true
-//    setImageViewSize(image: foodImage)
-//    foodImageView.image = Toucan.Resize.resizeImage(foodImage, size: foodImageView.frame.size)
-    setImageViewSize(image: UIImage(named: "chickenRice.jpg")!)
-    foodImageView.image = Toucan.Resize.resizeImage(UIImage(named:"chickenRice.jpg")!, size: foodImageView.frame.size)
+    setImageViewSize(image: foodImage)
+    foodImageView.image = Toucan.Resize.resizeImage(foodImage, size: foodImageView.frame.size)
+//    setImageViewSize(image: UIImage(named: "chickenRice.jpg")!)
+//    foodImageView.image = Toucan.Resize.resizeImage(UIImage(named:"chickenRice.jpg")!, size: foodImageView.frame.size)
     
     
-//    let clarifai = ClarifaiApp.init(apiKey: clarifaiAPI)
-//    let clarifaiImage = ClarifaiImage.init(image: foodImage)!
-//    clarifai?.getModelByID("bd367be194cf45149e75f01d59f77ba7", completion: { (model, error) in
-//      if error == nil
-//      {
-//        model!.predict(on: [clarifaiImage], completion: { (outputs:[ClarifaiOutput]?, outputError) in
-//          if outputError == nil
-//          {
-////            print(String(format: "Outputs: %@", outputs![0]))
-//            let responseData = (outputs![0].responseDict as! [String:AnyObject])["data"] as! [String:AnyObject]
-//            let possibleItems = responseData["concepts"] as! [[String:AnyObject]]
-//            for item in possibleItems
-//            {
-//              OperationQueue.main.addOperation({ 
-//                self.createTag(name: item["name"] as! String, predictedTag: true)
-//              })
-//            }
-//          }
-//        })
-//      }
-//    })
+    let clarifai = ClarifaiApp.init(apiKey: clarifaiAPI)
+    let clarifaiImage = ClarifaiImage.init(image: foodImage)!
+    clarifai?.getModelByID("bd367be194cf45149e75f01d59f77ba7", completion: { (model, error) in
+      if error == nil
+      {
+        model!.predict(on: [clarifaiImage], completion: { (outputs:[ClarifaiOutput]?, outputError) in
+          if outputError == nil
+          {
+//            print(String(format: "Outputs: %@", outputs![0]))
+            let responseData = (outputs![0].responseDict as! [String:AnyObject])["data"] as! [String:AnyObject]
+            let possibleItems = responseData["concepts"] as! [[String:AnyObject]]
+            for item in possibleItems
+            {
+              OperationQueue.main.addOperation({ 
+                self.createTag(name: item["name"] as! String, predictedTag: true)
+              })
+            }
+          }
+        })
+      }
+    })
     
-    let foodTemp = ["chicken", "rice", "vegetables", "cilantro", "chili sauce"]
-    for food in foodTemp
-    {
-      self.createTag(name: food, predictedTag: true)
-    }
+//    let foodTemp = ["chicken", "rice", "vegetables", "cilantro", "chili sauce", "sauce", "plate", "meat"]
+//    for food in foodTemp
+//    {
+//      self.createTag(name: food, predictedTag: true)
+//    }
     
     view.sv([foodImageView, menuItemTextField,tagsView])
     view.layout(
@@ -154,13 +154,12 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
     let tagPanGesture = UIPanGestureRecognizer.init(target: self, action: #selector(panMoveTag))
     tag.addGestureRecognizer(tagPanGesture)
     
-    tagsView.addArrangedSubview([tag])
+    tagsView.addArrangedSubview(tag)
   }
   
   func panMoveTag(sender:UIPanGestureRecognizer)
   {
     let translation = sender.translation(in: view)
-    print(translation)
     sender.view!.center = CGPoint(x: sender.view!.center.x + translation.x,
                                   y: sender.view!.center.y + translation.y)
     sender.setTranslation(CGPoint.zero, in: view)
@@ -197,20 +196,36 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
     let newTag = TagStackView(tagName: oldTag.tagLabel.text!, predicted: oldTag.isPredicted)
     newTag.frame = frameInImage
     newTag.oriCenter = oldTag.oriCenter
-    oldTag.removeFromSuperview()
+    newTag.oriOrigin = oldTag.oriOrigin
     let tagPanGesture = UIPanGestureRecognizer.init(target: self, action: #selector(panMoveTag))
     newTag.addGestureRecognizer(tagPanGesture)
-    toView.addSubview(newTag)
+    if toView is ArrangedTagView
+    {
+      oldTag.removeFromSuperview()
+      (toView as! ArrangedTagView).addArrangedSubview(newTag)
+    } else {
+      (fromView as! ArrangedTagView).deleteArrangeSubview(oldTag)
+      toView.addSubview(newTag)
+    }
     return newTag
   }
   
   func addNewTag()
   {
-    
+    self.tagsView.isInitialLoad = false
+    let textFieldAlert = UIAlertController(title: "New Tag", message: "" , preferredStyle: .alert)
+    textFieldAlert.addTextField { (textField) in
+      textField.placeholder = "tag name"
+      textField.textAlignment = .center
+    }
+    textFieldAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (alert) in self.dismiss(animated: true, completion: nil) }))
+    textFieldAlert.addAction(UIAlertAction(title: "Done", style: .default, handler: { (action) in
+      guard let tagString = textFieldAlert.textFields!.first!.text, tagString != "" else { return }
+      self.createTag(name: tagString.lowercased(), predictedTag: false)
+    }))
+    present(textFieldAlert, animated: true, completion: nil)
   }
-  
 }
-
 // MARK: - Tag Classes
 
 class TagStackView: UIStackView
@@ -220,6 +235,7 @@ class TagStackView: UIStackView
   var backgroundView: UIView!
   var isPredicted = false
   var oriCenter = CGPoint.zero
+  var oriOrigin = CGPoint.zero
   
   convenience init(tagName:String, predicted:Bool) {
     let tempTagLabel = UILabel()
@@ -233,7 +249,14 @@ class TagStackView: UIStackView
     
     let closeIcon = UIImage(named: "close-icon.png")!
     tempCloseTagButton.setImage(closeIcon, for: .normal)
-    tempCloseTagButton.tap { tempCloseTagButton.superview?.removeFromSuperview() }
+    tempCloseTagButton.tap {
+      if let tagSuperView = self.superview as? ArrangedTagView
+      {
+        tagSuperView.deleteArrangeSubview(self)
+      } else {
+        self.removeFromSuperview()
+      }
+    }
     
     self.isUserInteractionEnabled = true
     self.spacing = 5
@@ -261,26 +284,57 @@ class ArrangedTagView: UIView
   let padding: CGFloat = 20
   var xStack: CGFloat = 15
   var yStack: CGFloat = 15
+  var screenWidth:CGFloat = 414
+  var isInitialLoad = true
   
-  func addArrangedSubview(_ views:[TagStackView])
+  func addArrangedSubview(_ view:TagStackView)
   {
-//    let width = self.superview!.frame.width
-    let width:CGFloat = 414
 //    let height = self.frame.height
+    screenWidth = self.superview!.frame.width
     
-    for view in views
+    if xStack + view.frame.width + padding > screenWidth
     {
-      if xStack + view.frame.width + padding > width
+      yStack = yStack + view.frame.height + padding
+      xStack = padding
+    }
+    if ((yStack + ((view.frame.height + padding) * 2) > self.frame.height) && isInitialLoad)
+    {
+      return
+    }
+    
+    let viewFrame = CGRect(x: xStack, y: yStack, width: view.frame.width, height: view.frame.height)
+    view.frame = viewFrame
+    view.oriCenter = view.center
+    view.oriOrigin = view.frame.origin
+    self.addSubview(view)
+    
+    xStack = xStack + view.frame.width + padding
+  }
+  
+  func deleteArrangeSubview(_ view:TagStackView)
+  {
+    guard subviews.contains(view) else { return }
+    let viewIndex = subviews.index(of: view)!
+    
+    xStack = view.oriOrigin.x
+    yStack = view.oriOrigin.y
+    
+    view.removeFromSuperview()
+    
+    for (index, subview) in subviews.enumerated()
+    {
+      guard index >= viewIndex else { continue }
+      if xStack + subview.frame.width + padding > screenWidth
       {
         yStack = yStack + view.frame.height + padding
         xStack = padding
       }
-      let viewFrame = CGRect(x: xStack, y: yStack, width: view.frame.width, height: view.frame.height)
-      view.frame = viewFrame
-      view.oriCenter = view.center
-      self.addSubview(view)
-      
-      xStack = xStack + view.frame.width + padding
+      let tagView = subview as! TagStackView
+      tagView.frame.origin.x = xStack
+      tagView.frame.origin.y = yStack
+      tagView.oriCenter = tagView.center
+      tagView.oriOrigin = tagView.frame.origin
+      xStack = xStack + subview.frame.width + padding
     }
   }
 }

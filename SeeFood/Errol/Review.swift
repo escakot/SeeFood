@@ -29,6 +29,11 @@ class Review: PFObject, PFSubclassing {
     self.restaurant = restaurant
   }
   
+  func tags() -> PFRelation<Review>
+  {
+    return self.relation(forKey: "tags") as! PFRelation<Review>
+  }
+  
   static func parseClassName() -> String
   {
     return "Review"
