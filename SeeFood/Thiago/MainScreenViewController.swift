@@ -124,10 +124,14 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
          GoogleManager.shared.getPhotosFor(reference: reference[0]["photo_reference"] as! String, maxWidth: 200) { (restaurantImage:UIImage?) in
             rest.icon = restaurantImage
             if count == self.arrayOfRestaurants.count && !self.isMapView{
-               DispatchQueue.main.async{
+               DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
                   self.mainTable.reloadData()
                   self.myWebView.isHidden = true
-               }
+               })
+//               DispatchQueue.main.async{
+//                  self.mainTable.reloadData()
+//                  self.myWebView.isHidden = true
+//               }
             }
             else if self.isMapView {
                DispatchQueue.main.async {

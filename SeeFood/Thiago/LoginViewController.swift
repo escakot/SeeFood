@@ -57,6 +57,8 @@ class LoginViewController: UIViewController{
     usernameTextField.layer.masksToBounds = true
     passwordTextField.layer.addSublayer(border2)
     passwordTextField.layer.masksToBounds = true
+   usernameTextField.layer.cornerRadius = 5
+   passwordTextField.layer.cornerRadius = 5
     
     
     usernameTextField.attributedPlaceholder = NSAttributedString(string:"Username",
@@ -126,11 +128,13 @@ class LoginViewController: UIViewController{
   
   
   @IBAction func loginButton(_ sender: UIButton) {
+   self.myWebView.isHidden = false
     ParseManager.shared.userLogin(username: usernameTextField.text!, password: passwordTextField.text!) { (message:String?) in
       guard let message = message else {
         self.dismiss(animated: true, completion: nil)
         return
       }
+      self.myWebView.isHidden = true
       self.alertController.title = "Login Error"
       self.alertController.message = message
       self.present(self.alertController, animated: true, completion: nil)
@@ -152,6 +156,7 @@ class LoginViewController: UIViewController{
   func submitPasswordRecovery()
   {
     guard !resetUsernameTextField.text!.isEmpty || !resetEmailTextField.text!.isEmpty else {
+      self.myWebView.isHidden = true
       self.alertController.message = "Username and email cannot be empty for password recovery."
       present(alertController, animated: true, completion: nil)
       return

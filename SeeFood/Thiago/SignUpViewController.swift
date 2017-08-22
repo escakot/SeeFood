@@ -64,6 +64,9 @@ class SignUpViewController: UIViewController {
       passwordTextField.layer.masksToBounds = true
       emailTextField.layer.masksToBounds = true
       emailTextField.layer.addSublayer(border3)
+      usernameTextField.layer.cornerRadius = 5
+      passwordTextField.layer.cornerRadius = 5
+      emailTextField.layer.cornerRadius = 5
       
       
       usernameTextField.attributedPlaceholder = NSAttributedString(string:"Username",
@@ -81,8 +84,7 @@ class SignUpViewController: UIViewController {
    
    //MARK: IBActions
    @IBAction func signupButton(_ sender: UIButton) {
-      
-      
+      self.myWebView.isHidden = false
       if (usernameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! {
          print("Error: Empty textfields")
       }
@@ -96,6 +98,7 @@ class SignUpViewController: UIViewController {
                return
             }
             self.alertController.message = result
+            self.myWebView.isHidden = true
             OperationQueue.main.addOperation({
                self.present(self.alertController, animated: true, completion: nil)
             })

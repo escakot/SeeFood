@@ -23,12 +23,13 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
    var blurEffect: UIBlurEffect!
    var blurEffectView: UIVisualEffectView!
    @IBOutlet weak var blurBackgroundView: UIView!
+   @IBOutlet weak var tagsONOFFLabel: UILabel!
+   
    
    // TESTING PROP:
    var browsingImage: UIImage!
    var browsingName: String!
    
-   var imageList:[String] = ["meal.jpg", "turkey.jpg", "meal.jpg","meal.jpg","meal.jpg","meal.jpg","meal.jpg"]
    
    
    
@@ -67,16 +68,25 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
    }
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CellSwipe
-      cell.cellImage.image = UIImage(named: imageList[indexPath.row])
-      cell.cellBGImage.image = cell.cellImage.image
-      cell.cellBGImage.alpha = 0.6
+      
+      ParseManager.shared.queryReviewFor(self.arrayOfMenuItems[indexPath.row]) { (reviews: Array<Review>?) in
+         reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
+            if error == nil {
+               DispatchQueue.main.async {
+                  cell.cellImage.image = UIImage(data: data!)
+                  cell.cellBGImage.image = cell.cellImage.image
+                  cell.cellBGImage.alpha = 0.6
+               }
+            }
+            else {
+               print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
+            }
+         })
+      }
       return cell
    }
    
 
-   
-   
-   
    
    
    
@@ -89,10 +99,20 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
    //MARK: ScrollView Methods
    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
       pageControl.currentPage = Int(collectionView.contentOffset.x/self.collectionView.frame.size.width)
+      self.mealName.text = self.arrayOfMenuItems[pageControl.currentPage].title
    }
 
    
    
+   @IBAction func switchOnOFFTags(_ sender: UISwitch) {
+      if sender.isOn {
+         tagsONOFFLabel.isHidden = false
+      }
+      else {
+         tagsONOFFLabel.isHidden = true
+      }
+   }
+
    
    
 }
