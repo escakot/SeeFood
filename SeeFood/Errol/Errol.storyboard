@@ -20,29 +20,7 @@
                     <view key="view" contentMode="scaleToFill" id="y1k-CR-alG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Menu Item Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lMT-DJ-kaz">
-                                <rect key="frame" x="0.0" y="512" width="414" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MlW-Ul-aDX">
-                                <rect key="frame" x="0.0" y="225" width="414" height="287"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="287" id="y7v-9n-v2b"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="lMT-DJ-kaz" firstAttribute="leading" secondItem="y1k-CR-alG" secondAttribute="leading" id="EMz-P2-1bk"/>
-                            <constraint firstAttribute="trailing" secondItem="lMT-DJ-kaz" secondAttribute="trailing" id="G3d-pp-yta"/>
-                            <constraint firstItem="lMT-DJ-kaz" firstAttribute="top" secondItem="MlW-Ul-aDX" secondAttribute="bottom" id="IlG-Rq-QHJ"/>
-                            <constraint firstAttribute="trailing" secondItem="MlW-Ul-aDX" secondAttribute="trailing" id="ZUK-aa-2bf"/>
-                            <constraint firstItem="MlW-Ul-aDX" firstAttribute="leading" secondItem="y1k-CR-alG" secondAttribute="leading" id="dIl-hV-TbZ"/>
-                            <constraint firstItem="MlW-Ul-aDX" firstAttribute="centerY" secondItem="y1k-CR-alG" secondAttribute="centerY" id="xDj-se-RAc"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mRC-Qh-Z9E">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="PQe-YW-y0A">
@@ -58,11 +36,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="foodImageView" destination="MlW-Ul-aDX" id="PaA-hV-muN"/>
-                        <outlet property="foodImageViewHeight" destination="y7v-9n-v2b" id="3HO-il-Has"/>
-                        <outlet property="menuItemTextField" destination="lMT-DJ-kaz" id="6CF-LX-fFf"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxb-oV-YWN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -11,7 +11,6 @@ target 'SeeFood' do
   pod 'Toucan'
   pod 'SteviaLayout'
   pod 'Clarifai'
-  pod 'TagListView'
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'
