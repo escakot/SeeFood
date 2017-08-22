@@ -194,7 +194,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piB-Lz-fS2">
-                                        <rect key="frame" x="17" y="40" width="45" height="30"/>
+                                        <rect key="frame" x="8" y="40" width="45" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="4RT-iD-KJZ"/>
                                             <constraint firstAttribute="width" constant="45" id="eAf-dq-2xM"/>
@@ -207,8 +207,14 @@
                                             <action selector="switchMapListButton:" destination="iu1-dJ-09V" eventType="touchUpInside" id="imX-lV-7I2"/>
                                         </connections>
                                     </button>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="i8f-dq-xXz">
+                                        <rect key="frame" x="0.0" y="70" width="375" height="44"/>
+                                        <color key="backgroundColor" red="0.84476000070571899" green="0.11397387832403183" blue="0.16201174259185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="barTintColor" red="0.84476000070571899" green="0.11397387832403183" blue="0.16201174259185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M1S-nc-mqf">
-                                        <rect key="frame" x="328" y="40" width="30" height="30"/>
+                                        <rect key="frame" x="337" y="40" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="6qx-gt-FAj"/>
                                             <constraint firstAttribute="height" constant="30" id="a2X-G2-hY0"/>
@@ -218,22 +224,16 @@
                                             <segue destination="KCC-iw-CeY" kind="show" id="q9O-Uq-7Vw"/>
                                         </connections>
                                     </button>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="i8f-dq-xXz">
-                                        <rect key="frame" x="12" y="70" width="351" height="44"/>
-                                        <color key="backgroundColor" red="0.84476000070571899" green="0.11397387832403183" blue="0.16201174259185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="barTintColor" red="0.84476000070571899" green="0.11397387832403183" blue="0.16201174259185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" red="0.84313725490196079" green="0.11372549019607843" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="piB-Lz-fS2" firstAttribute="leading" secondItem="fAr-X8-TFm" secondAttribute="leading" constant="17" id="24N-Fg-4YP"/>
-                                    <constraint firstAttribute="trailing" secondItem="i8f-dq-xXz" secondAttribute="trailing" constant="12" id="69Y-ng-guI"/>
+                                    <constraint firstItem="piB-Lz-fS2" firstAttribute="leading" secondItem="fAr-X8-TFm" secondAttribute="leading" constant="8" id="24N-Fg-4YP"/>
+                                    <constraint firstAttribute="trailing" secondItem="i8f-dq-xXz" secondAttribute="trailing" id="69Y-ng-guI"/>
                                     <constraint firstItem="thG-zn-3gM" firstAttribute="centerX" secondItem="fAr-X8-TFm" secondAttribute="centerX" id="EAh-gM-o5G"/>
-                                    <constraint firstItem="i8f-dq-xXz" firstAttribute="leading" secondItem="fAr-X8-TFm" secondAttribute="leading" constant="12" id="F2o-ES-czk"/>
+                                    <constraint firstItem="i8f-dq-xXz" firstAttribute="leading" secondItem="fAr-X8-TFm" secondAttribute="leading" id="F2o-ES-czk"/>
                                     <constraint firstItem="i8f-dq-xXz" firstAttribute="top" secondItem="M1S-nc-mqf" secondAttribute="bottom" id="aLw-8r-xXT"/>
                                     <constraint firstAttribute="bottom" secondItem="i8f-dq-xXz" secondAttribute="bottom" constant="11" id="fyY-7b-8jT"/>
-                                    <constraint firstAttribute="trailing" secondItem="M1S-nc-mqf" secondAttribute="trailing" constant="17" id="jeC-6S-NX7"/>
+                                    <constraint firstAttribute="trailing" secondItem="M1S-nc-mqf" secondAttribute="trailing" constant="8" id="jeC-6S-NX7"/>
                                     <constraint firstItem="i8f-dq-xXz" firstAttribute="top" secondItem="piB-Lz-fS2" secondAttribute="bottom" id="m8r-P9-feu"/>
                                     <constraint firstItem="thG-zn-3gM" firstAttribute="top" secondItem="fAr-X8-TFm" secondAttribute="top" constant="33" id="tCG-q1-Evs"/>
                                     <constraint firstAttribute="height" constant="125" id="yrf-bt-GgN"/>
@@ -343,7 +343,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DYu-0k-D4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="48.799999999999997" y="1010.6446776611695"/>
+            <point key="canvasLocation" x="-543.20000000000005" y="1026.8365817091455"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="k7V-QX-Jb6">
@@ -494,7 +494,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="852" y="1010.6446776611695"/>
+            <point key="canvasLocation" x="260" y="1027"/>
         </scene>
         <!--Cell Detail View Controller-->
         <scene sceneID="cDl-A3-Zre">
@@ -533,8 +533,9 @@
                                                     <rect key="frame" x="-10.5" y="1" width="375" height="667"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meal.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EU7-tJ-7Rf">
+                                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meal.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EU7-tJ-7Rf">
                                                     <rect key="frame" x="0.0" y="0.0" width="354" height="670"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="670" id="Fag-bI-bTH"/>
                                                         <constraint firstAttribute="width" constant="354" id="ijV-UV-aKh"/>
@@ -578,8 +579,8 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fish" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7y-r5-PZb">
-                                        <rect key="frame" x="166" y="44.5" width="42.5" height="29.5"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="25"/>
+                                        <rect key="frame" x="164.5" y="39" width="46" height="35"/>
+                                        <fontDescription key="fontDescription" name="KohinoorDevanagari-Light" family="Kohinoor Devanagari" pointSize="25"/>
                                         <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -590,7 +591,7 @@
                                             <constraint firstAttribute="width" secondItem="5J6-xR-Phn" secondAttribute="height" multiplier="31:29" id="Rao-xN-ag1"/>
                                             <constraint firstAttribute="height" constant="58" id="vbB-3K-Ecm"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="25"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="19"/>
                                         <state key="normal" title="X">
                                             <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -598,14 +599,21 @@
                                             <action selector="backButton:" destination="MFv-d7-21X" eventType="touchUpInside" id="fwN-eU-su1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ox-t5-xWJ">
-                                        <rect key="frame" x="301" y="34" width="66" height="34"/>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nzU-tU-M40">
+                                        <rect key="frame" x="318" y="44" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                        <state key="normal" title="Tag">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                    </button>
+                                        <color key="onTintColor" red="0.84476000070571899" green="0.11397387832403183" blue="0.16201174259185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="switchOnOFFTags:" destination="MFv-d7-21X" eventType="valueChanged" id="cV5-bg-jE2"/>
+                                        </connections>
+                                    </switch>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TAGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOJ-Rl-bVv">
+                                        <rect key="frame" x="329" y="28" width="27" height="14"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="KohinoorDevanagari-Regular" family="Kohinoor Devanagari" pointSize="10"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -653,6 +661,7 @@
                         <outlet property="mealName" destination="o7y-r5-PZb" id="EUx-uJ-tIj"/>
                         <outlet property="navBar" destination="m9l-ni-9Ox" id="JaI-Yn-5yT"/>
                         <outlet property="pageControl" destination="VYe-dH-OZd" id="VqL-Zm-WFa"/>
+                        <outlet property="tagsONOFFLabel" destination="iOJ-Rl-bVv" id="cYm-4q-aG2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLb-Vv-7KI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -662,7 +671,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1648.8" y="1010.6446776611695"/>
+            <point key="canvasLocation" x="1057" y="1027"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="KoW-UT-JFF">

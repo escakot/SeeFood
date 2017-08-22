@@ -23,6 +23,8 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
    var blurEffect: UIBlurEffect!
    var blurEffectView: UIVisualEffectView!
    @IBOutlet weak var blurBackgroundView: UIView!
+   @IBOutlet weak var tagsONOFFLabel: UILabel!
+   
    
    // TESTING PROP:
    var browsingImage: UIImage!
@@ -89,9 +91,6 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
    
    
    
-   
-   
-   
    @IBAction func backButton(_ sender: UIButton) {
       dismiss(animated: true, completion: nil)
    }
@@ -100,10 +99,20 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
    //MARK: ScrollView Methods
    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
       pageControl.currentPage = Int(collectionView.contentOffset.x/self.collectionView.frame.size.width)
+      self.mealName.text = self.arrayOfMenuItems[pageControl.currentPage].title
    }
 
    
    
+   @IBAction func switchOnOFFTags(_ sender: UISwitch) {
+      if sender.isOn {
+         tagsONOFFLabel.isHidden = false
+      }
+      else {
+         tagsONOFFLabel.isHidden = true
+      }
+   }
+
    
    
 }
