@@ -57,6 +57,8 @@ class LoginViewController: UIViewController{
     usernameTextField.layer.masksToBounds = true
     passwordTextField.layer.addSublayer(border2)
     passwordTextField.layer.masksToBounds = true
+   usernameTextField.layer.cornerRadius = 5
+   passwordTextField.layer.cornerRadius = 5
     
     
     usernameTextField.attributedPlaceholder = NSAttributedString(string:"Username",

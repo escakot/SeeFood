@@ -194,10 +194,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piB-Lz-fS2">
-                                        <rect key="frame" x="8" y="40" width="45" height="30"/>
+                                        <rect key="frame" x="322" y="40" width="45" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="4RT-iD-KJZ"/>
-                                            <constraint firstAttribute="width" constant="45" id="eAf-dq-2xM"/>
+                                            <constraint firstAttribute="height" constant="30" id="CHu-Gy-Vzp"/>
+                                            <constraint firstAttribute="width" constant="45" id="g1T-Jb-wD8"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Map">
@@ -214,10 +214,10 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M1S-nc-mqf">
-                                        <rect key="frame" x="337" y="40" width="30" height="30"/>
+                                        <rect key="frame" x="8" y="40" width="30" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="6qx-gt-FAj"/>
-                                            <constraint firstAttribute="height" constant="30" id="a2X-G2-hY0"/>
+                                            <constraint firstAttribute="height" constant="30" id="MHC-i1-MLc"/>
+                                            <constraint firstAttribute="width" constant="30" id="epb-Ki-stZ"/>
                                         </constraints>
                                         <state key="normal" image="userIcon.png"/>
                                         <connections>
@@ -227,14 +227,14 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.84313725490196079" green="0.11372549019607843" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="piB-Lz-fS2" firstAttribute="leading" secondItem="fAr-X8-TFm" secondAttribute="leading" constant="8" id="24N-Fg-4YP"/>
+                                    <constraint firstItem="M1S-nc-mqf" firstAttribute="leading" secondItem="fAr-X8-TFm" secondAttribute="leading" constant="8" id="2lW-oF-7Sm"/>
                                     <constraint firstAttribute="trailing" secondItem="i8f-dq-xXz" secondAttribute="trailing" id="69Y-ng-guI"/>
                                     <constraint firstItem="thG-zn-3gM" firstAttribute="centerX" secondItem="fAr-X8-TFm" secondAttribute="centerX" id="EAh-gM-o5G"/>
                                     <constraint firstItem="i8f-dq-xXz" firstAttribute="leading" secondItem="fAr-X8-TFm" secondAttribute="leading" id="F2o-ES-czk"/>
-                                    <constraint firstItem="i8f-dq-xXz" firstAttribute="top" secondItem="M1S-nc-mqf" secondAttribute="bottom" id="aLw-8r-xXT"/>
+                                    <constraint firstItem="i8f-dq-xXz" firstAttribute="top" secondItem="piB-Lz-fS2" secondAttribute="bottom" id="cFn-w2-rMS"/>
                                     <constraint firstAttribute="bottom" secondItem="i8f-dq-xXz" secondAttribute="bottom" constant="11" id="fyY-7b-8jT"/>
-                                    <constraint firstAttribute="trailing" secondItem="M1S-nc-mqf" secondAttribute="trailing" constant="8" id="jeC-6S-NX7"/>
-                                    <constraint firstItem="i8f-dq-xXz" firstAttribute="top" secondItem="piB-Lz-fS2" secondAttribute="bottom" id="m8r-P9-feu"/>
+                                    <constraint firstAttribute="trailing" secondItem="piB-Lz-fS2" secondAttribute="trailing" constant="8" id="jSF-zc-C7b"/>
+                                    <constraint firstItem="i8f-dq-xXz" firstAttribute="top" secondItem="M1S-nc-mqf" secondAttribute="bottom" id="rT4-t3-Nml"/>
                                     <constraint firstItem="thG-zn-3gM" firstAttribute="top" secondItem="fAr-X8-TFm" secondAttribute="top" constant="33" id="tCG-q1-Evs"/>
                                     <constraint firstAttribute="height" constant="125" id="yrf-bt-GgN"/>
                                 </constraints>
@@ -343,7 +343,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DYu-0k-D4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-543.20000000000005" y="1026.8365817091455"/>
+            <point key="canvasLocation" x="-543.20000000000005" y="899.10044977511257"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="k7V-QX-Jb6">
@@ -494,7 +494,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="260" y="1027"/>
+            <point key="canvasLocation" x="260" y="900"/>
         </scene>
         <!--Cell Detail View Controller-->
         <scene sceneID="cDl-A3-Zre">
@@ -671,7 +671,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1057" y="1027"/>
+            <point key="canvasLocation" x="1057" y="900"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="KoW-UT-JFF">

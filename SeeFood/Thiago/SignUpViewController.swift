@@ -64,6 +64,9 @@ class SignUpViewController: UIViewController {
       passwordTextField.layer.masksToBounds = true
       emailTextField.layer.masksToBounds = true
       emailTextField.layer.addSublayer(border3)
+      usernameTextField.layer.cornerRadius = 5
+      passwordTextField.layer.cornerRadius = 5
+      emailTextField.layer.cornerRadius = 5
       
       
       usernameTextField.attributedPlaceholder = NSAttributedString(string:"Username",
