@@ -11,33 +11,41 @@ import Parse
 import Toucan
 import Clarifai
 import Stevia
+import MLPAutoCompleteTextField
+import IQKeyboardManager
 
-class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, MLPAutoCompleteTextFieldDataSource {
   
   var foodImageView: UIImageView!
-  var menuItemTextField: UITextField!
+  var menuItemTextField: MLPAutoCompleteTextField!
   var restaurant: Restaurant!
-  var menuItem: MenuItem?
   var foodImage: UIImage!
   let clarifaiAPI = "c2b0351a3e40478ca234a70c36fa864f"
   let tagsView = ArrangedTagView()
   
+  var listOfMenuItems: [MenuItem] = []
+  var menuItemSuggestions: [String] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
-    if menuItem != nil
-    {
-      menuItemTextField.text = menuItem!.title
-      menuItemTextField.isEnabled = false
-    }
-    
-    foodImageView = UIImageView()
-    foodImageView.contentMode = .scaleAspectFit
-    menuItemTextField = UITextField()
+    //MenuItemTextField
+    menuItemTextField = MLPAutoCompleteTextField()
     menuItemTextField.placeholder = "Menu Item Title"
     menuItemTextField.textAlignment = .center
+    menuItemTextField.delegate = self
+    menuItemTextField.autoCompleteDataSource = self
+    menuItemTextField.maximumNumberOfAutoCompleteRows = 3
+    menuItemTextField.autoCompleteTableBackgroundColor = UIColor.init(white: 1.0, alpha: 1.0)
+    
+    menuItemSuggestions = listOfMenuItems.map({ (menuItem:MenuItem) -> String in
+      return menuItem.title
+    })
+    
+    //FoodImageView
+    foodImageView = UIImageView()
+    foodImageView.contentMode = .scaleAspectFit
     foodImageView.isUserInteractionEnabled = true
     setImageViewSize(image: foodImage)
     foodImageView.image = Toucan.Resize.resizeImage(foodImage, size: foodImageView.frame.size)
@@ -105,8 +113,10 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
       return
     }
     let image = foodImageView.image!
-    if let menuItem = menuItem
+    if menuItemSuggestions.contains(menuItemTextField.text!)
     {
+      let chosenMenuItemIndex = menuItemSuggestions.index(of: menuItemTextField.text!)!
+      let menuItem = listOfMenuItems[chosenMenuItemIndex]
       ParseManager.shared.addReviewFor(menuItem, at: restaurant, image: image, completionHandler: { (savedReview) in
         let createdTags = self.createTagsToParseFor(review: savedReview)
         ParseManager.shared.addTagsFor(savedReview, tags: createdTags, completionHandler: { 
@@ -249,7 +259,19 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
     return tempTags
   }
   
+  // MARK: - Autocomplete MenuItem Textfield
+  func autoCompleteTextField(_ textField: MLPAutoCompleteTextField!, possibleCompletionsFor string: String!, completionHandler handler: (([Any]?) -> Void)!)
+  {
+    handler(menuItemSuggestions)
+  }
   
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    IQKeyboardManager.shared().keyboardDistanceFromTextField = 110
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    IQKeyboardManager.shared().keyboardDistanceFromTextField = kIQUseDefaultKeyboardDistance
+  }
 }
 // MARK: - Tag Classes
 
