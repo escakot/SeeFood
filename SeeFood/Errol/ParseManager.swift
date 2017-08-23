@@ -90,17 +90,20 @@ class ParseManager: NSObject {
     }
   }
   
-  func facebookLogin()
+  func facebookLogin(completionHandler: @escaping (String?) -> Void)
   {
     let permissionsArray = ["public_profile", "email"]
     
     PFFacebookUtils.logInInBackground(withReadPermissions: permissionsArray) { (user:PFUser?, error:Error?) in
       if user == nil
       {
-        print("Facebook login failed")
+        completionHandler("Login failed")
+        print("Facebook Login")
       } else if (user!.isNew) {
+        completionHandler(nil)
         print("User signed up and logged in through Facebook")
       } else {
+        completionHandler(nil)
         print("User logged in through Facebook")
       }
     }

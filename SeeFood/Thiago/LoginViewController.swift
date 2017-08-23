@@ -148,7 +148,18 @@ class LoginViewController: UIViewController{
   
   @IBAction func facebookLoginButton(_ sender: FBSDKButton)
   {
-    ParseManager.shared.facebookLogin()
+    ParseManager.shared.facebookLogin { (message) in
+      if message == nil
+      {
+        OperationQueue.main.addOperation({
+          self.performSegue(withIdentifier: "unwindSegueToMain", sender: nil)
+        })
+      } else {
+        self.alertController.title = "Facebook Login Failed"
+        self.alertController.message = message
+        self.present(self.alertController, animated: true, completion: nil)
+      }
+    }
   }
   
   
