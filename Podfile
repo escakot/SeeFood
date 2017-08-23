@@ -7,10 +7,13 @@ target 'SeeFood' do
 
   # Pods for SeeFood
   pod 'Parse'
+  pod 'ParseFacebookUtilsV4'
   pod 'IQKeyboardManager'
   pod 'Toucan'
   pod 'SteviaLayout'
   pod 'Clarifai'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'

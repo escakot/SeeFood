@@ -7,7 +7,10 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 import Stevia
+import Parse
 
 class LoginViewController: UIViewController{
   
@@ -18,6 +21,7 @@ class LoginViewController: UIViewController{
   @IBOutlet weak var passwordTextField: UITextField!
   
   @IBOutlet weak var loginButton: UIButton!
+  @IBOutlet weak var facebookLoginButton: FBSDKButton!
   
   @IBOutlet weak var myWebView: UIWebView!
   
@@ -42,6 +46,7 @@ class LoginViewController: UIViewController{
     
     //MARK: Styles
     loginButton.layer.cornerRadius = 20
+    facebookLoginButton.layer.cornerRadius = 20
     
     let border1 = CALayer()
     let border2 = CALayer()
@@ -57,8 +62,8 @@ class LoginViewController: UIViewController{
     usernameTextField.layer.masksToBounds = true
     passwordTextField.layer.addSublayer(border2)
     passwordTextField.layer.masksToBounds = true
-   usernameTextField.layer.cornerRadius = 5
-   passwordTextField.layer.cornerRadius = 5
+    usernameTextField.layer.cornerRadius = 5
+    passwordTextField.layer.cornerRadius = 5
     
     
     usernameTextField.attributedPlaceholder = NSAttributedString(string:"Username",
@@ -140,6 +145,12 @@ class LoginViewController: UIViewController{
       self.present(self.alertController, animated: true, completion: nil)
     }
   }
+  
+  @IBAction func facebookLoginButton(_ sender: FBSDKButton)
+  {
+    ParseManager.shared.facebookLogin()
+  }
+  
   
   @IBAction func resetPasswordButton(_ sender: UIButton)
   {

@@ -16,6 +16,15 @@ class Tag: PFObject, PFSubclassing {
   @NSManaged var centerY: CGFloat
   @NSManaged var review: Review
 
+  convenience init(title:String, centerX:CGFloat, centerY:CGFloat, review:Review)
+  {
+    self.init()
+    self.title = title
+    self.centerX = centerX
+    self.centerY = centerY
+    self.review = review
+  }
+  
   static func parseClassName() -> String
   {
     return "Tag"

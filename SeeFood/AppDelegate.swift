@@ -9,8 +9,10 @@
 import UIKit
 
 import Parse
+import ParseFacebookUtilsV4
 import GoogleMaps
 import GooglePlaces
+import FBSDKCoreKit
 import IQKeyboardManager
 
 @UIApplicationMain
@@ -18,16 +20,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
   
-  let googlePlacesAPIkey = "AIzaSyA-sLSOKTim1mTTPODL49iispJkCAuDCb0"
+  let googlePlacesAPIkey = "AIzaSyB8WnwQLN2IMPvdBgOWgy-yzSRsTKmhTkY"
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     IQKeyboardManager.shared().isEnabled = true
     
+    //Parse Setup
     Restaurant.registerSubclass()
     MenuItem.registerSubclass()
     Review.registerSubclass()
+    Tag.registerSubclass()
     
     let configuration = ParseClientConfiguration {
       $0.applicationId = "k28agL9Gsu2lP9KAgnwo238aAj7Vmjg5iB"
@@ -38,6 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     GMSServices.provideAPIKey("AIzaSyDnaWnMHeK5LNQ4rXlHUGZ5RR-nA79oUq8")
     GMSPlacesClient.provideAPIKey(googlePlacesAPIkey)
 
+    //Facebook Setup
+    PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
+    FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    
     return true
   }
 
@@ -57,10 +65,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationDidBecomeActive(_ application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    FBSDKAppEvents.activateApp()
   }
 
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+  }
+  
+  func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+    let handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+    
+    return handled
   }
 
 

@@ -26,6 +26,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
    var locationManager = CLLocationManager()
    var searchAreaButton: UIButton!
    var isMapView = false
+   let refreshControl = UIRefreshControl()
    
    
    
@@ -45,11 +46,15 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
       locationManager.requestWhenInUseAuthorization()
       locationManager.delegate = self
       locationManager.requestLocation()
-      getRestaurants(coordinates: (locationManager.location?.coordinate)!)
-      
+    
       //SearchBar Delegate
       searchBar.delegate = self
       searchBar.backgroundImage = UIImage()
+    
+      //Refresh Control
+      refreshControl.attributedTitle = NSAttributedString(string: "Pull to find nearby Restaurants")
+      refreshControl.addTarget(self, action: #selector(refreshPull), for: UIControlEvents.valueChanged)
+      mainTable.addSubview(refreshControl)
    }
    
   
@@ -127,6 +132,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
                   self.mainTable.reloadData()
                   self.myWebView.isHidden = true
+                  self.refreshControl.endRefreshing()
                })
 //               DispatchQueue.main.async{
 //                  self.mainTable.reloadData()
@@ -271,10 +277,13 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
       searchBar.resignFirstResponder()
    }
    
+   func refreshPull()
+   {
+      locationManager.requestLocation()
+   }
    
    
-   
-   
+  
    
    
    //MARK: ColorFunction
@@ -291,7 +300,8 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
    //MARK: Location MAnager Delegate
    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
    {
-      //Call google API to do Query
+      let location = locations.last!.coordinate
+      getRestaurants(coordinates: location)
    }
    
    

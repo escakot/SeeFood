@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseFacebookUtilsV4
 
 class ParseManager: NSObject {
   
@@ -16,6 +17,8 @@ class ParseManager: NSObject {
   static let shared = ParseManager()
   
   var currentUser: PFUser?
+  
+  // MARK: - PFUser Methods
   
   func userLogin(username:String, password:String, isLoginSuccessful: @escaping (String?) -> Void )
   {
@@ -87,13 +90,47 @@ class ParseManager: NSObject {
     }
   }
   
+  func facebookLogin()
+  {
+    let permissionsArray = ["public_profile", "email"]
+    
+    PFFacebookUtils.logInInBackground(withReadPermissions: permissionsArray) { (user:PFUser?, error:Error?) in
+      if user == nil
+      {
+        print("Facebook login failed")
+      } else if (user!.isNew) {
+        print("User signed up and logged in through Facebook")
+      } else {
+        print("User logged in through Facebook")
+      }
+    }
+  }
+  
+//  func facebookSignUp
+  
+  // MARK: - Query for PFObjects (Relational)
+  
+  func queryTagsFor(_ review:Review, completionHandler: @escaping (Array<Tag>?) -> Void)
+  {
+    let tagsQuery = review.tags().query()
+    tagsQuery.findObjectsInBackground { (tags:[Tag]?, error:Error?) in
+      if error == nil
+      {
+        completionHandler(tags)
+      } else {
+        print(error!.localizedDescription)
+        completionHandler(nil)
+      }
+    }
+  }
+  
   func queryReviewFor(_ menuItem:MenuItem, completionHandler: @escaping (Array<Review>?) -> Void)
   {
     let reviewsQuery = menuItem.reviews().query()
     reviewsQuery.findObjectsInBackground { (reviews:[Review]?, error:Error?) in
       if error == nil
       {
-        completionHandler(reviews!)
+        completionHandler(reviews)
       } else {
         print(error!.localizedDescription)
         completionHandler(nil)
@@ -132,6 +169,9 @@ class ParseManager: NSObject {
     })
   }
   
+  
+  // MARK: - Creating PFObjects (with Relations)
+  
   func createRestaurantProfileWith(id:String, name:String, completionHandler: @escaping (Bool, Restaurant?) -> Void)
   {
     let restaurant  = Restaurant(id:id, name:name)
@@ -161,7 +201,7 @@ class ParseManager: NSObject {
     }
   }
   
-  func addReviewFor(_ menuItem:MenuItem, at restaurant:Restaurant, image:UIImage, completionHandler: @escaping () -> Void)
+  func addReviewFor(_ menuItem:MenuItem, at restaurant:Restaurant, image:UIImage, completionHandler: @escaping (Review) -> Void)
   {
     guard let user = PFUser.current(),
       let imageData = UIImagePNGRepresentation(image) else {
@@ -173,12 +213,30 @@ class ParseManager: NSObject {
       if success
       {
         menuItem.reviews().add(review)
-        menuItem.saveInBackground()
-        completionHandler()
+        menuItem.saveInBackground(block: { (success, error) in
+          if success { completionHandler(review) }
+        })
       } else {
         print(error!.localizedDescription)
       }
     }
+  }
+  
+  func addTagsFor(_ review:Review, tags:[Tag], completionHandler: @escaping () -> Void)
+  {
+    for tag in tags
+    {
+      tag.saveInBackground(block: { (success, error) in
+        if error == nil
+        {
+          review.tags().add(tag)
+          review.saveInBackground()
+        } else {
+          print(error!.localizedDescription)
+        }
+      })
+    }
+    completionHandler()
   }
   
 }

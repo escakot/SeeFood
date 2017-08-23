@@ -107,23 +107,30 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
     let image = foodImageView.image!
     if let menuItem = menuItem
     {
-      ParseManager.shared.addReviewFor(menuItem, at: restaurant, image: image, completionHandler: {
-          OperationQueue.main.addOperation({ 
+      ParseManager.shared.addReviewFor(menuItem, at: restaurant, image: image, completionHandler: { (savedReview) in
+        let createdTags = self.createTagsToParseFor(review: savedReview)
+        ParseManager.shared.addTagsFor(savedReview, tags: createdTags, completionHandler: { 
+          OperationQueue.main.addOperation({
             self.dismiss(animated: true)
           })
+        })
       })
     } else {
       let title = menuItemTextField.text!
       ParseManager.shared.createMenuItemFor(restaurant, title: title, completionHandler: { (savedMenuItem) in
-        ParseManager.shared.addReviewFor(savedMenuItem, at: self.restaurant, image: image, completionHandler: {
-          OperationQueue.main.addOperation({
-            self.dismiss(animated: true)
+        ParseManager.shared.addReviewFor(savedMenuItem, at: self.restaurant, image: image, completionHandler: { (savedReview) in
+          let createdTags = self.createTagsToParseFor(review: savedReview)
+          ParseManager.shared.addTagsFor(savedReview, tags: createdTags, completionHandler: {
+            OperationQueue.main.addOperation({
+              self.dismiss(animated: true)
+            })
           })
         })
       })
     }
     print("saved")
   }
+  
   @IBAction func cancelButton(_ sender: UIBarButtonItem)
   {
     dismiss(animated: true)
@@ -225,6 +232,24 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
     }))
     present(textFieldAlert, animated: true, completion: nil)
   }
+  
+  func createTagsToParseFor(review:Review) -> [Tag]
+  {
+    let tags = foodImageView.subviews as! [TagStackView]
+    let imageSize = foodImageView.image!.size
+    var tempTags: [Tag] = []
+    for tag in tags
+    {
+      let percentCentX = tag.center.x/imageSize.width
+      let percentCentY = tag.center.y/imageSize.height
+      let newTag = Tag.init(title: tag.tagLabel.text!, centerX: percentCentX, centerY: percentCentY, review: review)
+      tempTags.append(newTag)
+    }
+    
+    return tempTags
+  }
+  
+  
 }
 // MARK: - Tag Classes
 
