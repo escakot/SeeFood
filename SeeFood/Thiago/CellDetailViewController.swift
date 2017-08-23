@@ -19,6 +19,7 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var pageControl: UIPageControl!
   var arrayOfMenuItems: [MenuItem] = []
+   var arrayOfReviews: [Review] = []
   var selectedCellIndex = IndexPath()
   var blurEffect: UIBlurEffect!
   var blurEffectView: UIVisualEffectView!
@@ -39,9 +40,8 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    pageControl.numberOfPages = arrayOfMenuItems.count
-    mealName.text = arrayOfMenuItems[0].title
+   
+    self.mealName.text = self.arrayOfMenuItems[selectedCellIndex[1]].title
     //MARK: CollectionView Layout
     let layout = UPCarouselFlowLayout()
     layout.itemSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
@@ -49,7 +49,7 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
     layout.sideItemScale = 1
     layout.scrollDirection = .horizontal
     collectionView.collectionViewLayout = layout
-    collectionView.scrollToItem(at: selectedCellIndex, at: .right, animated: true)
+//    collectionView.scrollToItem(at: selectedCellIndex, at: .right, animated: true)
     pageControl.currentPage = Int(collectionView.contentOffset.x/self.collectionView.frame.size.width)
     
     
@@ -60,51 +60,36 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
     blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     blurEffectView.alpha = 0.9
     blurBackgroundView.addSubview(blurEffectView)
+   
+   queryReviews()
   }
   
    
    
-//   func queryReviews(){
-//      ParseManager.shared.queryReviewFor(self.arrayOfMenuItems[indexPath.row]) { (reviews: Array<Review>?) in
-//         reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
-//            if error == nil {
-//               self.listOfTags.removeAll()
-//               for view in cell.cellImage.subviews { view.removeFromSuperview() }
-//               ParseManager.shared.queryTagsFor(reviews![0], completionHandler: { (tags:Array<Tag>?) in
-//                  guard let tags = tags else { return }
-//                  for tag in tags
-//                  {
-//                     self.createTag(tag, imageView: cell.cellImage)
-//                  }
-//               })
-//               DispatchQueue.main.async {
-//                  cell.cellImage.image = UIImage(data: data!)
-//                  cell.cellBGImage.image = cell.cellImage.image
-//                  cell.cellBGImage.alpha = 0.6
-//               }
-//            }
-//            else {
-//               print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
-//            }
-//         })
-//      }
-//   }
+   func queryReviews(){
+      ParseManager.shared.queryReviewFor(self.arrayOfMenuItems[selectedCellIndex[1]]) { (reviews: Array<Review>?) in
+         self.arrayOfReviews = reviews!
+         DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            self.pageControl.numberOfPages = self.arrayOfReviews.count
+         }
+      }
+   }
   
   
   
   //MARK: CollectionView Methods
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return arrayOfMenuItems.count
+    return self.arrayOfReviews.count
   }
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CellSwipe
-    
-    ParseManager.shared.queryReviewFor(self.arrayOfMenuItems[indexPath.row]) { (reviews: Array<Review>?) in
-      reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
+   
+      self.arrayOfReviews[indexPath.row].image.getDataInBackground(block: { (data: Data?, error:Error?) in
         if error == nil {
           self.listOfTags.removeAll()
           for view in cell.cellImage.subviews { view.removeFromSuperview() }
-          ParseManager.shared.queryTagsFor(reviews![0], completionHandler: { (tags:Array<Tag>?) in
+          ParseManager.shared.queryTagsFor(self.arrayOfReviews[indexPath.row], completionHandler: { (tags:Array<Tag>?) in
             guard let tags = tags else { return }
             for tag in tags
             {
@@ -121,7 +106,7 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
           print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
         }
       })
-    }
+   
     return cell
   }
   
