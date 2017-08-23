@@ -62,6 +62,33 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
     blurBackgroundView.addSubview(blurEffectView)
   }
   
+   
+   
+//   func queryReviews(){
+//      ParseManager.shared.queryReviewFor(self.arrayOfMenuItems[indexPath.row]) { (reviews: Array<Review>?) in
+//         reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
+//            if error == nil {
+//               self.listOfTags.removeAll()
+//               for view in cell.cellImage.subviews { view.removeFromSuperview() }
+//               ParseManager.shared.queryTagsFor(reviews![0], completionHandler: { (tags:Array<Tag>?) in
+//                  guard let tags = tags else { return }
+//                  for tag in tags
+//                  {
+//                     self.createTag(tag, imageView: cell.cellImage)
+//                  }
+//               })
+//               DispatchQueue.main.async {
+//                  cell.cellImage.image = UIImage(data: data!)
+//                  cell.cellBGImage.image = cell.cellImage.image
+//                  cell.cellBGImage.alpha = 0.6
+//               }
+//            }
+//            else {
+//               print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
+//            }
+//         })
+//      }
+//   }
   
   
   

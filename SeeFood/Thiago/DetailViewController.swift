@@ -11,8 +11,8 @@ import Photos
 import AVFoundation
 
 class MainCollectionView: UICollectionView {
-  
-  var isCameraLibraryViewOn = false
+   
+   var isCameraLibraryViewOn = false
    
    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
       let indexPath = self.indexPathForItem(at: point)
@@ -25,18 +25,19 @@ class MainCollectionView: UICollectionView {
    }
 }
 
-class DetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerPreviewingDelegate {
+class DetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerPreviewingDelegate, UITableViewDelegate, UITableViewDataSource {
    
    //MARK: Properties
    @IBOutlet weak var mainCollectionView: MainCollectionView!
    @IBOutlet weak var restaurantNameLabel: UILabel!
    @IBOutlet weak var defaultPhoto: UIImageView!
    @IBOutlet weak var defaultLabel: UILabel!
-   
+   @IBOutlet weak var backButton: UIButton!
+   @IBOutlet weak var mainTableView: UITableView!
+   @IBOutlet weak var switchListToPhoto: UIButton!
    var cameraLibraryView: UIView!
    var imagePicker: UIImagePickerController!
    var imageWasSelected: Bool!
-   
    var restaurant: RestaurantData!
    var parseRestaurant: Restaurant!
    var arrayOfMenuItems: [MenuItem] = []
@@ -46,20 +47,22 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
    override func viewDidLoad() {
       super.viewDidLoad()
       
+      let listImage = UIImage(named: "list.png")
+      switchListToPhoto.setImage(listImage, for: .normal)
+      self.view.addSubview(self.backButton)
       registerForPreviewing(with: self, sourceView: mainCollectionView)
-      
       restaurantNameLabel.text = restaurant.name
       
       //MARK: Query Restaurant
       ParseManager.shared.queryRestaurantWith(id: restaurant.placeID) { (savedRestaurant:Restaurant?) in
          if savedRestaurant == nil {
             print("No Retaurants with id: \(self.restaurant.placeID)")
-        ParseManager.shared.createRestaurantProfileWith(id: self.restaurant.placeID, name: self.restaurant.name, completionHandler: { (created:Bool, createdRestaurant:Restaurant?) in
-          print("Restaurant Created Status: \(created)")
-          self.defaultPhoto.isHidden = false
-          self.defaultLabel.isHidden = false
-          self.parseRestaurant = created ? createdRestaurant! : nil
-        })
+            ParseManager.shared.createRestaurantProfileWith(id: self.restaurant.placeID, name: self.restaurant.name, completionHandler: { (created:Bool, createdRestaurant:Restaurant?) in
+               print("Restaurant Created Status: \(created)")
+               self.defaultPhoto.isHidden = false
+               self.defaultLabel.isHidden = false
+               self.parseRestaurant = created ? createdRestaurant! : nil
+            })
          }
          else{
             self.parseRestaurant = savedRestaurant
@@ -108,7 +111,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
       cameraLibraryView.addSubview(cameraImageView)
       cameraLibraryView.addSubview(libraryImageView)
       
-     imageWasSelected = false
+      imageWasSelected = false
    }
    
    override func viewWillAppear(_ animated: Bool) {
@@ -321,7 +324,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
    
    
    // MARK: Force Touch
-
+   
    
    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
       
@@ -354,6 +357,76 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
    
    
    
+   //MARK: List to Collection Start
+   @IBAction func listButton(_ sender: UIButton) {
+      let listImage = UIImage(named: "list.png")
+      let photoImage = UIImage(named:"photo.png")
+      
+      if (sender.currentImage?.isEqual(listImage))! {
+         self.mainTableView.reloadData()
+//         self.mainTableView.addSubview(self.backButton)
+         sender.setImage(photoImage, for: .normal)
+      }
+      else {
+//         self.mainCollectionView.addSubview(self.backButton)
+         sender.setImage(listImage, for: .normal)
+      }
+      
+      UIView.animate(withDuration: 0.5) {
+         if (sender.currentImage?.isEqual(photoImage))! {
+            self.mainTableView.alpha = 1
+         }
+         else{
+            self.mainTableView.alpha = 0
+         }
+      }
+      
+   }
    
    
+   
+   
+   
+   //MARK: TableView Methods
+   func numberOfSections(in tableView: UITableView) -> Int {
+      return 1
+   }
+   
+   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return self.arrayOfMenuItems.count
+   }
+   
+   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      let cell: DetailTableCell = self.mainTableView.dequeueReusableCell(withIdentifier: "TableCell") as! DetailTableCell
+      let item = self.arrayOfMenuItems[indexPath.row]
+      
+      ParseManager.shared.queryReviewFor(item) { (reviews: Array<Review>?) in
+         reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
+            if error == nil {
+               for view in cell.cellImage.subviews { view.removeFromSuperview() }
+               DispatchQueue.main.async {
+                  cell.cellImage.image = UIImage(data: data!)
+               }
+            }
+            else {
+               print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
+            }
+         })
+      }
+      cell.cellLabel.text = item.title
+      return cell
+   }
+   
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      performSegue(withIdentifier:"SegueToCellDetail" , sender: indexPath)
+   }
+   
+   
+   
+}
+
+
+class DetailTableCell: UITableViewCell {
+   @IBOutlet weak var cellImage: UIImageView!
+   @IBOutlet weak var cellLabel: UILabel!
 }
