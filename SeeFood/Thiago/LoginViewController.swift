@@ -43,10 +43,14 @@ class LoginViewController: UIViewController{
     self.myWebView.load(html!, mimeType: "text/html", textEncodingName: "UTF-8", baseURL: htmlURL.deletingLastPathComponent())
     self.myWebView.isHidden = true
     
+    //MARK: - Facebook Login
+    facebookLoginButton.layer.cornerRadius = 20
+    let fbLoginButton = FBSDKLoginButton(frame: facebookLoginButton.frame)
+    view.addSubview(fbLoginButton)
+    fbLoginButton.layer.cornerRadius = 20
     
     //MARK: Styles
     loginButton.layer.cornerRadius = 20
-    facebookLoginButton.layer.cornerRadius = 20
     
     let border1 = CALayer()
     let border2 = CALayer()
@@ -117,6 +121,17 @@ class LoginViewController: UIViewController{
       containerView.centerHorizontally().centerVertically()
     )
     resetPasswordView.alpha = 0
+    
+    //Dismiss Login ViewController
+    let dismissLoginButton = UIButton()
+    dismissLoginButton.setImage(UIImage(named:"close-icon.png"), for: .normal)
+    dismissLoginButton.sizeToFit()
+    dismissLoginButton.tap { self.dismiss(animated: true, completion: nil) }
+    view.sv(dismissLoginButton)
+    view.layout(
+      UIApplication.shared.statusBarFrame.height + 10,
+      dismissLoginButton.width(40)-10-| ~ 40
+    )
   }
   
   func resetStyle(f:UITextField)
