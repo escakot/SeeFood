@@ -118,7 +118,7 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
   //MARK: ScrollView Methods
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     pageControl.currentPage = Int(collectionView.contentOffset.x/self.collectionView.frame.size.width)
-    self.mealName.text = self.arrayOfMenuItems[pageControl.currentPage].title
+    self.mealName.text = self.arrayOfMenuItems[selectedCellIndex.row].title
   }
   
   

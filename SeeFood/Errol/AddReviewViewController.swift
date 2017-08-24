@@ -84,7 +84,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
     view.sv([foodImageView, menuItemTextField,tagsView])
     view.layout(
       self.navigationController!.navigationBar.frame.height + UIApplication.shared.statusBarFrame.size.height,
-      foodImageView.fillHorizontally(),
+      foodImageView.centerHorizontally(),
       menuItemTextField.fillHorizontally() ~ 30,
       10,
       |-10-tagsView-10-|,
@@ -108,8 +108,11 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
   // MARK: - Button Methods
   @IBAction func postButton(_ sender: UIBarButtonItem)
   {
-    guard PFUser.current() != nil else {
-      dismiss(animated: true)
+    guard !(menuItemTextField.text!.isEmpty) else
+    {
+      let alert = UIAlertController(title: "Missing Title", message: "Menu item title is required to post", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+      present(alert, animated: true, completion: nil)
       return
     }
     let image = foodImageView.image!
@@ -235,7 +238,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
       textField.placeholder = "tag name"
       textField.textAlignment = .center
     }
-    textFieldAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (alert) in self.dismiss(animated: true, completion: nil) }))
+    textFieldAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
     textFieldAlert.addAction(UIAlertAction(title: "Done", style: .default, handler: { (action) in
       guard let tagString = textFieldAlert.textFields!.first!.text, tagString != "" else { return }
       self.createTag(name: tagString.lowercased(), predictedTag: false)
