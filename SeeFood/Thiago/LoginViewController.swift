@@ -12,7 +12,7 @@ import FBSDKLoginKit
 import Stevia
 import Parse
 
-class LoginViewController: UIViewController{
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
   
   //MARK: Properties
   
@@ -45,7 +45,14 @@ class LoginViewController: UIViewController{
     
     //MARK: - Facebook Login
     facebookLoginButton.layer.cornerRadius = 20
+    facebookLoginButton.alpha = 0
     let fbLoginButton = FBSDKLoginButton(frame: facebookLoginButton.frame)
+    fbLoginButton.delegate = self
+    if FBSDKAccessToken.current() == nil
+    {
+      fbLoginButton.removeTarget(nil, action: nil, for: UIControlEvents.allEvents)
+      fbLoginButton.addTarget(self, action: #selector(facebookLoginButtonTap), for: .touchUpInside)
+    }
     view.addSubview(fbLoginButton)
     fbLoginButton.layer.cornerRadius = 20
     
@@ -124,13 +131,13 @@ class LoginViewController: UIViewController{
     
     //Dismiss Login ViewController
     let dismissLoginButton = UIButton()
-    dismissLoginButton.setImage(UIImage(named:"close-icon.png"), for: .normal)
+    dismissLoginButton.setImage(UIImage(named:"x-icon.png"), for: .normal)
     dismissLoginButton.sizeToFit()
     dismissLoginButton.tap { self.dismiss(animated: true, completion: nil) }
     view.sv(dismissLoginButton)
     view.layout(
       UIApplication.shared.statusBarFrame.height + 10,
-      dismissLoginButton.width(40)-10-| ~ 40
+      dismissLoginButton.width(30)-12-| ~ 30
     )
   }
   
@@ -161,7 +168,7 @@ class LoginViewController: UIViewController{
     }
   }
   
-  @IBAction func facebookLoginButton(_ sender: FBSDKButton)
+  @IBAction func facebookLoginButtonTap(_ sender: FBSDKButton)
   {
     ParseManager.shared.facebookLogin { (message) in
       if message == nil
@@ -216,6 +223,15 @@ class LoginViewController: UIViewController{
       self.resetPasswordView.removeFromSuperview()
       self.resetUsernameTextField.text = ""
       self.resetEmailTextField.text = ""
+    }
+  }
+  
+  // MARK: - FB Login Delegate
+  func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) { }
+  
+  func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+    ParseManager.shared.facebookLogout {
+      self.performSegue(withIdentifier: "unwindSegueToMain", sender: nil)
     }
   }
 }

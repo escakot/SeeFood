@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
   
-  let googlePlacesAPIkey = "AIzaSyA-sLSOKTim1mTTPODL49iispJkCAuDCb0"
+  let googlePlacesAPIkey = "AIzaSyB8WnwQLN2IMPvdBgOWgy-yzSRsTKmhTkY"
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.

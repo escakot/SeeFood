@@ -42,6 +42,7 @@
 		D1A839A31F450A0700881330 /* photo-library-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A839A11F450A0700881330 /* photo-library-icon.png */; };
 		D1A839A51F4676E000881330 /* mailIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A839A41F4676E000881330 /* mailIcon.png */; };
 		D1AA61E71F4DD81100339CA3 /* SeeFood.png in Resources */ = {isa = PBXBuildFile; fileRef = D1AA61E61F4DD81100339CA3 /* SeeFood.png */; };
+		D1AA61EB1F4EC0DA00339CA3 /* x-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D1AA61EA1F4EC0DA00339CA3 /* x-icon.png */; };
 		D1B8A8F81F4A814400D7D470 /* close-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B8A8F71F4A814400D7D470 /* close-icon.png */; };
 		D1C0EB5F1F3A2C6200DCF4C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */; };
 		D1C0EB661F3A2C6200DCF4C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB651F3A2C6200DCF4C9 /* Assets.xcassets */; };
@@ -94,6 +95,7 @@
 		D1A839A11F450A0700881330 /* photo-library-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-library-icon.png"; sourceTree = "<group>"; };
 		D1A839A41F4676E000881330 /* mailIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mailIcon.png; sourceTree = "<group>"; };
 		D1AA61E61F4DD81100339CA3 /* SeeFood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SeeFood.png; sourceTree = "<group>"; };
+		D1AA61EA1F4EC0DA00339CA3 /* x-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "x-icon.png"; sourceTree = "<group>"; };
 		D1B8A8F71F4A814400D7D470 /* close-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close-icon.png"; sourceTree = "<group>"; };
 		D1C0EB5B1F3A2C6200DCF4C9 /* SeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C0EB5E1F3A2C6200DCF4C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				D1A839A41F4676E000881330 /* mailIcon.png */,
 				D1B8A8F71F4A814400D7D470 /* close-icon.png */,
 				D1AA61E61F4DD81100339CA3 /* SeeFood.png */,
+				D1AA61EA1F4EC0DA00339CA3 /* x-icon.png */,
 				D17FE7771F3E326400206951 /* assets.xib */,
 				D1C0EB8A1F3B995A00DCF4C9 /* Models */,
 			);
@@ -341,6 +344,7 @@
 				D17FE7781F3E326400206951 /* assets.xib in Resources */,
 				D1C0EB751F3A2C8E00DCF4C9 /* Errol.storyboard in Resources */,
 				7E93CCAC1F4DEEBE00326298 /* list.png in Resources */,
+				D1AA61EB1F4EC0DA00339CA3 /* x-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

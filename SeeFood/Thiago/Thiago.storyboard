@@ -129,9 +129,6 @@
                                 <state key="normal" title="Facebook Login">
                                     <color key="titleColor" red="0.99270072990000002" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="facebookLoginButton:" destination="KCC-iw-CeY" eventType="touchUpInside" id="dem-3s-owt"/>
-                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SeeFood.png" translatesAutoresizingMaskIntoConstraints="NO" id="yl7-pl-QE1">
                                 <rect key="frame" x="67" y="138" width="240" height="65"/>

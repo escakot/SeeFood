@@ -109,6 +109,12 @@ class ParseManager: NSObject {
     }
   }
   
+  func facebookLogout(completionHandler: @escaping () -> Void)
+  {
+    PFFacebookUtils.facebookLoginManager().logOut()
+    completionHandler()
+  }
+  
 //  func facebookSignUp
   
   // MARK: - Query for PFObjects (Relational)

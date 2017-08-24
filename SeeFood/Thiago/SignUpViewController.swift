@@ -81,13 +81,13 @@ class SignUpViewController: UIViewController {
     
       //Dismiss Controller
       let dismissLoginButton = UIButton()
-      dismissLoginButton.setImage(UIImage(named:"close-icon.png"), for: .normal)
+      dismissLoginButton.setImage(UIImage(named:"x-icon.png"), for: .normal)
       dismissLoginButton.sizeToFit()
       dismissLoginButton.tap { self.dismiss(animated: true, completion: nil) }
       view.sv(dismissLoginButton)
       view.layout(
         UIApplication.shared.statusBarFrame.height + 10,
-        dismissLoginButton.width(40)-10-| ~ 40
+        dismissLoginButton.width(30)-12-| ~ 30
       )
    }
    
