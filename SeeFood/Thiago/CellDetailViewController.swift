@@ -184,9 +184,6 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
 }
 
 
-
-
-
 //MARK: Cell Class
 class CellSwipe: UICollectionViewCell {
   @IBOutlet weak var cellImage: UIImageView!

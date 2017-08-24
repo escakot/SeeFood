@@ -433,6 +433,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
       })
     }
     cell.cellLabel.text = item.title
+    cell.selectionStyle = .none
     return cell
   }
   
