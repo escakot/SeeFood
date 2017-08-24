@@ -453,13 +453,13 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksn-Wp-0Cg">
-                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="605" width="375" height="62"/>
                                 <color key="backgroundColor" red="0.84476000070571899" green="0.11397387832403183" blue="0.16201174259185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="gQG-QF-M8g"/>
+                                    <constraint firstAttribute="height" constant="62" id="gQG-QF-M8g"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="KohinoorDevanagari-Regular" family="Kohinoor Devanagari" pointSize="24"/>
-                                <state key="normal" title="Add">
+                                <fontDescription key="fontDescription" name="KohinoorDevanagari-Regular" family="Kohinoor Devanagari" pointSize="56"/>
+                                <state key="normal" title="+">
                                     <color key="titleColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -480,7 +480,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="94" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gN0-kO-M8n">
-                                <rect key="frame" x="0.0" y="88" width="375" height="528"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="509"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.15732899308204651" green="0.13718172907829285" blue="0.13698515295982361" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -519,7 +519,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="ksn-Wp-0Cg" firstAttribute="top" secondItem="gN0-kO-M8n" secondAttribute="bottom" constant="2" id="1FH-Kt-GbV"/>
+                            <constraint firstItem="ksn-Wp-0Cg" firstAttribute="top" secondItem="gN0-kO-M8n" secondAttribute="bottom" constant="8" id="1FH-Kt-GbV"/>
                             <constraint firstItem="ZIg-qR-Pbg" firstAttribute="leading" secondItem="bMm-tY-OE0" secondAttribute="leading" id="1gY-dS-7vd"/>
                             <constraint firstItem="oUG-YF-b7X" firstAttribute="centerX" secondItem="ksn-Wp-0Cg" secondAttribute="centerX" id="2GU-7l-m2H"/>
                             <constraint firstItem="oUG-YF-b7X" firstAttribute="top" secondItem="A00-hr-8HI" secondAttribute="bottom" constant="12" id="7TP-wX-Hsp"/>
@@ -688,6 +688,7 @@
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="5J6-xR-Phn" firstAttribute="leading" secondItem="m9l-ni-9Ox" secondAttribute="leading" id="MpG-OA-mi0"/>
+                                    <constraint firstItem="o7y-r5-PZb" firstAttribute="top" secondItem="m9l-ni-9Ox" secondAttribute="top" constant="39" id="Sau-3p-iRS"/>
                                     <constraint firstAttribute="bottom" secondItem="o7y-r5-PZb" secondAttribute="bottom" constant="12" id="WG1-HK-zzH"/>
                                     <constraint firstItem="5J6-xR-Phn" firstAttribute="top" secondItem="m9l-ni-9Ox" secondAttribute="top" constant="22" id="b8Y-rS-YCF"/>
                                     <constraint firstItem="o7y-r5-PZb" firstAttribute="centerX" secondItem="m9l-ni-9Ox" secondAttribute="centerX" id="bIC-8R-thY"/>
