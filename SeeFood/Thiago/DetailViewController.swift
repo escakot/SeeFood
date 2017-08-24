@@ -36,6 +36,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
   @IBOutlet weak var backButton: UIButton!
   @IBOutlet weak var mainTableView: UITableView!
   @IBOutlet weak var switchListToPhoto: UIButton!
+  var blurView: UIVisualEffectView!
   var cameraLibraryView: UIView!
   var imagePicker: UIImagePickerController!
   var imageWasSelected: Bool!
@@ -88,6 +89,13 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     // Image Picker
     imagePicker = UIImagePickerController()
     imagePicker.delegate = self
+    
+    // Creating BlurView
+    blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+    blurView.isUserInteractionEnabled = false
+    blurView.frame = mainCollectionView.frame
+    blurView.backgroundColor = UIColor(white: 0.5, alpha: 0.7)
+    blurView.alpha = 0.0
     
     // Creating cameraLibraryView
     cameraLibraryView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.75, height: view.frame.width * 0.75 / 2))
@@ -190,9 +198,11 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     guard !view.subviews.contains(cameraLibraryView) else { return }
     mainCollectionView.isCameraLibraryViewOn = true
+    view.addSubview(blurView)
     view.addSubview(cameraLibraryView)
     cameraLibraryView.alpha = 0
     UIView.animate(withDuration: 0.6) {
+      self.blurView.alpha = 0.85
       self.cameraLibraryView.alpha = 1.0
     }
   }
@@ -239,6 +249,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
       addReviewController.foodImage = pickedImage
       addReviewController.restaurant = parseRestaurant
       addReviewController.listOfMenuItems = arrayOfMenuItems
+      blurView.removeFromSuperview()
       cameraLibraryView.removeFromSuperview()
       dismiss(animated: true, completion: nil)
       present(navController, animated: true, completion: nil)
@@ -255,8 +266,10 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     if !cameraLibraryView.frame.contains(touch.location(in: view))
     {
       UIView.animate(withDuration: 0.6, animations: {
+        self.blurView.alpha = 0
         self.cameraLibraryView.alpha = 0
       }, completion: { (success) in
+        self.blurView.removeFromSuperview()
         self.cameraLibraryView.removeFromSuperview()
         self.mainCollectionView.isCameraLibraryViewOn = false
       })
