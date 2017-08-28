@@ -45,16 +45,23 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     //MARK: - Facebook Login
     facebookLoginButton.layer.cornerRadius = 20
-    facebookLoginButton.alpha = 0
-    let fbLoginButton = FBSDKLoginButton(frame: facebookLoginButton.frame)
+    facebookLoginButton.setTitle("", for: .normal)
+    facebookLoginButton.backgroundColor = .clear
+//    facebookLoginButton.alpha = 0
+    let fbLoginButton = FBSDKLoginButton(frame: facebookLoginButton.bounds)
     fbLoginButton.delegate = self
     if FBSDKAccessToken.current() == nil
     {
       fbLoginButton.removeTarget(nil, action: nil, for: UIControlEvents.allEvents)
       fbLoginButton.addTarget(self, action: #selector(facebookLoginButtonTap), for: .touchUpInside)
     }
-    view.addSubview(fbLoginButton)
+    facebookLoginButton.addSubview(fbLoginButton)
     fbLoginButton.layer.cornerRadius = 20
+    fbLoginButton.translatesAutoresizingMaskIntoConstraints = false
+    fbLoginButton.topAnchor.constraint(equalTo: facebookLoginButton.topAnchor).isActive = true
+    fbLoginButton.bottomAnchor.constraint(equalTo: facebookLoginButton.bottomAnchor).isActive = true
+    fbLoginButton.leadingAnchor.constraint(equalTo: facebookLoginButton.leadingAnchor).isActive = true
+    fbLoginButton.trailingAnchor.constraint(equalTo: facebookLoginButton.trailingAnchor).isActive = true
     
     //MARK: Styles
     loginButton.layer.cornerRadius = 20
