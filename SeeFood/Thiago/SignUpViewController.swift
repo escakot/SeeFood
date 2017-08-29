@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Stevia
 
 class SignUpViewController: UIViewController {
    
@@ -77,6 +78,17 @@ class SignUpViewController: UIViewController {
                                                                    attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
       //UIAlertController Button
       alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+    
+      //Dismiss Controller
+      let dismissLoginButton = UIButton()
+      dismissLoginButton.setImage(UIImage(named:"x-icon.png"), for: .normal)
+      dismissLoginButton.sizeToFit()
+      dismissLoginButton.tap { self.dismiss(animated: true, completion: nil) }
+      view.sv(dismissLoginButton)
+      view.layout(
+        UIApplication.shared.statusBarFrame.height + 10,
+        dismissLoginButton.width(30)-12-| ~ 30
+      )
    }
    
    

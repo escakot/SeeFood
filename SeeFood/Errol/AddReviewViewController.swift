@@ -11,33 +11,41 @@ import Parse
 import Toucan
 import Clarifai
 import Stevia
+import MLPAutoCompleteTextField
+import IQKeyboardManager
 
-class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, MLPAutoCompleteTextFieldDataSource {
   
   var foodImageView: UIImageView!
-  var menuItemTextField: UITextField!
+  var menuItemTextField: MLPAutoCompleteTextField!
   var restaurant: Restaurant!
-  var menuItem: MenuItem?
   var foodImage: UIImage!
   let clarifaiAPI = "c2b0351a3e40478ca234a70c36fa864f"
   let tagsView = ArrangedTagView()
   
+  var listOfMenuItems: [MenuItem] = []
+  var menuItemSuggestions: [String] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
-    if menuItem != nil
-    {
-      menuItemTextField.text = menuItem!.title
-      menuItemTextField.isEnabled = false
-    }
-    
-    foodImageView = UIImageView()
-    foodImageView.contentMode = .scaleAspectFit
-    menuItemTextField = UITextField()
+    //MenuItemTextField
+    menuItemTextField = MLPAutoCompleteTextField()
     menuItemTextField.placeholder = "Menu Item Title"
     menuItemTextField.textAlignment = .center
+    menuItemTextField.delegate = self
+    menuItemTextField.autoCompleteDataSource = self
+    menuItemTextField.maximumNumberOfAutoCompleteRows = 3
+    menuItemTextField.autoCompleteTableBackgroundColor = UIColor.init(white: 1.0, alpha: 1.0)
+    
+    menuItemSuggestions = listOfMenuItems.map({ (menuItem:MenuItem) -> String in
+      return menuItem.title
+    })
+    
+    //FoodImageView
+    foodImageView = UIImageView()
+    foodImageView.contentMode = .scaleAspectFit
     foodImageView.isUserInteractionEnabled = true
     setImageViewSize(image: foodImage)
     foodImageView.image = Toucan.Resize.resizeImage(foodImage, size: foodImageView.frame.size)
@@ -76,7 +84,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
     view.sv([foodImageView, menuItemTextField,tagsView])
     view.layout(
       self.navigationController!.navigationBar.frame.height + UIApplication.shared.statusBarFrame.size.height,
-      foodImageView.fillHorizontally(),
+      foodImageView.centerHorizontally(),
       menuItemTextField.fillHorizontally() ~ 30,
       10,
       |-10-tagsView-10-|,
@@ -100,13 +108,18 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
   // MARK: - Button Methods
   @IBAction func postButton(_ sender: UIBarButtonItem)
   {
-    guard PFUser.current() != nil else {
-      dismiss(animated: true)
+    guard !(menuItemTextField.text!.isEmpty) else
+    {
+      let alert = UIAlertController(title: "Missing Title", message: "Menu item title is required to post", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+      present(alert, animated: true, completion: nil)
       return
     }
     let image = foodImageView.image!
-    if let menuItem = menuItem
+    if menuItemSuggestions.contains(menuItemTextField.text!)
     {
+      let chosenMenuItemIndex = menuItemSuggestions.index(of: menuItemTextField.text!)!
+      let menuItem = listOfMenuItems[chosenMenuItemIndex]
       ParseManager.shared.addReviewFor(menuItem, at: restaurant, image: image, completionHandler: { (savedReview) in
         let createdTags = self.createTagsToParseFor(review: savedReview)
         ParseManager.shared.addTagsFor(savedReview, tags: createdTags, completionHandler: { 
@@ -225,7 +238,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
       textField.placeholder = "tag name"
       textField.textAlignment = .center
     }
-    textFieldAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (alert) in self.dismiss(animated: true, completion: nil) }))
+    textFieldAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
     textFieldAlert.addAction(UIAlertAction(title: "Done", style: .default, handler: { (action) in
       guard let tagString = textFieldAlert.textFields!.first!.text, tagString != "" else { return }
       self.createTag(name: tagString.lowercased(), predictedTag: false)
@@ -249,7 +262,19 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
     return tempTags
   }
   
+  // MARK: - Autocomplete MenuItem Textfield
+  func autoCompleteTextField(_ textField: MLPAutoCompleteTextField!, possibleCompletionsFor string: String!, completionHandler handler: (([Any]?) -> Void)!)
+  {
+    handler(menuItemSuggestions)
+  }
   
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    IQKeyboardManager.shared().keyboardDistanceFromTextField = 110
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    IQKeyboardManager.shared().keyboardDistanceFromTextField = kIQUseDefaultKeyboardDistance
+  }
 }
 // MARK: - Tag Classes
 

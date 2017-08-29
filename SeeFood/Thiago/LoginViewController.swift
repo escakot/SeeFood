@@ -12,7 +12,7 @@ import FBSDKLoginKit
 import Stevia
 import Parse
 
-class LoginViewController: UIViewController{
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
   
   //MARK: Properties
   
@@ -43,10 +43,28 @@ class LoginViewController: UIViewController{
     self.myWebView.load(html!, mimeType: "text/html", textEncodingName: "UTF-8", baseURL: htmlURL.deletingLastPathComponent())
     self.myWebView.isHidden = true
     
+    //MARK: - Facebook Login
+    facebookLoginButton.layer.cornerRadius = 20
+    facebookLoginButton.setTitle("", for: .normal)
+    facebookLoginButton.backgroundColor = .clear
+//    facebookLoginButton.alpha = 0
+    let fbLoginButton = FBSDKLoginButton(frame: facebookLoginButton.bounds)
+    fbLoginButton.delegate = self
+    if FBSDKAccessToken.current() == nil
+    {
+      fbLoginButton.removeTarget(nil, action: nil, for: UIControlEvents.allEvents)
+      fbLoginButton.addTarget(self, action: #selector(facebookLoginButtonTap), for: .touchUpInside)
+    }
+    facebookLoginButton.addSubview(fbLoginButton)
+    fbLoginButton.layer.cornerRadius = 20
+    fbLoginButton.translatesAutoresizingMaskIntoConstraints = false
+    fbLoginButton.topAnchor.constraint(equalTo: facebookLoginButton.topAnchor).isActive = true
+    fbLoginButton.bottomAnchor.constraint(equalTo: facebookLoginButton.bottomAnchor).isActive = true
+    fbLoginButton.leadingAnchor.constraint(equalTo: facebookLoginButton.leadingAnchor).isActive = true
+    fbLoginButton.trailingAnchor.constraint(equalTo: facebookLoginButton.trailingAnchor).isActive = true
     
     //MARK: Styles
     loginButton.layer.cornerRadius = 20
-    facebookLoginButton.layer.cornerRadius = 20
     
     let border1 = CALayer()
     let border2 = CALayer()
@@ -117,6 +135,17 @@ class LoginViewController: UIViewController{
       containerView.centerHorizontally().centerVertically()
     )
     resetPasswordView.alpha = 0
+    
+    //Dismiss Login ViewController
+    let dismissLoginButton = UIButton()
+    dismissLoginButton.setImage(UIImage(named:"x-icon.png"), for: .normal)
+    dismissLoginButton.sizeToFit()
+    dismissLoginButton.tap { self.dismiss(animated: true, completion: nil) }
+    view.sv(dismissLoginButton)
+    view.layout(
+      UIApplication.shared.statusBarFrame.height + 10,
+      dismissLoginButton.width(30)-12-| ~ 30
+    )
   }
   
   func resetStyle(f:UITextField)
@@ -146,7 +175,7 @@ class LoginViewController: UIViewController{
     }
   }
   
-  @IBAction func facebookLoginButton(_ sender: FBSDKButton)
+  @IBAction func facebookLoginButtonTap(_ sender: FBSDKButton)
   {
     ParseManager.shared.facebookLogin { (message) in
       if message == nil
@@ -201,6 +230,15 @@ class LoginViewController: UIViewController{
       self.resetPasswordView.removeFromSuperview()
       self.resetUsernameTextField.text = ""
       self.resetEmailTextField.text = ""
+    }
+  }
+  
+  // MARK: - FB Login Delegate
+  func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) { }
+  
+  func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+    ParseManager.shared.facebookLogout {
+      self.performSegue(withIdentifier: "unwindSegueToMain", sender: nil)
     }
   }
 }

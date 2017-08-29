@@ -14,6 +14,7 @@ target 'SeeFood' do
   pod 'Clarifai'
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
+  pod 'MLPAutoCompleteTextField'
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'

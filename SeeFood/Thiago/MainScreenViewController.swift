@@ -134,10 +134,6 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                   self.myWebView.isHidden = true
                   self.refreshControl.endRefreshing()
                })
-//               DispatchQueue.main.async{
-//                  self.mainTable.reloadData()
-//                  self.myWebView.isHidden = true
-//               }
             }
             else if self.isMapView {
                DispatchQueue.main.async {
@@ -148,7 +144,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                      marker.icon = GMSMarker.markerImage(with: self.UIColorFromRGB(rgbValue: 0xB21823))
                      marker.position = CLLocationCoordinate2D(latitude: restaurant.location.latitude, longitude: restaurant.location.longitude)
                      marker.title = restaurant.name
-                     marker.snippet = "Lorem"
+//                     marker.snippet = "Lorem"
                      marker.map = self.mapView
                   }
                }
@@ -196,7 +192,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
          marker.icon = GMSMarker.markerImage(with: UIColorFromRGB(rgbValue: 0xB21823))
          marker.position = CLLocationCoordinate2D(latitude: restaurant.location.latitude, longitude: restaurant.location.longitude)
          marker.title = restaurant.name
-         marker.snippet = "Lorem"
+//         marker.snippet = "Lorem"
          marker.map = mapView
       }
       
