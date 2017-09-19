@@ -34,6 +34,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqy-VZ-jjT">
                                 <rect key="frame" x="40" y="427" width="289" height="36"/>
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="0.12212456597222222" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xqy-VZ-jjT" secondAttribute="height" multiplier="289:36" id="wix-xR-fTi"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -133,6 +136,7 @@
                                 <rect key="frame" x="40" y="475" width="288" height="36"/>
                                 <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="0.11514395249999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="vNK-gN-wbx" secondAttribute="height" multiplier="8:1" id="JzC-qH-ACN"/>
                                     <constraint firstAttribute="height" constant="36" id="dqV-Ck-iEi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>

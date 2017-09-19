@@ -85,8 +85,6 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CellSwipe
    
-      self.arrayOfReviews[indexPath.row].image.getDataInBackground(block: { (data: Data?, error:Error?) in
-        if error == nil {
           self.listOfTags.removeAll()
           for view in cell.cellImage.subviews { view.removeFromSuperview() }
           ParseManager.shared.queryTagsFor(self.arrayOfReviews[indexPath.row], completionHandler: { (tags:Array<Tag>?) in
@@ -97,15 +95,14 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
             }
           })
           DispatchQueue.main.async {
-            cell.cellImage.image = UIImage(data: data!)
+            do {
+              cell.cellImage.image = try UIImage(data: Data(contentsOf: URL(string:self.arrayOfReviews[indexPath.row].url)!))
+            } catch {
+              print(error.localizedDescription)
+            }
             cell.cellBGImage.image = cell.cellImage.image
             cell.cellBGImage.alpha = 0.6
           }
-        }
-        else {
-          print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
-        }
-      })
    
     return cell
   }

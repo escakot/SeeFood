@@ -55,6 +55,7 @@
 		D1C0EB901F3BAB8E00DCF4C9 /* Star-Half.png in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB8D1F3BAB8E00DCF4C9 /* Star-Half.png */; };
 		D1C0EB911F3BAB8E00DCF4C9 /* Star-Filled.png in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB8E1F3BAB8E00DCF4C9 /* Star-Filled.png */; };
 		D1C0EB921F3BAB8E00DCF4C9 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */; };
+		D1D6AB7C1F70B3700042D7D5 /* ImgurManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6AB7B1F70B3700042D7D5 /* ImgurManager.swift */; };
 		D1E32D961F3BEF470008726F /* ParseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E32D951F3BEF470008726F /* ParseManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,7 @@
 		D1C0EB8D1F3BAB8E00DCF4C9 /* Star-Half.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Star-Half.png"; sourceTree = "<group>"; };
 		D1C0EB8E1F3BAB8E00DCF4C9 /* Star-Filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Star-Filled.png"; sourceTree = "<group>"; };
 		D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star.png; sourceTree = "<group>"; };
+		D1D6AB7B1F70B3700042D7D5 /* ImgurManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImgurManager.swift; sourceTree = "<group>"; };
 		D1E32D951F3BEF470008726F /* ParseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 				D1C0EB8B1F3BA61900DCF4C9 /* AddReviewViewController.swift */,
 				D1E32D951F3BEF470008726F /* ParseManager.swift */,
 				D17FE7751F3D70A300206951 /* GoogleManager.swift */,
+				D1D6AB7B1F70B3700042D7D5 /* ImgurManager.swift */,
 				D1C0EB8D1F3BAB8E00DCF4C9 /* Star-Half.png */,
 				D1C0EB8E1F3BAB8E00DCF4C9 /* Star-Filled.png */,
 				D1C0EB8F1F3BAB8E00DCF4C9 /* Star.png */,
@@ -415,6 +418,7 @@
 				7E7EDAAE1F3BD78C0024B2CD /* DetailViewController.swift in Sources */,
 				D1E32D961F3BEF470008726F /* ParseManager.swift in Sources */,
 				7E0E1BD21F3A455500367508 /* LoginViewController.swift in Sources */,
+				D1D6AB7C1F70B3700042D7D5 /* ImgurManager.swift in Sources */,
 				D1C0EB891F3B95F400DCF4C9 /* MenuItem.swift in Sources */,
 				D1C0EB5F1F3A2C6200DCF4C9 /* AppDelegate.swift in Sources */,
 				D1C0EB851F3B93C600DCF4C9 /* Review.swift in Sources */,

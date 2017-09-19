@@ -161,16 +161,20 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     let cell: CustomCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCollectionViewCell
     
     ParseManager.shared.queryReviewFor(self.arrayOfMenuItems[indexPath.row]) { (reviews: Array<Review>?) in
-      reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
-        if error == nil {
-          DispatchQueue.main.async {
-            cell.cellImage.image = UIImage(data: data!)
-          }
+      //      reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
+      //        if error == nil {
+      DispatchQueue.main.async {
+        do {
+          cell.cellImage.image = try UIImage(data: Data(contentsOf: URL.init(string: reviews![0].url)!))
+        } catch {
+          print(error.localizedDescription)
         }
-        else {
-          print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
-        }
-      })
+      }
+      //        }
+      //        else {
+      //          print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
+      //        }
+      //          })
     }
     return cell
   }
@@ -420,17 +424,14 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     let item = self.arrayOfMenuItems[indexPath.row]
     
     ParseManager.shared.queryReviewFor(item) { (reviews: Array<Review>?) in
-      reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
-        if error == nil {
-          for view in cell.cellImage.subviews { view.removeFromSuperview() }
-          DispatchQueue.main.async {
-            cell.cellImage.image = UIImage(data: data!)
-          }
+      for view in cell.cellImage.subviews { view.removeFromSuperview() }
+      DispatchQueue.main.async {
+        do {
+          cell.cellImage.image = try UIImage(data: Data(contentsOf: URL(string:(reviews?[0].url)!)!))
+        } catch {
+          print(error.localizedDescription)
         }
-        else {
-          print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
-        }
-      })
+      }
     }
     cell.cellLabel.text = item.title
     cell.selectionStyle = .none
