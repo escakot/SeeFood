@@ -70,9 +70,9 @@ class ImgurManager: NSObject {
       if (error != nil)
       {
         print(error!.localizedDescription)
+      } else {
+        returnJSONData(data!)
       }
-      
-      returnJSONData(data!)
     }
     dataTask.resume()
   }

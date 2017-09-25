@@ -853,6 +853,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pHp-1k-uz6">
                                 <rect key="frame" x="43" y="437" width="289" height="36"/>
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="0.11514395254629629" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="pHp-1k-uz6" secondAttribute="height" multiplier="289:36" id="cqn-FL-Gza"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="0.99270072990000002" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

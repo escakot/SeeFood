@@ -319,6 +319,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
          break
       case .authorizedWhenInUse:
          print("Location Status is OK.")
+         locationManager.requestLocation()
          break
       }
    }

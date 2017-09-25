@@ -93,7 +93,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     // Creating BlurView
     blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
     blurView.isUserInteractionEnabled = false
-    blurView.frame = mainCollectionView.frame
     blurView.backgroundColor = UIColor(white: 0.5, alpha: 0.7)
     blurView.alpha = 0.0
     
@@ -202,6 +201,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     guard !view.subviews.contains(cameraLibraryView) else { return }
     mainCollectionView.isCameraLibraryViewOn = true
+    blurView.frame = mainCollectionView.frame
     view.addSubview(blurView)
     view.addSubview(cameraLibraryView)
     cameraLibraryView.alpha = 0
