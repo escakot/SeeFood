@@ -71,11 +71,11 @@ class SignUpViewController: UIViewController {
       
       
       usernameTextField.attributedPlaceholder = NSAttributedString(string:"Username",
-                                                                   attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
+                                                                   attributes: [NSAttributedStringKey.foregroundColor: UIColor.white.withAlphaComponent(0.2)])
       passwordTextField.attributedPlaceholder = NSAttributedString(string:"Password",
-                                                                   attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
+                                                                   attributes: [NSAttributedStringKey.foregroundColor: UIColor.white.withAlphaComponent(0.2)])
       emailTextField.attributedPlaceholder = NSAttributedString(string:"Email",
-                                                                   attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
+                                                                   attributes: [NSAttributedStringKey.foregroundColor: UIColor.white.withAlphaComponent(0.2)])
       //UIAlertController Button
       alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
     

@@ -281,7 +281,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
   }
   
   // MARK: UIGesture Methods
-  func cameraTapped(_ sender: UITapGestureRecognizer)
+  @objc func cameraTapped(_ sender: UITapGestureRecognizer)
   {
     guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
       let alert = UIAlertController(title: "Camera Error", message: "Camera is invalid or unavailable.", preferredStyle: .alert)
@@ -290,10 +290,10 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
       return
     }
     imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-    let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+    let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
     switch authStatus {
     case .notDetermined:
-      AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) in
+      AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted) in
         if granted
         {
           self.present(self.imagePicker, animated: true, completion: nil)
@@ -316,7 +316,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
   }
-  func libraryTapped(_ sender: UITapGestureRecognizer)
+  @objc func libraryTapped(_ sender: UITapGestureRecognizer)
   {
     imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
     let authStatus = PHPhotoLibrary.authorizationStatus()

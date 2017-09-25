@@ -85,9 +85,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     
     usernameTextField.attributedPlaceholder = NSAttributedString(string:"Username",
-                                                                 attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
+                                                                 attributes: [NSAttributedStringKey.foregroundColor: UIColor.white.withAlphaComponent(0.2)])
     passwordTextField.attributedPlaceholder = NSAttributedString(string:"Password",
-                                                                 attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
+                                                                 attributes: [NSAttributedStringKey.foregroundColor: UIColor.white.withAlphaComponent(0.2)])
     
     //Setup AlertController Action
     alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
@@ -210,7 +210,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
   }
   
-  func submitPasswordRecovery()
+  @objc func submitPasswordRecovery()
   {
     guard !resetUsernameTextField.text!.isEmpty || !resetEmailTextField.text!.isEmpty else {
       self.myWebView.isHidden = true
