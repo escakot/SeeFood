@@ -178,6 +178,15 @@ class CellDetailViewController: UIViewController, UICollectionViewDataSource, UI
     return CGRect(x: imageOriginX, y: imageOriginY, width: newWidth, height: newHeight)
   }
   
+  //Social Media Sharing
+//  func createSnapshot() -> UIImage
+//  {
+//    UIGraphicsBeginImageContextWithOptions(loadedNib.bounds.size, loadedNib.isOpaque, 0.0)
+//    loadedNib.drawHierarchy(in: loadedNib.bounds, afterScreenUpdates: false)
+//    let snapshot = UIGraphicsGetImageFromCurrentImageContext()
+//    UIGraphicsEndImageContext()
+//    return snapshot!
+//  }
 }
 
 

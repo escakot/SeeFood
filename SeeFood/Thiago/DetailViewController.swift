@@ -43,6 +43,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
   var restaurant: RestaurantData!
   var parseRestaurant: Restaurant!
   var arrayOfMenuItems: [MenuItem] = []
+  var activityIndicator: UIActivityIndicatorView!
   
   
   
@@ -55,6 +56,12 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     registerForPreviewing(with: self, sourceView: mainCollectionView)
     restaurantNameLabel.text = restaurant.name
     
+    //Activity Indicator
+    activityIndicator = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
+    activityIndicator.center = CGPoint(x: view.frame.width/2 - activityIndicator.frame.size.width/2, y: view.frame.height/2 - activityIndicator.frame.size.height/2)
+    view.addSubview(activityIndicator)
+    activityIndicator.startAnimating()
+    
     //MARK: Query Restaurant
     ParseManager.shared.queryRestaurantWith(id: restaurant.placeID) { (savedRestaurant:Restaurant?) in
       if savedRestaurant == nil {
@@ -64,6 +71,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
           self.defaultPhoto.isHidden = false
           self.defaultLabel.isHidden = false
           self.parseRestaurant = created ? createdRestaurant! : nil
+          self.activityIndicator.stopAnimating()
         })
       }
       else{
@@ -75,11 +83,13 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
           if (array?.isEmpty)!{
             self.defaultPhoto.isHidden = false
             self.defaultLabel.isHidden = false
+            self.activityIndicator.stopAnimating()
             print("There are no Menu Items for \(self.parseRestaurant.name)")
           }else{
             self.arrayOfMenuItems = array!
             DispatchQueue.main.async {
               self.mainCollectionView.reloadData()
+              self.activityIndicator.stopAnimating()
             }
           }
         }
