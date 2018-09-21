@@ -10,7 +10,7 @@ target 'SeeFood' do
   pod 'ParseFacebookUtilsV4'
   pod 'IQKeyboardManager'
   pod 'Toucan'
-  pod 'SteviaLayout'
+  pod 'SteviaLayout', :git => 'https://github.com/freshOS/Stevia.git', :branch => 'swift4'
   pod 'Clarifai'
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'

@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     facebookLoginButton.layer.cornerRadius = 20
     facebookLoginButton.setTitle("", for: .normal)
     facebookLoginButton.backgroundColor = .clear
-//    facebookLoginButton.alpha = 0
+    //    facebookLoginButton.alpha = 0
     let fbLoginButton = FBSDKLoginButton(frame: facebookLoginButton.bounds)
     fbLoginButton.delegate = self
     if FBSDKAccessToken.current() == nil
@@ -85,9 +85,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     
     usernameTextField.attributedPlaceholder = NSAttributedString(string:"Username",
-                                                                 attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
+                                                                 attributes: [NSAttributedStringKey.foregroundColor: UIColor.white.withAlphaComponent(0.2)])
     passwordTextField.attributedPlaceholder = NSAttributedString(string:"Password",
-                                                                 attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.2)])
+                                                                 attributes: [NSAttributedStringKey.foregroundColor: UIColor.white.withAlphaComponent(0.2)])
     
     //Setup AlertController Action
     alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
@@ -161,8 +161,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
   
   
   
-  @IBAction func loginButton(_ sender: UIButton) {
-   self.myWebView.isHidden = false
+  @IBAction func loginButton(_ sender: UIButton)
+  {
+    guard !usernameTextField.text!.isEmpty && !passwordTextField.text!.isEmpty else {
+      self.alertController.message = "Username or password cannot be empty"
+      present(alertController, animated: true, completion: nil)
+      return
+    }
+    self.myWebView.isHidden = false
     ParseManager.shared.userLogin(username: usernameTextField.text!, password: passwordTextField.text!) { (message:String?) in
       guard let message = message else {
         self.dismiss(animated: true, completion: nil)
@@ -204,7 +210,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
   }
   
-  func submitPasswordRecovery()
+  @objc func submitPasswordRecovery()
   {
     guard !resetUsernameTextField.text!.isEmpty || !resetEmailTextField.text!.isEmpty else {
       self.myWebView.isHidden = true
@@ -212,18 +218,18 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
       present(alertController, animated: true, completion: nil)
       return
     }
-//    ParseManager.shared.userResetPassword(username: resetUsernameTextField.text!, email: resetEmailTextField.text!) { (errorMessage) in
-//      self.alertController.title = "Password Recovery"
-//      if errorMessage != nil
-//      {
-        self.alertController.message = "Please check your email for password recovery."
-//      } else {
-//        self.alertController.message = errorMessage
-//      }
-//      OperationQueue.main.addOperation({
-        self.present(self.alertController, animated: true, completion: nil)
-//      })
-//    }
+    //    ParseManager.shared.userResetPassword(username: resetUsernameTextField.text!, email: resetEmailTextField.text!) { (errorMessage) in
+    //      self.alertController.title = "Password Recovery"
+    //      if errorMessage != nil
+    //      {
+    self.alertController.message = "Please check your email for password recovery."
+    //      } else {
+    //        self.alertController.message = errorMessage
+    //      }
+    //      OperationQueue.main.addOperation({
+    self.present(self.alertController, animated: true, completion: nil)
+    //      })
+    //    }
     UIView.animate(withDuration: 0.6, animations: {
       self.resetPasswordView.alpha = 0
     }) { (success) in

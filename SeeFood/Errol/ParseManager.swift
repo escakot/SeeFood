@@ -17,6 +17,7 @@ class ParseManager: NSObject {
   static let shared = ParseManager()
   
   var currentUser: PFUser?
+  let imgurManager = ImgurManager()
   
   // MARK: - PFUser Methods
   
@@ -115,7 +116,7 @@ class ParseManager: NSObject {
     completionHandler()
   }
   
-//  func facebookSignUp
+  //  func facebookSignUp
   
   // MARK: - Query for PFObjects (Relational)
   
@@ -216,17 +217,22 @@ class ParseManager: NSObject {
       let imageData = UIImagePNGRepresentation(image) else {
         return
     }
-    let imageFile = PFFile(name: "image.png", data: imageData)
-    let review = Review(user: user, image: imageFile!, menuItem: menuItem, restaurant: restaurant)
-    review.saveInBackground { (success: Bool, error: Error?) in
-      if success
-      {
-        menuItem.reviews().add(review)
-        menuItem.saveInBackground(block: { (success, error) in
-          if success { completionHandler(review) }
-        })
-      } else {
-        print(error!.localizedDescription)
+    //    let imageFile = PFFile(name: "image.png", data: imageData)
+    imgurManager.postPhotoToImgur(title: menuItem.title, imageData: imageData) { (stringURL:String?) in
+      guard let stringURL = stringURL else {
+        return
+      }
+      let review = Review(user: user, url: stringURL, menuItem: menuItem, restaurant: restaurant)
+      review.saveInBackground { (success: Bool, error: Error?) in
+        if success
+        {
+          menuItem.reviews().add(review)
+          menuItem.saveInBackground(block: { (success, error) in
+            if success { completionHandler(review) }
+          })
+        } else {
+          print(error!.localizedDescription)
+        }
       }
     }
   }

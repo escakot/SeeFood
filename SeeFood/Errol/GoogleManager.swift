@@ -13,7 +13,7 @@ import GooglePlaces
 class RestaurantData: NSObject {
   var placeID: String!
   var name: String!
-//  var isOpen: Bool?
+  //  var isOpen: Bool?
   var rating: Float = 0.0
   var address: String!
   var location: CLLocationCoordinate2D
@@ -23,7 +23,7 @@ class RestaurantData: NSObject {
   init(withJSONdata data:[String:AnyObject]) {
     placeID = data["place_id"] as! String
     name = data["name"] as! String
-//    isOpen = (data["opening_hours"] as! [String:AnyObject])["open_now"] as! Bool
+    //    isOpen = (data["opening_hours"] as! [String:AnyObject])["open_now"] as! Bool
     if data["rating"] != nil
     {
       rating = data["rating"] as! Float
@@ -81,26 +81,15 @@ class GoogleManager: NSObject {
     
     let urlRequest = URLRequest(url: components.url!)
     
-    let configurations = URLSessionConfiguration.default
-    let session = URLSession(configuration: configurations)
-    let dataTask = session.dataTask(with: urlRequest, completionHandler: { (data: Data?, response: URLResponse?,error: Error?) in
-      if error == nil
-      {
-        
-        guard let image = UIImage(data: data!) else {
-          completionHandler(nil)
-          return
-        }
-        completionHandler(image)
-        
-      } else {
-        print(error!.localizedDescription)
+    performQuery(with: urlRequest) { (data:Data) in
+      guard let image = UIImage(data: data) else {
+        completionHandler(nil)
+        return
       }
-    })
-      
-    dataTask.resume()
+      completionHandler(image)
+    }
   }
-    
+  
   // MARK: - Query Search Methods
   func getRestaurantsNear(coordinates: CLLocationCoordinate2D, radius:Int, completionHandler: @escaping ([RestaurantData]) -> Void)
   {
@@ -114,36 +103,26 @@ class GoogleManager: NSObject {
     
     let urlRequest = URLRequest(url: components.url!)
     
-    let configurations = URLSessionConfiguration.default
-    let session = URLSession(configuration: configurations)
-    let dataTask = session.dataTask(with: urlRequest, completionHandler: { (data: Data?, response: URLResponse?,error: Error?) in
-      if error == nil
-      {
-        do {
-          let jsonData = try JSONSerialization.jsonObject(with: data!, options:[]) as! [String:AnyObject]
-          let placesArray = jsonData["results"] as! [[String:AnyObject]]
-          
-          for placesDict in placesArray
-          {
-            guard placesDict["place_id"] != nil else {
-              print("Place ID Is Nil")
-              return
-            }
-            let restaurantInfo = RestaurantData(withJSONdata: placesDict)
-            restaurants.append(restaurantInfo)
+    performQuery(with: urlRequest) { (data:Data) in
+      do {
+        let jsonData = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:AnyObject]
+        let placesArray = jsonData["results"] as! [[String:AnyObject]]
+        
+        for placesDict in placesArray
+        {
+          guard placesDict["place_id"] != nil else {
+            print("Place ID Is Nil")
+            return
           }
-          completionHandler(restaurants)
-        } catch {
-          print(error.localizedDescription)
-          completionHandler(restaurants)
+          let restaurantInfo = RestaurantData(withJSONdata: placesDict)
+          restaurants.append(restaurantInfo)
         }
-        
-        
-      } else {
-        print(error!.localizedDescription)
+        completionHandler(restaurants)
+      } catch {
+        print(error.localizedDescription)
+        completionHandler(restaurants)
       }
-    })
-    dataTask.resume()
+    }
   }
   
   func searchRestaurantWith(searchText:String, coordinates:CLLocation?, completionHandler: @escaping ([RestaurantData]) -> Void)
@@ -163,36 +142,41 @@ class GoogleManager: NSObject {
     
     let urlRequest = URLRequest(url: components.url!)
     
-    let configurations = URLSessionConfiguration.default
-    let session = URLSession(configuration: configurations)
-    let dataTask = session.dataTask(with: urlRequest, completionHandler: { (data: Data?, response: URLResponse?,error: Error?) in
-      if error == nil
-      {
-        do {
-          let jsonData = try JSONSerialization.jsonObject(with: data!, options:[]) as! [String:AnyObject]
-          let placesArray = jsonData["results"] as! [[String:AnyObject]]
-          
-          for placesDict in placesArray
-          {
-            guard placesDict["place_id"] != nil else {
-              print("Place ID Is Nil")
-              return
-            }
-            let restaurantInfo = RestaurantData(withJSONdata: placesDict)
-            restaurants.append(restaurantInfo)
+    performQuery(with: urlRequest) { (data:Data) in
+      do {
+        let jsonData = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:AnyObject]
+        let placesArray = jsonData["results"] as! [[String:AnyObject]]
+        
+        for placesDict in placesArray
+        {
+          guard placesDict["place_id"] != nil else {
+            print("Place ID Is Nil")
+            return
           }
-          completionHandler(restaurants)
-        } catch {
-          print(error.localizedDescription)
-          completionHandler(restaurants)
+          let restaurantInfo = RestaurantData(withJSONdata: placesDict)
+          restaurants.append(restaurantInfo)
         }
-        
-        
-      } else {
-        print(error!.localizedDescription)
+        completionHandler(restaurants)
+      } catch {
+        print(error.localizedDescription)
+        completionHandler(restaurants)
       }
-    })
+    }
+  }
+  
+  func performQuery(with urlRequest:URLRequest, returnJSONData: @escaping (Data) -> ())
+  {
+    let configuration = URLSessionConfiguration.default
+    let session = URLSession(configuration: configuration)
+    let dataTask = session.dataTask(with: urlRequest)
+    { (data: Data?, response: URLResponse?, error: Error?) in
+      if (error != nil)
+      {
+        print(error!.localizedDescription)
+      } else {
+        returnJSONData(data!)
+      }
+    }
     dataTask.resume()
-    
   }
 }

@@ -177,7 +177,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
     tagsView.addArrangedSubview(tag)
   }
   
-  func panMoveTag(sender:UIPanGestureRecognizer)
+  @objc func panMoveTag(sender:UIPanGestureRecognizer)
   {
     let translation = sender.translation(in: view)
     sender.view!.center = CGPoint(x: sender.view!.center.x + translation.x,
@@ -230,7 +230,7 @@ class AddReviewViewController: UIViewController, UITextFieldDelegate, UIGestureR
     return newTag
   }
   
-  func addNewTag()
+  @objc func addNewTag()
   {
     self.tagsView.isInitialLoad = false
     let textFieldAlert = UIAlertController(title: "New Tag", message: "" , preferredStyle: .alert)

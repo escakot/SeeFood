@@ -228,7 +228,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
       }
    }
    
-   func searchThisArea(){
+   @objc func searchThisArea(){
       print("Search Pressed")
       self.searchAreaButton.isHidden = true
       self.arrayOfRestaurants.removeAll()
@@ -273,7 +273,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
       searchBar.resignFirstResponder()
    }
    
-   func refreshPull()
+   @objc func refreshPull()
    {
       locationManager.requestLocation()
    }
@@ -319,6 +319,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
          break
       case .authorizedWhenInUse:
          print("Location Status is OK.")
+         locationManager.requestLocation()
          break
       }
    }
@@ -375,7 +376,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
       perform(#selector(performRestaurantSearch), with: searchText, afterDelay: 0.3)
    }
    
-   func performRestaurantSearch(sender:Any?)
+   @objc func performRestaurantSearch(sender:Any?)
    {
       let searchText = sender as! String
       if searchText == ""

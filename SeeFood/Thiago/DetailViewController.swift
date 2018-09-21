@@ -43,6 +43,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
   var restaurant: RestaurantData!
   var parseRestaurant: Restaurant!
   var arrayOfMenuItems: [MenuItem] = []
+  var activityIndicator: UIActivityIndicatorView!
   
   
   
@@ -55,6 +56,12 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     registerForPreviewing(with: self, sourceView: mainCollectionView)
     restaurantNameLabel.text = restaurant.name
     
+    //Activity Indicator
+    activityIndicator = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
+    activityIndicator.center = CGPoint(x: view.frame.width/2 - activityIndicator.frame.size.width/2, y: view.frame.height/2 - activityIndicator.frame.size.height/2)
+    view.addSubview(activityIndicator)
+    activityIndicator.startAnimating()
+    
     //MARK: Query Restaurant
     ParseManager.shared.queryRestaurantWith(id: restaurant.placeID) { (savedRestaurant:Restaurant?) in
       if savedRestaurant == nil {
@@ -64,6 +71,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
           self.defaultPhoto.isHidden = false
           self.defaultLabel.isHidden = false
           self.parseRestaurant = created ? createdRestaurant! : nil
+          self.activityIndicator.stopAnimating()
         })
       }
       else{
@@ -75,11 +83,13 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
           if (array?.isEmpty)!{
             self.defaultPhoto.isHidden = false
             self.defaultLabel.isHidden = false
+            self.activityIndicator.stopAnimating()
             print("There are no Menu Items for \(self.parseRestaurant.name)")
           }else{
             self.arrayOfMenuItems = array!
             DispatchQueue.main.async {
               self.mainCollectionView.reloadData()
+              self.activityIndicator.stopAnimating()
             }
           }
         }
@@ -93,7 +103,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     // Creating BlurView
     blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
     blurView.isUserInteractionEnabled = false
-    blurView.frame = mainCollectionView.frame
     blurView.backgroundColor = UIColor(white: 0.5, alpha: 0.7)
     blurView.alpha = 0.0
     
@@ -161,16 +170,20 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     let cell: CustomCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCollectionViewCell
     
     ParseManager.shared.queryReviewFor(self.arrayOfMenuItems[indexPath.row]) { (reviews: Array<Review>?) in
-      reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
-        if error == nil {
-          DispatchQueue.main.async {
-            cell.cellImage.image = UIImage(data: data!)
-          }
+      //      reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
+      //        if error == nil {
+      DispatchQueue.main.async {
+        do {
+          cell.cellImage.image = try UIImage(data: Data(contentsOf: URL.init(string: reviews![0].url)!))
+        } catch {
+          print(error.localizedDescription)
         }
-        else {
-          print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
-        }
-      })
+      }
+      //        }
+      //        else {
+      //          print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
+      //        }
+      //          })
     }
     return cell
   }
@@ -198,6 +211,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     guard !view.subviews.contains(cameraLibraryView) else { return }
     mainCollectionView.isCameraLibraryViewOn = true
+    blurView.frame = mainCollectionView.frame
     view.addSubview(blurView)
     view.addSubview(cameraLibraryView)
     cameraLibraryView.alpha = 0
@@ -277,7 +291,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
   }
   
   // MARK: UIGesture Methods
-  func cameraTapped(_ sender: UITapGestureRecognizer)
+  @objc func cameraTapped(_ sender: UITapGestureRecognizer)
   {
     guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
       let alert = UIAlertController(title: "Camera Error", message: "Camera is invalid or unavailable.", preferredStyle: .alert)
@@ -286,10 +300,10 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
       return
     }
     imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-    let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+    let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
     switch authStatus {
     case .notDetermined:
-      AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) in
+      AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted) in
         if granted
         {
           self.present(self.imagePicker, animated: true, completion: nil)
@@ -312,7 +326,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
   }
-  func libraryTapped(_ sender: UITapGestureRecognizer)
+  @objc func libraryTapped(_ sender: UITapGestureRecognizer)
   {
     imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
     let authStatus = PHPhotoLibrary.authorizationStatus()
@@ -420,17 +434,14 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     let item = self.arrayOfMenuItems[indexPath.row]
     
     ParseManager.shared.queryReviewFor(item) { (reviews: Array<Review>?) in
-      reviews?[0].image.getDataInBackground(block: { (data: Data?, error:Error?) in
-        if error == nil {
-          for view in cell.cellImage.subviews { view.removeFromSuperview() }
-          DispatchQueue.main.async {
-            cell.cellImage.image = UIImage(data: data!)
-          }
+      for view in cell.cellImage.subviews { view.removeFromSuperview() }
+      DispatchQueue.main.async {
+        do {
+          cell.cellImage.image = try UIImage(data: Data(contentsOf: URL(string:(reviews?[0].url)!)!))
+        } catch {
+          print(error.localizedDescription)
         }
-        else {
-          print(error?.localizedDescription ?? "Error converting UIImage to PFFile")
-        }
-      })
+      }
     }
     cell.cellLabel.text = item.title
     cell.selectionStyle = .none
